@@ -1,1809 +1,377 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartGastro Pro - QR-Bestellsystem & Zeiterfassung</title>
-    <meta name="description" content="Professionelles QR-Bestellsystem mit integrierter Zeiterfassung für Gastronomiebetriebe. Jährliche Lizenz: 99€ pro Software.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #2D3748;
-            --primary-dark: #1A202C;
-            --secondary: #3182CE;
-            --accent: #38B2AC;
-            --success: #48BB78;
-            --warning: #ECC94B;
-            --danger: #F56565;
-            --dark: #1A202C;
-            --light: #F7FAFC;
-            --gray: #718096;
-            --border: #E2E8F0;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --radius: 12px;
-            --radius-sm: 8px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            background-color: var(--light);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header & Navigation */
-        header {
-            background-color: white;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .logo span {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--secondary);
-        }
-
-        .language-selector {
-            position: relative;
-        }
-
-        .language-btn {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 8px 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .language-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            box-shadow: var(--shadow);
-            min-width: 160px;
-            display: none;
-            z-index: 10;
-        }
-
-        .language-dropdown.active {
-            display: block;
-        }
-
-        .language-option {
-            padding: 12px 16px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: background 0.3s;
-        }
-
-        .language-option:hover {
-            background: #f3f4f6;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 100px 0;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .hero-text h1 {
-            font-size: 48px;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            font-weight: 800;
-        }
-
-        .hero-text p {
-            font-size: 20px;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 32px;
-            border-radius: var(--radius);
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            font-size: 16px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--secondary), var(--accent));
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-secondary {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background: #e04e4e;
-            transform: translateY(-2px);
-        }
-
-        /* Featured Image Section */
-        .featured-section {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .featured-image {
-            width: 100%;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            margin-bottom: 30px;
-        }
-
-        .featured-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .image-caption {
-            text-align: center;
-            color: var(--gray);
-            font-size: 14px;
-            margin-top: 10px;
-        }
-
-        /* Pricing Cards */
-        .pricing-section {
-            padding: 100px 0;
-            background: var(--light);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: var(--dark);
-            font-weight: 800;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 18px;
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto 60px;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        .pricing-card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 40px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-            transition: transform 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .pricing-card.featured {
-            border: 2px solid var(--secondary);
-            transform: scale(1.05);
-        }
-
-        .pricing-badge {
-            position: absolute;
-            top: 20px;
-            right: -30px;
-            background: var(--secondary);
-            color: white;
-            padding: 8px 30px;
-            transform: rotate(45deg);
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .software-icon {
-            font-size: 48px;
-            color: var(--secondary);
-            margin-bottom: 20px;
-        }
-
-        .pricing-card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-
-        .price {
-            font-size: 48px;
-            font-weight: 800;
-            color: var(--dark);
-            margin: 20px 0;
-        }
-
-        .price span {
-            font-size: 16px;
-            color: var(--gray);
-            font-weight: 500;
-        }
-
-        .pricing-features {
-            list-style: none;
-            margin: 30px 0;
-        }
-
-        .pricing-features li {
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .pricing-features li:last-child {
-            border-bottom: none;
-        }
-
-        .pricing-features i {
-            color: var(--success);
-        }
-
-        /* How It Works */
-        .how-it-works {
-            padding: 100px 0;
-            background: white;
-        }
-
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            counter-reset: step-counter;
-        }
-
-        .step {
-            position: relative;
-            padding-left: 80px;
-        }
-
-        .step::before {
-            counter-increment: step-counter;
-            content: counter(step-counter);
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 60px;
-            height: 60px;
-            background: var(--secondary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        /* Login Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: var(--radius);
-            padding: 50px;
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-            animation: modalSlide 0.3s ease-out;
-        }
-
-        @keyframes modalSlide {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--gray);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            font-size: 16px;
-        }
-
-        /* Dashboard */
-        .dashboard {
-            display: none;
-            min-height: 100vh;
-            padding: 40px 0;
-            background-color: var(--light);
-        }
-
-        .dashboard.active {
-            display: block;
-        }
-
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            padding: 30px;
-            background: white;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .dashboard-card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 30px;
-            box-shadow: var(--shadow);
-        }
-
-        .license-section {
-            background: #F0F9FF;
-            border-radius: var(--radius);
-            padding: 30px;
-            margin-top: 40px;
-        }
-
-        .license-code {
-            font-family: monospace;
-            background: white;
-            padding: 15px;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border);
-            font-size: 18px;
-            letter-spacing: 2px;
-            margin: 15px 0;
-        }
-
-        /* User Menu */
-        .user-menu {
-            display: none;
-            position: relative;
-        }
-
-        .user-menu.active {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 15px;
-            background: #f8f9fa;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .user-info:hover {
-            background: #e9ecef;
-        }
-
-        .user-avatar {
-            width: 32px;
-            height: 32px;
-            background: var(--secondary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .user-name {
-            font-weight: 500;
-        }
-
-        .user-dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            min-width: 200px;
-            box-shadow: var(--shadow-lg);
-            border-radius: var(--radius-sm);
-            z-index: 100;
-            margin-top: 10px;
-        }
-
-        .user-info:hover .user-dropdown {
-            display: block;
-        }
-
-        .user-dropdown a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 15px;
-            color: var(--dark);
-            text-decoration: none;
-            transition: background 0.3s;
-        }
-
-        .user-dropdown a:hover {
-            background: #f8f9fa;
-        }
-
-        .dropdown-divider {
-            height: 1px;
-            background: var(--border);
-            margin: 5px 0;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--primary-dark);
-            color: white;
-            padding: 60px 0 30px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #2D3748;
-            color: #A0AEC0;
-            font-size: 14px;
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .pricing-card.featured {
-                transform: none;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-text h1 {
-                font-size: 36px;
-            }
-            
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        /* Payment Required Modal */
-        .payment-required {
-            text-align: center;
-            padding: 40px 0;
-        }
-
-        .payment-required i {
-            font-size: 64px;
-            color: var(--warning);
-            margin-bottom: 20px;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: var(--dark);
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .nav-links {
-                position: fixed;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                background: white;
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: var(--shadow);
-                display: none;
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-        }
-
-        /* Messages */
-        .message {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            border-radius: var(--radius-sm);
-            background: var(--success);
-            color: white;
-            z-index: 10000;
-            animation: slideIn 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .message.error {
-            background: var(--danger);
-        }
-
-        .message.info {
-            background: var(--secondary);
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Sanremo LMIV Professional – Komplettversion</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #0c111c;
+      --surface: #141a29;
+      --card: #1a2133;
+      --border: #2a3348;
+      --text: #edf2fb;
+      --text-muted: #9aa8bf;
+      --primary: #2ecc71;
+      --primary-dark: #25a55c;
+      --danger: #e74c3c;
+      --warning: #f39c12;
+      --info: #3498db;
+    }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.5; }
+    .app-header { background: rgba(20, 26, 41, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 1rem 2rem; position: sticky; top: 0; z-index: 100; }
+    .app-header h1 { font-size: 1.7rem; background: linear-gradient(135deg, #fff, #86efac); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .app-header p { font-size: 0.85rem; color: var(--text-muted); }
+    .layout { display: flex; min-height: calc(100vh - 88px); }
+    .sidebar { width: 280px; background: var(--surface); border-right: 1px solid var(--border); padding: 1.5rem 1rem; flex-shrink: 0; }
+    .nav-btn { width: 100%; text-align: left; background: transparent; border: none; color: var(--text-muted); padding: 0.75rem 1rem; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .nav-btn:hover { background: var(--border); color: white; }
+    .nav-btn.active { background: var(--primary-dark); color: #0a2f1f; box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2); }
+    .main { flex: 1; padding: 1.8rem; overflow-y: auto; }
+    .screen { display: none; animation: fadeIn 0.25s ease; }
+    .screen.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: translateY(0);} }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 1.25rem; padding: 1.25rem; margin-bottom: 1.5rem; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.2rem; }
+    .col-span-12 { grid-column: span 12; }
+    .col-span-6 { grid-column: span 6; }
+    .col-span-5 { grid-column: span 5; }
+    .col-span-4 { grid-column: span 4; }
+    .col-span-3 { grid-column: span 3; }
+    .col-span-7 { grid-column: span 7; }
+    .col-span-8 { grid-column: span 8; }
+    h2 { font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: -0.3px; }
+    h3 { font-size: 1.1rem; font-weight: 600; margin: 0.75rem 0; }
+    label { display: block; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 0.3rem; }
+    input, select, textarea { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 0.6rem 0.8rem; border-radius: 10px; font-size: 0.9rem; transition: 0.15s; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(46,204,113,0.2); }
+    button { background: var(--primary); border: none; font-weight: 700; padding: 0.5rem 1.2rem; border-radius: 10px; cursor: pointer; transition: 0.1s; color: #052e16; font-size: 0.85rem; margin-right: 0.5rem; margin-top: 0.5rem; }
+    button.secondary { background: var(--border); color: white; }
+    button.danger { background: var(--danger); color: white; }
+    .pill { display: inline-block; padding: 0.2rem 0.7rem; border-radius: 30px; font-size: 0.7rem; font-weight: 700; margin-right: 0.5rem; margin-bottom: 0.5rem; }
+    .pill.success { background: rgba(46,204,113,0.2); color: #a3e4c0; }
+    .pill.warning { background: rgba(243,156,18,0.2); color: #f8c471; }
+    .pill.error { background: rgba(231,76,60,0.2); color: #f5b7b1; }
+    .pill.info { background: rgba(52,152,219,0.2); color: #7fb3d5; }
+    .product-item, .recipe-item { background: var(--surface); border-radius: 12px; padding: 0.8rem; margin-bottom: 0.8rem; border-left: 3px solid var(--primary); }
+    .badge { background: var(--border); padding: 0.2rem 0.5rem; border-radius: 20px; font-size: 0.7rem; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    hr { border-color: var(--border); margin: 1rem 0; }
+    .preview-box { background: #fefefe; color: #111; border-radius: 14px; padding: 1.2rem; font-family: 'Courier New', monospace; white-space: pre-wrap; font-size: 0.85rem; line-height: 1.4; border: 1px solid #ccc; }
+    .tech-sheet { background: #fefefe; color: #111; border-radius: 14px; padding: 1.5rem; font-family: 'Segoe UI', 'Inter', sans-serif; font-size: 0.9rem; line-height: 1.5; border: 1px solid #ccc; max-width: 100%; overflow-x: auto; }
+    .tech-sheet h2 { color: #1a5276; border-bottom: 2px solid #2ecc71; padding-bottom: 0.5rem; margin-top: 1rem; }
+    .tech-sheet h3 { color: #2c3e50; margin-top: 1rem; }
+    .tech-sheet table { width: 100%; border-collapse: collapse; margin: 0.5rem 0; }
+    .tech-sheet th, .tech-sheet td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; }
+    .tech-sheet th { background: #e8f0fe; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 0.5rem; text-align: left; border-bottom: 1px solid var(--border); }
+    .progress-bar { background: var(--border); border-radius: 20px; height: 6px; overflow: hidden; margin: 0.5rem 0; }
+    .progress-fill { background: var(--primary); height: 100%; width: 0%; transition: width 0.2s; }
+    @media print { body * { visibility: hidden; } .tech-sheet, .tech-sheet * { visibility: visible; } .tech-sheet { position: absolute; top: 0; left: 0; width: 100%; margin: 0; padding: 1rem; } }
+    @media (max-width: 800px) { .layout { flex-direction: column; } .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); } .col-span-6, .col-span-5, .col-span-4, .col-span-7, .col-span-8 { grid-column: span 12; } }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="nav-container">
-                <a href="#" class="logo">
-                    <i class="fas fa-utensils"></i>
-                    <span>SmartGastro Pro</span>
-                </a>
-                
-                <div class="nav-links" id="nav-links">
-                    <a href="#pricing" data-i18n="nav_pricing">Preise</a>
-                    <a href="#how-it-works" data-i18n="nav_how_it_works">Funktionsweise</a>
-                    <a href="#" id="dashboard-nav" data-i18n="nav_dashboard">Dashboard</a>
-                    
-                    <div class="language-selector">
-                        <button class="language-btn">
-                            <i class="fas fa-globe"></i>
-                            <span class="current-language">Deutsch</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="language-dropdown">
-                            <div class="language-option" data-lang="de">
-                                <span>🇩🇪 Deutsch</span>
-                            </div>
-                            <div class="language-option" data-lang="en">
-                                <span>🇬🇧 English</span>
-                            </div>
-                            <div class="language-option" data-lang="it">
-                                <span>🇮🇹 Italiano</span>
-                            </div>
-                            <div class="language-option" data-lang="pt">
-                                <span>🇵🇹 Português</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- User Menu (Hidden by default) -->
-                    <div class="user-menu" id="user-menu">
-                        <div class="user-info">
-                            <div class="user-avatar" id="user-avatar">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <span class="user-name" id="user-display-name">Benutzer</span>
-                            <div class="user-dropdown">
-                                <a href="#profile"><i class="fas fa-user-cog"></i> Profil</a>
-                                <a href="#settings"><i class="fas fa-cog"></i> Einstellungen</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" id="dropdown-logout"><i class="fas fa-sign-out-alt"></i> Abmelden</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Login Button -->
-                    <button class="btn btn-primary" id="login-btn">
-                        <i class="fas fa-sign-in-alt"></i>
-                        <span data-i18n="nav_login">Login</span>
-                    </button>
-                    
-                    <!-- Logout Button (Hidden by default) -->
-                    <button class="btn btn-danger" id="logout-btn" style="display: none;">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span data-i18n="nav_logout">Logout</span>
-                    </button>
-                </div>
-                
-                <button class="mobile-menu-btn" id="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+<div class="app-header">
+  <h1>🍦 Sanremo LMIV Präzisionssystem</h1>
+  <p>100% gewichtsbasierte Zutatenliste • LMIV-konforme Etiketten • Nährwerte pro 100g • Professionelle Rezeptverwaltung • Technische Datenblätter • <span style="color:#2ecc71">✅ AUTOMATISCHE SORTIERUNG (größter % zuerst)</span></p>
+</div>
+<div class="layout">
+  <div class="sidebar">
+    <button class="nav-btn active" data-screen="dashboard">📊 Dashboard</button>
+    <button class="nav-btn" data-screen="products">📦 Produkte & Rohstoffe</button>
+    <button class="nav-btn" data-screen="recipes">🍨 Rezepte (grammgenau)</button>
+    <button class="nav-btn" data-screen="techsheets">📄 Technische Datenblätter</button>
+    <button class="nav-btn" data-screen="labelgen">🏷️ Etikett Generator</button>
+    <button class="nav-btn" data-screen="validation">⚖️ LMIV Konformitätsprüfung</button>
+    <button class="nav-btn" data-screen="backup">💾 Backup & Daten</button>
+    <div class="card" style="margin-top: 1.5rem;">
+      <div style="font-size:0.8rem;">✅ Automatische Sortierung aktiv</div>
+      <div style="font-size:0.75rem; color:var(--text-muted);">Zutaten werden immer nach Gewicht sortiert (größter Anteil zuerst) – LMIV Art. 18 Abs. 2</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <section id="dashboard" class="screen active">
+      <div class="grid">
+        <div class="card col-span-12">
+          <h2>📋 Professionelle LMIV-Steuerung</h2>
+          <p>Dieses System erlaubt Ihnen, <strong>eigene Produkte</strong> mit vollständiger Rezeptur (Zutaten + Prozente) und Nährwerten zu erfassen. Daraus erstellen Sie <strong>Rezepte</strong> in Gramm – die Zutatenliste wird automatisch nach dem tatsächlichen Gewicht sortiert.</p>
+          <div class="two-col" style="margin-top: 1rem;">
+            <div><span class="pill success">✓ Produkte mit 100% Struktur</span> <span class="pill success">✓ Automatische Allergene</span></div>
+            <div><span class="pill success">✓ Nährwerte pro 100g</span> <span class="pill success">✓ Zutaten nach Gewicht</span></div>
+          </div>
         </div>
-    </header>
-
-    <!-- Dashboard (Hidden by default) -->
-    <section class="dashboard" id="client-dashboard">
-        <div class="container">
-            <div class="dashboard-header">
-                <div>
-                    <h2 data-i18n="dashboard_welcome">Willkommen,</h2>
-                    <p><span id="dashboard-user-name">Max Mustermann</span></p>
-                    <p data-i18n="dashboard_subtitle">SmartGastro Pro Dashboard</p>
-                </div>
-                <button class="btn btn-secondary" id="dashboard-logout-btn">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span data-i18n="dashboard_logout">Logout</span>
-                </button>
-            </div>
-
-            <div class="dashboard-grid">
-                <div class="dashboard-card">
-                    <h3><i class="fas fa-qrcode"></i> <span data-i18n="dashboard_qr_system">QR-Bestellsystem</span></h3>
-                    <p data-i18n="dashboard_qr_desc">Zugang zur QR-Bestellsystem Software</p>
-                    <div class="license-section">
-                        <h4 data-i18n="dashboard_your_license">Ihre Lizenz</h4>
-                        <div class="license-code" id="license-qr">SG-QR-2025-XXXX-XXXX-XXXX</div>
-                        <p data-i18n="dashboard_valid_until">Gültig bis: <strong>31.12.2025</strong></p>
-                        <a href="https://sanremo-software.github.io/Eis-Menu/" target="_blank" class="btn btn-primary">
-                            <i class="fas fa-external-link-alt"></i>
-                            <span data-i18n="dashboard_open_software">Software öffnen</span>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="dashboard-card">
-                    <h3><i class="fas fa-users"></i> <span data-i18n="dashboard_time_tracking">Zeiterfassung</span></h3>
-                    <p data-i18n="dashboard_time_desc">Zugang zur Mitarbeiter-Zeiterfassung</p>
-                    <div class="license-section">
-                        <h4 data-i18n="dashboard_your_license">Ihre Lizenz</h4>
-                        <div class="license-code" id="license-time">SG-TIME-2025-XXXX-XXXX-XXXX</div>
-                        <p data-i18n="dashboard_valid_until">Gültig bis: <strong>31.12.2025</strong></p>
-                        <a href="https://sanremo-software.github.io/Sanremo-mitarbeiter/" target="_blank" class="btn btn-primary">
-                            <i class="fas fa-external-link-alt"></i>
-                            <span data-i18n="dashboard_open_software">Software öffnen</span>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="dashboard-card">
-                    <h3><i class="fas fa-download"></i> <span data-i18n="dashboard_downloads">Software Download</span></h3>
-                    <p data-i18n="dashboard_downloads_desc">Installationsdateien und Dokumentation</p>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="padding: 10px 0; border-bottom: 1px solid var(--border);">
-                            <i class="fas fa-file-pdf"></i>
-                            <a href="#" data-i18n="dashboard_user_manual">Benutzerhandbuch (PDF)</a>
-                        </li>
-                        <li style="padding: 10px 0; border-bottom: 1px solid var(--border);">
-                            <i class="fas fa-video"></i>
-                            <a href="#" data-i18n="dashboard_video_tutorials">Video-Tutorials</a>
-                        </li>
-                        <li style="padding: 10px 0;">
-                            <i class="fas fa-headset"></i>
-                            <a href="#" data-i18n="dashboard_support">Technischer Support</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <div class="card col-span-4"><h3>📊 Statistik</h3><div id="statsArea"></div></div>
+        <div class="card col-span-4"><h3>📌 Arbeitsablauf</h3><ol style="margin-left: 1.2rem;"><li>Produkte anlegen + Zusammensetzung 100%</li><li>Rezept mit Gramm-Mengen erstellen</li><li>LMIV-Prüfung durchführen</li><li>Etikett generieren</li><li>Technisches Datenblatt exportieren</li></ol></div>
+        <div class="card col-span-4"><h3>⚖️ Rechtliche Basis</h3><p>Zutaten nach absteigendem Gewichtsanteil – LMIV Art. 18 Abs. 2.</p></div>
+      </div>
     </section>
 
-    <!-- Main Content -->
-    <main id="main-content">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-text">
-                        <h1 data-i18n="hero_title">Professionelle Gastronomie Software</h1>
-                        <p data-i18n="hero_subtitle">QR-Bestellsystem & Zeiterfassung in separaten Paketen. Jährliche Lizenzierung für maximale Flexibilität.</p>
-                        <div class="hero-buttons">
-                            <a href="#pricing" class="btn btn-primary">
-                                <i class="fas fa-shopping-cart"></i>
-                                <span data-i18n="hero_buy_button">Software kaufen (99€/Jahr)</span>
-                            </a>
-                            <button class="btn btn-secondary" id="hero-login-btn">
-                                <i class="fas fa-key"></i>
-                                <span data-i18n="hero_login_button">Kunden Login</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="hero-image">
-                        <img src="https://via.placeholder.com/600x400/2D3748/ffffff?text=SmartGastro+Pro+System" alt="SmartGastro Pro Interface">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Featured Image Section -->
-        <section class="featured-section">
-            <div class="container">
-                <div class="featured-image">
-                    <img src="IMG-20251120-WA0003.jpg" alt="SmartGastro Complete System Interface" 
-                         onerror="this.src='https://via.placeholder.com/1200x600/2D3748/ffffff?text=SmartGastro+Professional+Interface'">
-                </div>
-                <div class="image-caption" data-i18n="featured_image_caption">
-                    SmartGastro Professional Interface - Modernes Design für optimale Benutzererfahrung
-                </div>
-            </div>
-        </section>
-
-        <!-- Pricing Section -->
-        <section class="pricing-section" id="pricing">
-            <div class="container">
-                <h2 class="section-title" data-i18n="pricing_title">Wählen Sie Ihre Software</h2>
-                <p class="section-subtitle" data-i18n="pricing_subtitle">Jährliche Lizenzierung - Jede Software separat erhältlich</p>
-                
-                <div class="pricing-grid">
-                    <!-- QR System Card -->
-                    <div class="pricing-card">
-                        <div class="software-icon">
-                            <i class="fas fa-qrcode"></i>
-                        </div>
-                        <h3 data-i18n="pricing_qr_title">QR-Bestellsystem</h3>
-                        <p data-i18n="pricing_qr_desc">Professionelles Bestellsystem mit QR-Code Technologie</p>
-                        
-                        <div class="price">99€ <span data-i18n="pricing_per_year">/ Jahr</span></div>
-                        
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_qr_orders">QR-Code Bestellungen</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_admin_dashboard">Admin Dashboard</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_auto_print">Automatischer Druck</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_sales_stats">Verkaufsstatistiken</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_menu_management">Menü-Verwaltung</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_24_7_support">24/7 Support</span></li>
-                        </ul>
-                        
-                        <button class="btn btn-primary" style="width: 100%;" data-software="qr">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span data-i18n="pricing_buy_now">Jetzt kaufen</span>
-                        </button>
-                    </div>
-                    
-                    <!-- Combo Package Card -->
-                    <div class="pricing-card featured">
-                        <div class="pricing-badge" data-i18n="pricing_recommended">Empfohlen</div>
-                        <div class="software-icon">
-                            <i class="fas fa-users-cog"></i>
-                        </div>
-                        <h3 data-i18n="pricing_combo_title">Beide Softwaren</h3>
-                        <p data-i18n="pricing_combo_desc">Komplettpaket mit 10% Rabatt</p>
-                        
-                        <div class="price">178€ <span data-i18n="pricing_per_year">/ Jahr</span></div>
-                        <p style="color: var(--success); font-weight: 600;">
-                            <i class="fas fa-gift"></i> <span data-i18n="pricing_save_20">Sparen Sie 20€ gegenüber Einzelkauf</span>
-                        </p>
-                        
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_qr_system">QR-Bestellsystem</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_time_tracking">Zeiterfassung Software</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_combined_license">Kombinierte Lizenz</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_unified_dashboard">Einheitliches Dashboard</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_priority_support">Prioritäts-Support</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_free_updates">Kostenlose Updates</span></li>
-                        </ul>
-                        
-                        <button class="btn btn-primary" style="width: 100%; background: linear-gradient(135deg, var(--accent), var(--success));" data-software="both">
-                            <i class="fas fa-gem"></i>
-                            <span data-i18n="pricing_buy_combo">Komplettpaket kaufen</span>
-                        </button>
-                    </div>
-                    
-                    <!-- Time Tracking Card -->
-                    <div class="pricing-card">
-                        <div class="software-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <h3 data-i18n="pricing_time_title">Zeiterfassung</h3>
-                        <p data-i18n="pricing_time_desc">Mitarbeiterverwaltung mit Stempelfunktion</p>
-                        
-                        <div class="price">99€ <span data-i18n="pricing_per_year">/ Jahr</span></div>
-                        
-                        <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_clock_in_out">Ein-/Ausstempeln</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_scheduling">Dienstplanung</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_whatsapp">WhatsApp Integration</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_export_times">Arbeitszeiten-Export</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_admin_area">Admin-Bereich</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="feature_multi_user">Mehrbenutzer-Support</span></li>
-                        </ul>
-                        
-                        <button class="btn btn-primary" style="width: 100%;" data-software="time">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span data-i18n="pricing_buy_now">Jetzt kaufen</span>
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Licensing Process -->
-                <div style="text-align: center; padding: 40px; background: white; border-radius: var(--radius); box-shadow: var(--shadow);">
-                    <h3 data-i18n="licensing_process_title">Lizenzierungsprozess</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 30px;">
-                        <div>
-                            <div style="width: 50px; height: 50px; background: var(--secondary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
-                                <i class="fas fa-shopping-cart"></i>
-                            </div>
-                            <h4 data-i18n="step_1_title">1. Kaufen</h4>
-                            <p data-i18n="step_1_desc">Wählen Sie Ihre Software und bezahlen Sie sicher</p>
-                        </div>
-                        <div>
-                            <div style="width: 50px; height: 50px; background: var(--secondary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <h4 data-i18n="step_2_title">2. Lizenz erhalten</h4>
-                            <p data-i18n="step_2_desc">Sie bekommen Ihre Lizenzschlüssel per Email</p>
-                        </div>
-                        <div>
-                            <div style="width: 50px; height: 50px; background: var(--secondary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
-                                <i class="fas fa-user-plus"></i>
-                            </div>
-                            <h4 data-i18n="step_3_title">3. Registrieren</h4>
-                            <p data-i18n="step_3_desc">Erstellen Sie Ihr Konto mit der Lizenz</p>
-                        </div>
-                        <div>
-                            <div style="width: 50px; height: 50px; background: var(--secondary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
-                                <i class="fas fa-rocket"></i>
-                            </div>
-                            <h4 data-i18n="step_4_title">4. Loslegen</h4>
-                            <p data-i18n="step_4_desc">Starten Sie mit Ihrer Software</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- How It Works -->
-        <section class="how-it-works" id="how-it-works">
-            <div class="container">
-                <h2 class="section-title" data-i18n="how_it_works_title">So funktioniert's</h2>
-                <p class="section-subtitle" data-i18n="how_it_works_subtitle">Einfacher Prozess zur Software-Aktivierung</p>
-                
-                <div class="steps">
-                    <div class="step">
-                        <h3 data-i18n="how_step_1_title">Software auswählen</h3>
-                        <p data-i18n="how_step_1_desc">Wählen Sie zwischen QR-Bestellsystem, Zeiterfassung oder dem Komplettpaket</p>
-                    </div>
-                    
-                    <div class="step">
-                        <h3 data-i18n="how_step_2_title">Sicher bezahlen</h3>
-                        <p data-i18n="how_step_2_desc">Bezahlen Sie 99€ pro Jahr pro Software über unser sicheres Zahlungssystem</p>
-                    </div>
-                    
-                    <div class="step">
-                        <h3 data-i18n="how_step_3_title">Lizenz erhalten</h3>
-                        <p data-i18n="how_step_3_desc">Sie bekommen einen eindeutigen Lizenzschlüssel per Email zugeschickt</p>
-                    </div>
-                    
-                    <div class="step">
-                        <h3 data-i18n="how_step_4_title">Konto erstellen</h3>
-                        <p data-i18n="how_step_4_desc">Registrieren Sie sich mit Ihrer Lizenz und erhalten Sie Zugang zur Software</p>
-                    </div>
-                </div>
-                
-                <div style="text-align: center; margin-top: 60px;">
-                    <h3 data-i18n="ready_to_start">Bereit loszulegen?</h3>
-                    <button class="btn btn-primary" style="margin-top: 20px;">
-                        <i class="fas fa-play-circle"></i>
-                        <span data-i18n="start_now_button">Jetzt Software kaufen</span>
-                    </button>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Payment Modal -->
-    <div class="modal" id="payment-modal">
-        <div class="modal-content">
-            <button class="close-modal" id="close-payment">&times;</button>
-            
-            <div id="payment-form">
-                <h2 id="payment-title" data-i18n="payment_title">QR-Bestellsystem kaufen</h2>
-                <p style="margin-bottom: 30px; color: var(--gray);" data-i18n="payment_price">Jährliche Lizenz: <strong>99€</strong></p>
-                
-                <div class="form-group">
-                    <label data-i18n="payment_email_label">Email Adresse</label>
-                    <input type="email" id="payment-email" placeholder="ihre@email.de" required>
-                </div>
-                
-                <div class="form-group">
-                    <label data-i18n="payment_business_label">Betriebsname</label>
-                    <input type="text" id="business-name" placeholder="Ihr Restaurant Name" required>
-                </div>
-                
-                <div id="paypal-button-container" style="margin-top: 30px;"></div>
-                
-                <p style="margin-top: 20px; font-size: 14px; color: var(--gray); text-align: center;">
-                    <i class="fas fa-lock"></i> <span data-i18n="payment_secure">Sichere Zahlung via PayPal</span>
-                </p>
-            </div>
+    <section id="products" class="screen">
+      <div class="grid">
+        <div class="card col-span-5">
+          <h2>➕ Produkt anlegen / bearbeiten</h2>
+          <input type="hidden" id="editProductId">
+          <label>Produktname</label><input id="prodName" placeholder="z.B. Bio-Vollmilch 3.8%">
+          <label>Kategorie</label><select id="prodCategory"><option>Milchprodukt</option><option>PASTE</option><option>fettglasur</option><option>Frucht</option><option>Fett</option><option>Pulver</option><option>Emulgator</option></select>
+          <label>Allergene (kommagetrennt, GROSS)</label><input id="prodAllergens" placeholder="MILCH, EI, GLUTEN">
+          <div class="two-col"><div><label>kJ / 100g</label><input id="prodKj" type="number" step="any"></div><div><label>kcal / 100g</label><input id="prodKcal" type="number" step="any"></div></div>
+          <div class="two-col"><div><label>Fett (g)</label><input id="prodFat" step="any"></div><div><label>davon gesättigt</label><input id="prodSat" step="any"></div></div>
+          <div class="two-col"><div><label>Kohlenhydrate (g)</label><input id="prodCarb" step="any"></div><div><label>davon Zucker</label><input id="prodSugar" step="any"></div></div>
+          <div class="two-col"><div><label>Eiweiß (g)</label><input id="prodProtein" step="any"></div><div><label>Salz (g)</label><input id="prodSalt" step="any"></div></div>
+          <hr><h3>🧪 Exakte Zusammensetzung (100% Regel)</h3>
+          <div class="two-col"><div><label>Zutat / Rohstoff</label><input id="compName" placeholder="z.B. Vollmilch"></div><div><label>Anteil (%)</label><input id="compPercent" type="number" step="0.01"></div></div>
+          <button onclick="addIngredientToCurrent()">➕ Zutat hinzufügen</button>
+          <button class="secondary" onclick="normalizeCurrentProduct()">↺ Auf 100% normalisieren</button>
+          <button class="secondary" onclick="sortCurrentComposition()">🔄 Nach Gewicht sortieren</button>
+          <div class="progress-bar"><div class="progress-fill" id="productPercentFill"></div></div>
+          <div id="currentCompositionList"></div>
+          <hr><button onclick="saveProduct()">💾 Produkt speichern</button><button class="secondary" onclick="clearProductForm()">🔄 Formular leeren</button>
         </div>
-    </div>
+        <div class="card col-span-7"><h2>📋 Produktbibliothek</h2><div id="productsList" style="max-height: 600px; overflow-y: auto;"></div></div>
+      </div>
+    </section>
 
-    <!-- Login Modal -->
-    <div class="modal" id="login-modal">
-        <div class="modal-content">
-            <button class="close-modal" id="close-login">&times;</button>
-            
-            <div id="login-form-content">
-                <h2 data-i18n="login_title">SmartGastro Login</h2>
-                <p style="margin-bottom: 30px; color: var(--gray);" data-i18n="login_description">Bitte melden Sie sich mit Ihren Zugangsdaten an</p>
-                
-                <div class="form-group">
-                    <label data-i18n="login_email_label">Email Adresse</label>
-                    <input type="email" id="login-email" placeholder="ihre@email.de">
-                </div>
-                
-                <div class="form-group">
-                    <label data-i18n="login_license_label">Lizenzschlüssel</label>
-                    <input type="text" id="license-key" placeholder="SG-XXXX-XXXX-XXXX-XXXX">
-                    <small style="color: var(--gray); display: block; margin-top: 5px;" data-i18n="login_license_help">
-                        Sie finden Ihren Lizenzschlüssel in der Bestätigungs-Email
-                    </small>
-                </div>
-                
-                <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" id="submit-login">
-                    <i class="fas fa-sign-in-alt"></i>
-                    <span data-i18n="login_button">Einloggen</span>
-                </button>
-                
-                <div style="text-align: center; margin-top: 20px;">
-                    <p style="color: var(--gray);" data-i18n="login_no_license">Noch keine Lizenz? 
-                        <a href="#" id="go-to-payment" style="color: var(--secondary);" data-i18n="login_buy_now">Jetzt kaufen</a>
-                    </p>
-                </div>
-            </div>
+    <section id="recipes" class="screen">
+      <div class="grid">
+        <div class="card col-span-5">
+          <h2>🍨 Rezept erstellen</h2>
+          <input type="hidden" id="editRecipeId">
+          <label>Rezeptname</label><input id="recipeName" placeholder="z.B. Stracciatella">
+          <label>Verkehrsbezeichnung</label><input id="recipeLegal" placeholder="Milcheis mit Schokolade">
+          <label>Verpackungsgröße (g)</label><select id="recipePackaging"><option>170</option><option>250</option><option>500</option><option>750</option><option>1000</option><option>2000</option></select>
+          <label>Aufbewahrung</label><input id="recipeStorage" value="Bei -18°C lagern">
+          <label>Hersteller</label><input id="recipeManufacturer" value="Eiscafé Sanremo">
+          <label>MHD / Los</label><input id="recipeMhd" value="MHD siehe Deckel">
+          <hr><h3>➕ Zutat (Produkt + Gramm)</h3>
+          <div class="two-col"><div><label>Produkt</label><select id="recipeProductSelect"></select></div><div><label>Menge (g)</label><input id="recipeItemQty" type="number" step="0.1"></div></div>
+          <button onclick="addRecipeItem()">+ Zutat hinzufügen</button>
+          <button class="secondary" onclick="clearRecipeDraft()">Alle entfernen</button>
+          <div id="recipeTotalWeight"></div>
         </div>
-    </div>
-
-    <!-- Payment Required Modal -->
-    <div class="modal" id="payment-required-modal">
-        <div class="modal-content">
-            <div class="payment-required">
-                <i class="fas fa-shopping-cart"></i>
-                <h2 data-i18n="payment_required_title">Zugang erforderlich</h2>
-                <p style="margin: 20px 0;" data-i18n="payment_required_description">
-                    Um die SmartGastro Software nutzen zu können, benötigen Sie eine gültige Lizenz.
-                </p>
-                <p style="margin-bottom: 30px;" data-i18n="payment_required_price">
-                    Preis: <strong>99€ pro Software / Jahr</strong>
-                </p>
-                
-                <div style="display: flex; gap: 15px; justify-content: center;">
-                    <button class="btn btn-primary" id="buy-now-redirect">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span data-i18n="payment_buy_now">Jetzt kaufen</span>
-                    </button>
-                    <button class="btn btn-secondary" id="close-payment-required">
-                        <span data-i18n="payment_later">Später</span>
-                    </button>
-                </div>
-            </div>
+        <div class="card col-span-7">
+          <h2>📊 Rezeptpositionen</h2>
+          <div style="max-height: 280px; overflow: auto;"><table id="recipeItemsTable"></table></div>
+          <button onclick="saveRecipe()" style="margin-top: 12px;">💾 Rezept speichern</button>
+          <hr><h2>📁 Ihre Rezepte</h2><div id="savedRecipesList"></div>
         </div>
-    </div>
+      </div>
+    </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div>
-                    <h3 style="margin-bottom: 20px;">SmartGastro Pro</h3>
-                    <p data-i18n="footer_description">Professionelle Software für Gastronomiebetriebe</p>
-                </div>
-                
-                <div>
-                    <h4 style="margin-bottom: 20px;" data-i18n="footer_contact">Kontakt</h4>
-                    <p><i class="fas fa-envelope"></i> paulo.sanremo@web.de</p>
-                    <p><i class="fas fa-phone"></i> +49 176 7280 9926</p>
-                </div>
-                
-                <div>
-                    <h4 style="margin-bottom: 20px;" data-i18n="footer_software">Software</h4>
-                    <p><a href="#" style="color: white;" data-i18n="footer_qr_system">QR-Bestellsystem</a></p>
-                    <p><a href="#" style="color: white;" data-i18n="footer_time_tracking">Zeiterfassung</a></p>
-                    <p><a href="#" style="color: white;" data-i18n="footer_dashboard">Dashboard</a></p>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p data-i18n="footer_copyright">© 2025 SmartGastro Pro. Alle Rechte vorbehalten.</p>
-                <p style="margin-top: 10px; font-size: 12px;" data-i18n="footer_pricing">
-                    Jährliche Lizenzierung - Preise pro Software: 99€/Jahr
-                </p>
-            </div>
+    <section id="techsheets" class="screen">
+      <div class="grid">
+        <div class="card col-span-4">
+          <h2>📄 Datenblatt - Produkt</h2>
+          <select id="techProductSelect"></select>
+          <button onclick="generateProductTechSheet()">📄 Produkt-Datenblatt</button>
+          <hr><h2>🍨 Datenblatt - Rezept</h2>
+          <select id="techRecipeSelect"></select>
+          <button onclick="generateRecipeTechSheet()">📄 Rezept-Datenblatt</button>
+          <button class="secondary" onclick="printTechSheet()">🖨️ Drucken</button>
         </div>
-    </footer>
+        <div class="card col-span-8"><div id="techSheetPreview" class="tech-sheet"></div></div>
+      </div>
+    </section>
 
-    <!-- PayPal SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AXNSOvcYdaokv8QFi8lhyhfgsMwzgx5u5NG1yjLW4t7jNQHuyJ0I9ZlM6M_qQ9ptxRzgaw56LgMd47UR&vault=true&intent=subscription&locale=de_DE"></script>
+    <section id="labelgen" class="screen">
+      <div class="grid">
+        <div class="card col-span-4"><h2>🏷️ Etikett</h2><select id="labelRecipeSelect"></select><button onclick="generateLabel()">Generieren</button><button class="secondary" onclick="copyLabel()">Kopieren</button><button class="secondary" onclick="downloadLabelTxt()">Als TXT</button></div>
+        <div class="card col-span-8"><div class="preview-box" id="labelPreviewText"></div></div>
+      </div>
+    </section>
 
-    <script>
-        // ============================================
-        // COMPLETE AUTHENTICATION SYSTEM
-        // ============================================
+    <section id="validation" class="screen">
+      <div class="grid">
+        <div class="card col-span-4"><h2>Rezept prüfen</h2><select id="validationSelect"></select><button onclick="validateRecipe()">Prüfen</button></div>
+        <div class="card col-span-8"><div id="validationResult"></div></div>
+      </div>
+    </section>
 
-        // Multi-language translations
-        const translations = {
-            de: {
-                nav_pricing: "Preise",
-                nav_how_it_works: "Funktionsweise",
-                nav_dashboard: "Dashboard",
-                nav_login: "Login",
-                nav_logout: "Logout",
-                hero_title: "Professionelle Gastronomie Software",
-                hero_subtitle: "QR-Bestellsystem & Zeiterfassung in separaten Paketen. Jährliche Lizenzierung für maximale Flexibilität.",
-                hero_buy_button: "Software kaufen (99€/Jahr)",
-                hero_login_button: "Kunden Login",
-                featured_image_caption: "SmartGastro Professional Interface - Modernes Design für optimale Benutzererfahrung",
-                pricing_title: "Wählen Sie Ihre Software",
-                pricing_subtitle: "Jährliche Lizenzierung - Jede Software separat erhältlich",
-                pricing_qr_title: "QR-Bestellsystem",
-                pricing_qr_desc: "Professionelles Bestellsystem mit QR-Code Technologie",
-                pricing_combo_title: "Beide Softwaren",
-                pricing_combo_desc: "Komplettpaket mit 10% Rabatt",
-                pricing_time_title: "Zeiterfassung",
-                pricing_time_desc: "Mitarbeiterverwaltung mit Stempelfunktion",
-                pricing_per_year: "/ Jahr",
-                pricing_recommended: "Empfohlen",
-                pricing_save_20: "Sparen Sie 20€ gegenüber Einzelkauf",
-                pricing_buy_now: "Jetzt kaufen",
-                pricing_buy_combo: "Komplettpaket kaufen",
-                feature_qr_orders: "QR-Code Bestellungen",
-                feature_admin_dashboard: "Admin Dashboard",
-                feature_auto_print: "Automatischer Druck",
-                feature_sales_stats: "Verkaufsstatistiken",
-                feature_menu_management: "Menü-Verwaltung",
-                feature_24_7_support: "24/7 Support",
-                feature_qr_system: "QR-Bestellsystem",
-                feature_time_tracking: "Zeiterfassung Software",
-                feature_combined_license: "Kombinierte Lizenz",
-                feature_unified_dashboard: "Einheitliches Dashboard",
-                feature_priority_support: "Prioritäts-Support",
-                feature_free_updates: "Kostenlose Updates",
-                feature_clock_in_out: "Ein-/Ausstempeln",
-                feature_scheduling: "Dienstplanung",
-                feature_whatsapp: "WhatsApp Integration",
-                feature_export_times: "Arbeitszeiten-Export",
-                feature_admin_area: "Admin-Bereich",
-                feature_multi_user: "Mehrbenutzer-Support",
-                licensing_process_title: "Lizenzierungsprozess",
-                step_1_title: "1. Kaufen",
-                step_1_desc: "Wählen Sie Ihre Software und bezahlen Sie sicher",
-                step_2_title: "2. Lizenz erhalten",
-                step_2_desc: "Sie bekommen Ihre Lizenzschlüssel per Email",
-                step_3_title: "3. Registrieren",
-                step_3_desc: "Erstellen Sie Ihr Konto mit der Lizenz",
-                step_4_title: "4. Loslegen",
-                step_4_desc: "Starten Sie mit Ihrer Software",
-                how_it_works_title: "So funktioniert's",
-                how_it_works_subtitle: "Einfacher Prozess zur Software-Aktivierung",
-                how_step_1_title: "Software auswählen",
-                how_step_1_desc: "Wählen Sie zwischen QR-Bestellsystem, Zeiterfassung oder dem Komplettpaket",
-                how_step_2_title: "Sicher bezahlen",
-                how_step_2_desc: "Bezahlen Sie 99€ pro Jahr pro Software über unser sicheres Zahlungssystem",
-                how_step_3_title: "Lizenz erhalten",
-                how_step_3_desc: "Sie bekommen einen eindeutigen Lizenzschlüssel per Email zugeschickt",
-                how_step_4_title: "Konto erstellen",
-                how_step_4_desc: "Registrieren Sie sich mit Ihrer Lizenz und erhalten Sie Zugang zur Software",
-                ready_to_start: "Bereit loszulegen?",
-                start_now_button: "Jetzt Software kaufen",
-                payment_title: "QR-Bestellsystem kaufen",
-                payment_price: "Jährliche Lizenz:",
-                payment_email_label: "Email Adresse",
-                payment_business_label: "Betriebsname",
-                payment_secure: "Sichere Zahlung via PayPal",
-                login_title: "SmartGastro Login",
-                login_description: "Bitte melden Sie sich mit Ihren Zugangsdaten an",
-                login_email_label: "Email Adresse",
-                login_license_label: "Lizenzschlüssel",
-                login_license_help: "Sie finden Ihren Lizenzschlüssel in der Bestätigungs-Email",
-                login_button: "Einloggen",
-                login_no_license: "Noch keine Lizenz?",
-                login_buy_now: "Jetzt kaufen",
-                payment_required_title: "Zugang erforderlich",
-                payment_required_description: "Um die SmartGastro Software nutzen zu können, benötigen Sie eine gültige Lizenz.",
-                payment_required_price: "Preis:",
-                payment_buy_now: "Jetzt kaufen",
-                payment_later: "Später",
-                dashboard_welcome: "Willkommen,",
-                dashboard_subtitle: "SmartGastro Pro Dashboard",
-                dashboard_logout: "Logout",
-                dashboard_qr_system: "QR-Bestellsystem",
-                dashboard_qr_desc: "Zugang zur QR-Bestellsystem Software",
-                dashboard_time_tracking: "Zeiterfassung",
-                dashboard_time_desc: "Zugang zur Mitarbeiter-Zeiterfassung",
-                dashboard_your_license: "Ihre Lizenz",
-                dashboard_valid_until: "Gültig bis:",
-                dashboard_open_software: "Software öffnen",
-                dashboard_downloads: "Software Download",
-                dashboard_downloads_desc: "Installationsdateien und Dokumentation",
-                dashboard_user_manual: "Benutzerhandbuch (PDF)",
-                dashboard_video_tutorials: "Video-Tutorials",
-                dashboard_support: "Technischer Support",
-                footer_description: "Professionelle Software für Gastronomiebetriebe",
-                footer_contact: "Kontakt",
-                footer_software: "Software",
-                footer_qr_system: "QR-Bestellsystem",
-                footer_time_tracking: "Zeiterfassung",
-                footer_dashboard: "Dashboard",
-                footer_copyright: "© 2025 SmartGastro Pro. Alle Rechte vorbehalten.",
-                footer_pricing: "Jährliche Lizenzierung - Preise pro Software: 99€/Jahr"
-            },
-            en: {
-                nav_pricing: "Pricing",
-                nav_how_it_works: "How it Works",
-                nav_dashboard: "Dashboard",
-                nav_login: "Login",
-                nav_logout: "Logout",
-                hero_title: "Professional Hospitality Software",
-                hero_subtitle: "QR Ordering System & Time Tracking in separate packages. Annual licensing for maximum flexibility.",
-                hero_buy_button: "Buy Software (99€/Year)",
-                hero_login_button: "Customer Login",
-                featured_image_caption: "SmartGastro Professional Interface - Modern design for optimal user experience",
-                pricing_title: "Choose Your Software",
-                pricing_subtitle: "Annual licensing - Each software available separately",
-                pricing_qr_title: "QR Ordering System",
-                pricing_qr_desc: "Professional ordering system with QR code technology",
-                pricing_combo_title: "Both Software",
-                pricing_combo_desc: "Complete package with 10% discount",
-                pricing_time_title: "Time Tracking",
-                pricing_time_desc: "Employee management with clock-in function",
-                pricing_per_year: "/ year",
-                pricing_recommended: "Recommended",
-                pricing_save_20: "Save 20€ compared to individual purchase",
-                pricing_buy_now: "Buy Now",
-                pricing_buy_combo: "Buy Complete Package",
-                feature_qr_orders: "QR Code Orders",
-                feature_admin_dashboard: "Admin Dashboard",
-                feature_auto_print: "Automatic Printing",
-                feature_sales_stats: "Sales Statistics",
-                feature_menu_management: "Menu Management",
-                feature_24_7_support: "24/7 Support",
-                feature_qr_system: "QR Ordering System",
-                feature_time_tracking: "Time Tracking Software",
-                feature_combined_license: "Combined License",
-                feature_unified_dashboard: "Unified Dashboard",
-                feature_priority_support: "Priority Support",
-                feature_free_updates: "Free Updates",
-                feature_clock_in_out: "Clock In/Out",
-                feature_scheduling: "Scheduling",
-                feature_whatsapp: "WhatsApp Integration",
-                feature_export_times: "Time Export",
-                feature_admin_area: "Admin Area",
-                feature_multi_user: "Multi-User Support",
-                licensing_process_title: "Licensing Process",
-                step_1_title: "1. Purchase",
-                step_1_desc: "Choose your software and pay securely",
-                step_2_title: "2. Receive License",
-                step_2_desc: "You'll receive your license keys via email",
-                step_3_title: "3. Register",
-                step_3_desc: "Create your account with the license",
-                step_4_title: "4. Get Started",
-                step_4_desc: "Start using your software",
-                how_it_works_title: "How It Works",
-                how_it_works_subtitle: "Simple process for software activation",
-                how_step_1_title: "Choose Software",
-                how_step_1_desc: "Select between QR ordering system, time tracking, or complete package",
-                how_step_2_title: "Secure Payment",
-                how_step_2_desc: "Pay 99€ per year per software through our secure payment system",
-                how_step_3_title: "Receive License",
-                how_step_3_desc: "You'll receive a unique license key via email",
-                how_step_4_title: "Create Account",
-                how_step_4_desc: "Register with your license and get access to the software",
-                ready_to_start: "Ready to get started?",
-                start_now_button: "Buy Software Now",
-                payment_title: "Buy QR Ordering System",
-                payment_price: "Annual license:",
-                payment_email_label: "Email Address",
-                payment_business_label: "Business Name",
-                payment_secure: "Secure payment via PayPal",
-                login_title: "SmartGastro Login",
-                login_description: "Please sign in with your credentials",
-                login_email_label: "Email Address",
-                login_license_label: "License Key",
-                login_license_help: "You'll find your license key in the confirmation email",
-                login_button: "Sign In",
-                login_no_license: "No license yet?",
-                login_buy_now: "Buy Now",
-                payment_required_title: "Access Required",
-                payment_required_description: "To use the SmartGastro software, you need a valid license.",
-                payment_required_price: "Price:",
-                payment_buy_now: "Buy Now",
-                payment_later: "Later",
-                dashboard_welcome: "Welcome,",
-                dashboard_subtitle: "SmartGastro Pro Dashboard",
-                dashboard_logout: "Logout",
-                dashboard_qr_system: "QR Ordering System",
-                dashboard_qr_desc: "Access to QR ordering system software",
-                dashboard_time_tracking: "Time Tracking",
-                dashboard_time_desc: "Access to employee time tracking",
-                dashboard_your_license: "Your License",
-                dashboard_valid_until: "Valid until:",
-                dashboard_open_software: "Open Software",
-                dashboard_downloads: "Software Downloads",
-                dashboard_downloads_desc: "Installation files and documentation",
-                dashboard_user_manual: "User Manual (PDF)",
-                dashboard_video_tutorials: "Video Tutorials",
-                dashboard_support: "Technical Support",
-                footer_description: "Professional software for hospitality businesses",
-                footer_contact: "Contact",
-                footer_software: "Software",
-                footer_qr_system: "QR Ordering System",
-                footer_time_tracking: "Time Tracking",
-                footer_dashboard: "Dashboard",
-                footer_copyright: "© 2025 SmartGastro Pro. All rights reserved.",
-                footer_pricing: "Annual licensing - Price per software: 99€/year"
-            }
-        };
+    <section id="backup" class="screen">
+      <div class="grid">
+        <div class="card col-span-6"><h2>Backup</h2><button onclick="exportData()">📁 JSON Export</button><button class="secondary" onclick="document.getElementById('importFile').click()">📂 Import JSON</button><input id="importFile" type="file" accept="application/json" style="display:none" onchange="importData(event)"></div>
+        <div class="card col-span-6"><h2>Reset</h2><button class="danger" onclick="resetAll()">⚠️ Alle Daten löschen</button></div>
+        <div class="card col-span-12"><pre id="rawData" style="background:#0a0f1c; padding:1rem; overflow:auto; font-size:11px;"></pre></div>
+      </div>
+    </section>
+  </div>
+</div>
 
-        class AuthSystem {
-            constructor() {
-                this.currentUser = null;
-                this.currentLanguage = 'de';
-                this.selectedSoftware = null;
-                this.init();
-            }
+<script>
+  const STORAGE_KEY = 'sanremo_lmiv_complete';
+  let state = { products: [], recipes: [], recipeDraft: [] };
 
-            init() {
-                this.setupElements();
-                this.bindEvents();
-                this.checkAuthStatus();
-                this.applyTranslation(this.currentLanguage);
-            }
+  // IHRE PRODUKTE mit fester Reihenfolge (bereits sortiert)
+  const defaultProducts = [
+    { id: 'p_milch', name: 'MILCH', category: 'Milchprodukt', allergens: 'MILCH', nutrition: { kj:265, kcal:64, fat:3.5, sat:2.3, carb:4.8, sugar:4.8, protein:3.4, salt:0.1 }, composition: [{ id:'c1', name:'Milch', percent:100 }] },
+    { id: 'p_dextrose', name: 'Dextrose', category: 'Pulver', allergens: '', nutrition: { kj:1570, kcal:370, fat:0, sat:0, carb:100, sugar:100, protein:0, salt:0 }, composition: [{ id:'c2', name:'Dextrose', percent:100 }] },
+    { id: 'p_sanhe', name: 'SANHE', category: 'Milchprodukt', allergens: 'MILCH', nutrition: { kj:1320, kcal:314, fat:33, sat:20, carb:3, sugar:2, protein:2, salt:0 }, composition: [{ id:'c3', name:'Sahne', percent:100 }] },
+    { id: 'p_magermilch', name: 'MAGERMILCHPULVER', category: 'Milchprodukt', allergens: 'MILCH', nutrition: { kj:1500, kcal:360, fat:1, sat:0, carb:52, sugar:52, protein:36, salt:1.2 }, composition: [{ id:'c4', name:'Magermilchpulver', percent:100 }] },
+    { id: 'p_glukosepulver', name: 'Glukosepulver', category: 'Pulver', allergens: '', nutrition: { kj:1570, kcal:370, fat:0, sat:0, carb:100, sugar:100, protein:0, salt:0 }, composition: [{ id:'c5', name:'Glukosepulver', percent:100 }] },
+    { id: 'p_zucker', name: 'Zucker', category: 'Süße', allergens: '', nutrition: { kj:1700, kcal:400, fat:0, sat:0, carb:100, sugar:100, protein:0, salt:0 }, composition: [{ id:'c6', name:'Zucker', percent:100 }] },
+    { id: 'p_glukosesirup', name: 'Glukosesirup', category: 'Süße', allergens: '', nutrition: { kj:1570, kcal:370, fat:0, sat:0, carb:100, sugar:100, protein:0, salt:0 }, composition: [{ id:'c7', name:'Glukosesirup', percent:100 }] },
+    { id: 'p_pflanzenfette', name: 'Pflanzenfette (Palm, Kokos)', category: 'Fett', allergens: '', nutrition: { kj:3700, kcal:900, fat:100, sat:85, carb:0, sugar:0, protein:0, salt:0 }, composition: [{ id:'c8', name:'Pflanzenfette', percent:100 }] },
+    { id: 'p_milcheiweiss', name: 'MILCHeiweiß', category: 'Pulver', allergens: 'MILCH', nutrition: { kj:1600, kcal:380, fat:0, sat:0, carb:0, sugar:0, protein:90, salt:0.5 }, composition: [{ id:'c9', name:'Milcheiweiß', percent:100 }] },
+    { id: 'p_laktose', name: 'LAKTOSE', category: 'Milchprodukt', allergens: 'MILCH', nutrition: { kj:1700, kcal:400, fat:0, sat:0, carb:100, sugar:100, protein:0, salt:0 }, composition: [{ id:'c10', name:'Laktose', percent:100 }] },
+    { 
+      id: 'p_grundbasis', 
+      name: 'Milchspeiseeis Grundbasis', 
+      category: 'Milchprodukt', 
+      allergens: 'MILCH', 
+      nutrition: { kj:1127, kcal:267, fat:4.9, sat:3.4, carb:50.8, sugar:48.3, protein:4.8, salt:0.09 },
+      composition: [
+        { id:'g1', name:'MILCH', percent:67.09 },
+        { id:'g2', name:'Dextrose', percent:12.43 },
+        { id:'g3', name:'SANHE', percent:4.85 },
+        { id:'g4', name:'MAGERMILCHPULVER', percent:4.41 },
+        { id:'g5', name:'Glukosepulver', percent:4.39 },
+        { id:'g6', name:'Zucker', percent:3.90 },
+        { id:'g7', name:'Glukosesirup', percent:1.46 },
+        { id:'g8', name:'Pflanzenfette (Palm, Kokos)', percent:0.59 },
+        { id:'g9', name:'MILCHeiweiß', percent:0.29 },
+        { id:'g10', name:'LAKTOSE', percent:0.24 },
+        { id:'g11', name:'Verdickungsmittel (E410, E466, E407, E412)', percent:0.12 },
+        { id:'g12', name:'Aromen', percent:0.10 },
+        { id:'g13', name:'Emulgatoren (E471, E477, E472b, E473)', percent:0.07 },
+        { id:'g14', name:'Salz', percent:0.05 }
+      ]
+    },
+    { 
+      id: 'p_kakaoglasur', 
+      name: 'Kakaofettglasur', 
+      category: 'Fettglasur', 
+      allergens: 'SOJA', 
+      nutrition: { kj:2347, kcal:565, fat:40, sat:31, carb:40, sugar:35, protein:6.5, salt:0.02 },
+      composition: [
+        { id:'k1', name:'Zucker', percent:40 },
+        { id:'k2', name:'pflanzliche Fette (Palm, Kokos, Shea)', percent:35 },
+        { id:'k3', name:'fettarmes Kakaopulver', percent:19 },
+        { id:'k4', name:'Kakaomasse', percent:5.5 },
+        { id:'k5', name:'Emulgator Lecithine (SOJA)', percent:0.5 }
+      ]
+    }
+  ];
 
-            setupElements() {
-                // Get all DOM elements
-                this.elements = {
-                    loginBtn: document.getElementById('login-btn'),
-                    logoutBtn: document.getElementById('logout-btn'),
-                    userMenu: document.getElementById('user-menu'),
-                    userName: document.getElementById('user-display-name'),
-                    userAvatar: document.getElementById('user-avatar'),
-                    loginModal: document.getElementById('login-modal'),
-                    paymentModal: document.getElementById('payment-modal'),
-                    paymentRequiredModal: document.getElementById('payment-required-modal'),
-                    closeLogin: document.getElementById('close-login'),
-                    closePayment: document.getElementById('close-payment'),
-                    submitLogin: document.getElementById('submit-login'),
-                    loginEmail: document.getElementById('login-email'),
-                    licenseKey: document.getElementById('license-key'),
-                    dashboardNav: document.getElementById('dashboard-nav'),
-                    dashboardLogout: document.getElementById('dashboard-logout-btn'),
-                    dropdownLogout: document.getElementById('dropdown-logout'),
-                    navLinks: document.getElementById('nav-links'),
-                    mobileMenuBtn: document.getElementById('mobile-menu-btn'),
-                    mainContent: document.getElementById('main-content'),
-                    clientDashboard: document.getElementById('client-dashboard'),
-                    goToPayment: document.getElementById('go-to-payment'),
-                    buyNowRedirect: document.getElementById('buy-now-redirect'),
-                    closePaymentRequired: document.getElementById('close-payment-required'),
-                    heroLoginBtn: document.getElementById('hero-login-btn')
-                };
-            }
+  function sortProductComposition(prod) {
+    if (prod.composition) prod.composition.sort((a,b) => b.percent - a.percent);
+    return prod;
+  }
 
-            bindEvents() {
-                // Login button
-                this.elements.loginBtn.addEventListener('click', () => this.showLoginModal());
-                this.elements.heroLoginBtn.addEventListener('click', () => this.showLoginModal());
-                
-                // Close modals
-                this.elements.closeLogin.addEventListener('click', () => this.hideLoginModal());
-                this.elements.closePayment.addEventListener('click', () => this.hidePaymentModal());
-                this.elements.closePaymentRequired.addEventListener('click', () => this.hidePaymentRequiredModal());
-                
-                // Login form
-                this.elements.submitLogin.addEventListener('click', () => this.handleLogin());
-                
-                // Logout buttons
-                this.elements.logoutBtn.addEventListener('click', () => this.handleLogout());
-                this.elements.dashboardLogout.addEventListener('click', () => this.handleLogout());
-                this.elements.dropdownLogout.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.handleLogout();
-                });
-                
-                // Dashboard navigation
-                this.elements.dashboardNav.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.showDashboard();
-                });
-                
-                // Payment navigation
-                this.elements.goToPayment.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.hideLoginModal();
-                    this.showPaymentModal();
-                });
-                
-                this.elements.buyNowRedirect.addEventListener('click', () => {
-                    this.hidePaymentRequiredModal();
-                    this.showPaymentModal();
-                });
-                
-                // Mobile menu
-                this.elements.mobileMenuBtn.addEventListener('click', () => {
-                    this.elements.navLinks.classList.toggle('active');
-                });
-                
-                // Language selector
-                document.querySelectorAll('.language-option').forEach(option => {
-                    option.addEventListener('click', () => {
-                        const lang = option.getAttribute('data-lang');
-                        this.applyTranslation(lang);
-                        document.querySelector('.language-dropdown').classList.remove('active');
-                    });
-                });
-                
-                document.querySelector('.language-btn').addEventListener('click', () => {
-                    document.querySelector('.language-dropdown').classList.toggle('active');
-                });
-                
-                // Close modals on outside click
-                document.addEventListener('click', (e) => {
-                    if (e.target === this.elements.loginModal) {
-                        this.hideLoginModal();
-                    }
-                    if (e.target === this.elements.paymentModal) {
-                        this.hidePaymentModal();
-                    }
-                    if (e.target === this.elements.paymentRequiredModal) {
-                        this.hidePaymentRequiredModal();
-                    }
-                });
-                
-                // Close language dropdown on outside click
-                document.addEventListener('click', (e) => {
-                    if (!e.target.closest('.language-selector')) {
-                        document.querySelector('.language-dropdown').classList.remove('active');
-                    }
-                });
-                
-                // Buy buttons
-                document.querySelectorAll('[data-software]').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        this.selectedSoftware = btn.getAttribute('data-software');
-                        this.showPaymentModal();
-                    });
-                });
-            }
+  function loadState() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      try { const data = JSON.parse(raw); state.products = data.products || []; state.recipes = data.recipes || []; state.recipeDraft = []; } catch(e) {}
+    }
+    if (!state.products.length) state.products = JSON.parse(JSON.stringify(defaultProducts));
+    state.products.forEach(p => { if (!p.composition) p.composition = []; if (!p.nutrition) p.nutrition = {}; sortProductComposition(p); });
+    if (!state.recipes.length) state.recipes = [];
+    renderAll();
+  }
 
-            applyTranslation(lang) {
-                this.currentLanguage = lang;
-                const dict = translations[lang];
-                
-                document.querySelectorAll('[data-i18n]').forEach(element => {
-                    const key = element.getAttribute('data-i18n');
-                    if (dict[key]) {
-                        element.textContent = dict[key];
-                    }
-                });
-                
-                document.querySelector('.current-language').textContent = 
-                    lang === 'de' ? 'Deutsch' : 'English';
-                
-                localStorage.setItem('smartgastro_language', lang);
-            }
+  function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); renderAll(); }
+  function uid() { return Date.now() + '-' + Math.random().toString(36).substr(2, 8); }
+  function getProductPercentSum(prod) { return (prod.composition || []).reduce((s,c)=>s+c.percent,0); }
+  function parseDecimal(v) { let num = parseFloat(String(v).trim().replace(',', '.')); return isNaN(num) ? 0 : parseFloat(num.toFixed(2)); }
 
-            checkAuthStatus() {
-                const user = JSON.parse(localStorage.getItem('smartgastro_user'));
-                const hasLicense = localStorage.getItem('smartgastro_license') === 'true';
-                
-                if (user && hasLicense) {
-                    this.currentUser = user;
-                    this.updateUI();
-                    this.showDashboard();
-                } else if (user && !hasLicense) {
-                    this.currentUser = user;
-                    this.updateUI();
-                    this.showPaymentRequiredModal();
-                } else {
-                    this.showMainContent();
-                }
-                
-                // Set language
-                const savedLang = localStorage.getItem('smartgastro_language') || 'de';
-                this.applyTranslation(savedLang);
-            }
+  function getWeightSortedIngredients(recipe) {
+    const map = new Map();
+    for (let item of recipe.items) {
+      const prod = state.products.find(p => p.id === item.productId);
+      if (!prod || !prod.composition) continue;
+      for (let comp of prod.composition) {
+        const gramm = item.qty * (comp.percent / 100);
+        map.set(comp.name, (map.get(comp.name) || 0) + gramm);
+      }
+    }
+    return Array.from(map.entries()).sort((a,b)=>b[1]-a[1]).map(e=>e[0]);
+  }
 
-            updateUI() {
-                if (this.currentUser) {
-                    // Update user info
-                    this.elements.userName.textContent = this.currentUser.name;
-                    this.elements.userAvatar.innerHTML = this.currentUser.name.charAt(0).toUpperCase();
-                    document.getElementById('dashboard-user-name').textContent = this.currentUser.name;
-                    
-                    // Show user menu, hide login button
-                    this.elements.userMenu.classList.add('active');
-                    this.elements.loginBtn.style.display = 'none';
-                    this.elements.logoutBtn.style.display = 'flex';
-                } else {
-                    // Show login button, hide user menu
-                    this.elements.userMenu.classList.remove('active');
-                    this.elements.loginBtn.style.display = 'flex';
-                    this.elements.logoutBtn.style.display = 'none';
-                }
-            }
+  function computeRecipeNutrition(recipe) {
+    const total = recipe.items.reduce((s,i)=>s+i.qty,0);
+    if (!total) return null;
+    const acc = { kj:0,kcal:0,fat:0,sat:0,carb:0,sugar:0,protein:0,salt:0 };
+    for (let item of recipe.items) {
+      const prod = state.products.find(p=>p.id===item.productId);
+      if (!prod) continue;
+      const f = item.qty / total;
+      for (let k in acc) acc[k] += (prod.nutrition[k] || 0) * f;
+    }
+    for (let k in acc) acc[k] = parseFloat(acc[k].toFixed(2));
+    return acc;
+  }
 
-            showLoginModal() {
-                this.elements.loginModal.classList.add('active');
-                this.elements.loginEmail.focus();
-            }
+  // UI Funktionen
+  function renderProductsList() {
+    const container = document.getElementById('productsList');
+    if (!state.products.length) { container.innerHTML = '<div class="product-item">Keine Produkte</div>'; return; }
+    container.innerHTML = state.products.map(p => {
+      const sum = getProductPercentSum(p);
+      const status = Math.abs(sum-100)<0.1 ? '✅ 100%' : `⚠️ ${sum.toFixed(1)}%`;
+      return `<div class="product-item"><strong>${p.name}</strong> <span class="badge">${p.category}</span> <span class="pill success">${status}</span><div style="font-size:0.75rem;">Allergene: ${p.allergens || '—'} | ${p.composition.length} Zutaten</div><div><button onclick="editProduct('${p.id}')">✏️ Bearbeiten</button> <button class="danger" onclick="deleteProduct('${p.id}')">Löschen</button> <button onclick="openProductComp('${p.id}')">🔬 Zus.</button></div></div>`;
+    }).join('');
+  }
 
-            hideLoginModal() {
-                this.elements.loginModal.classList.remove('active');
-                this.elements.loginEmail.value = '';
-                this.elements.licenseKey.value = '';
-            }
+  window.editProduct = (id) => {
+    const p = state.products.find(x=>x.id===id);
+    if(!p) return;
+    document.getElementById('editProductId').value = p.id;
+    document.getElementById('prodName').value = p.name;
+    document.getElementById('prodCategory').value = p.category;
+    document.getElementById('prodAllergens').value = p.allergens || '';
+    document.getElementById('prodKj').value = p.nutrition.kj;
+    document.getElementById('prodKcal').value = p.nutrition.kcal;
+    document.getElementById('prodFat').value = p.nutrition.fat;
+    document.getElementById('prodSat').value = p.nutrition.sat;
+    document.getElementById('prodCarb').value = p.nutrition.carb;
+    document.getElementById('prodSugar').value = p.nutrition.sugar;
+    document.getElementById('prodProtein').value = p.nutrition.protein;
+    document.getElementById('prodSalt').value = p.nutrition.salt;
+    renderCurrentComposition(p);
+  };
+  window.openProductComp = (id) => { editProduct(id); switchScreen('products'); };
+  
+  function renderCurrentComposition(prod) {
+    const div = document.getElementById('currentCompositionList');
+    if (!prod) { div.innerHTML = ''; document.getElementById('productPercentFill').style.width = '0%'; return; }
+    const sum = getProductPercentSum(prod);
+    document.getElementById('productPercentFill').style.width = Math.min(100, sum) + '%';
+    const sorted = [...prod.composition].sort((a,b)=>b.percent-a.percent);
+    div.innerHTML = sorted.map(c => `<div style="display:flex; justify-content:space-between;"><span>${c.name}</span><span>${c.percent.toFixed(2)}% <button class="danger" style="padding:0 6px;" onclick="removeCompFromCurrent('${c.id}')">X</button></span></div>`).join('');
+  }
+  window.removeCompFromCurrent = (cid) => { const pid = document.getElementById('editProductId').value; const prod = state.products.find(p=>p.id===pid); if(prod) { prod.composition = prod.composition.filter(c=>c.id!==cid); renderCurrentComposition(prod); saveState(); } };
+  window.addIngredientToCurrent = () => { const pid = document.getElementById('editProductId').value; const prod = state.products.find(p=>p.id===pid); if(!prod) { alert("Produkt wählen"); return; } const name = document.getElementById('compName').value.trim(); const pct = parseDecimal(document.getElementById('compPercent').value); if(!name || !pct) { alert("Name und %"); return; } prod.composition.push({ id: uid(), name, percent: pct }); sortProductComposition(prod); renderCurrentComposition(prod); saveState(); };
+  window.sortCurrentComposition = () => { const pid = document.getElementById('editProductId').value; const prod = state.products.find(p=>p.id===pid); if(prod) { sortProductComposition(prod); renderCurrentComposition(prod); saveState(); alert("Sortiert!"); } };
+  window.normalizeCurrentProduct = () => { const pid = document.getElementById('editProductId').value; const prod = state.products.find(p=>p.id===pid); if(!prod || !prod.composition.length) { alert("Keine Zutaten"); return; } let sum = prod.composition.reduce((a,b)=>a+b.percent,0); if(sum===0) return; prod.composition = prod.composition.map(c => ({ ...c, percent: parseFloat((c.percent/sum*100).toFixed(2)) })); sortProductComposition(prod); renderCurrentComposition(prod); saveState(); };
+  window.saveProduct = () => { let id = document.getElementById('editProductId').value; const prod = { id: id || uid(), name: document.getElementById('prodName').value.trim(), category: document.getElementById('prodCategory').value, allergens: document.getElementById('prodAllergens').value, nutrition: { kj: parseDecimal(document.getElementById('prodKj').value), kcal: parseDecimal(document.getElementById('prodKcal').value), fat: parseDecimal(document.getElementById('prodFat').value), sat: parseDecimal(document.getElementById('prodSat').value), carb: parseDecimal(document.getElementById('prodCarb').value), sugar: parseDecimal(document.getElementById('prodSugar').value), protein: parseDecimal(document.getElementById('prodProtein').value), salt: parseDecimal(document.getElementById('prodSalt').value) }, composition: [] }; if(!prod.name) { alert("Name erforderlich"); return; } const idx = state.products.findIndex(p=>p.id===prod.id); if(idx>=0) { prod.composition = state.products[idx].composition || []; state.products[idx] = prod; } else { state.products.push(prod); } sortProductComposition(prod); clearProductForm(); saveState(); };
+  window.deleteProduct = (id) => { if(confirm("Löschen?")) { state.products = state.products.filter(p=>p.id!==id); state.recipes.forEach(r=>r.items=r.items.filter(i=>i.productId!==id)); saveState(); } };
+  function clearProductForm() { document.getElementById('editProductId').value=''; ['prodName','prodAllergens','prodKj','prodKcal','prodFat','prodSat','prodCarb','prodSugar','prodProtein','prodSalt'].forEach(id=>document.getElementById(id).value=''); document.getElementById('currentCompositionList').innerHTML=''; document.getElementById('productPercentFill').style.width='0%'; }
 
-            showPaymentModal() {
-                this.elements.paymentModal.classList.add('active');
-            }
-
-            hidePaymentModal() {
-                this.elements.paymentModal.classList.remove('active');
-            }
-
-            showPaymentRequiredModal() {
-                this.elements.paymentRequiredModal.classList.add('active');
-            }
-
-            hidePaymentRequiredModal() {
-                this.elements.paymentRequiredModal.classList.remove('active');
-            }
-
-            async handleLogin() {
-                const email = this.elements.loginEmail.value.trim();
-                const licenseKey = this.elements.licenseKey.value.trim();
-                
-                if (!email || !licenseKey) {
-                    this.showMessage('Bitte füllen Sie alle Felder aus', 'error');
-                    return;
-                }
-                
-                // Simple validation
-                if (!licenseKey.startsWith('SG-')) {
-                    this.showMessage('Ungültiger Lizenzschlüssel', 'error');
-                    return;
-                }
-                
-                this.showMessage('Anmeldung wird durchgeführt...', 'info');
-                
-                // Simulate API call
-                await new Promise(resolve => setTimeout(resolve, 1500));
-                
-                // Create user object
-                const userName = email.split('@')[0];
-                const formattedName = userName.charAt(0).toUpperCase() + userName.slice(1);
-                
-                this.currentUser = {
-                    name: formattedName,
-                    email: email,
-                    license: licenseKey
-                };
-                
-                // Save to localStorage
-                localStorage.setItem('smartgastro_user', JSON.stringify(this.currentUser));
-                localStorage.setItem('smartgastro_license', 'true');
-                
-                // Update UI and show dashboard
-                this.updateUI();
-                this.hideLoginModal();
-                this.showDashboard();
-                this.showMessage('Erfolgreich eingeloggt!', 'success');
-            }
-
-            handleLogout() {
-                if (confirm(this.currentLanguage === 'de' ? 
-                    'Möchten Sie sich wirklich abmelden?' : 
-                    'Do you really want to log out?')) {
-                    
-                    // Clear data
-                    localStorage.removeItem('smartgastro_user');
-                    localStorage.removeItem('smartgastro_license');
-                    this.currentUser = null;
-                    
-                    // Update UI
-                    this.updateUI();
-                    this.showMainContent();
-                    this.showMessage(this.currentLanguage === 'de' ? 
-                        'Erfolgreich abgemeldet' : 
-                        'Successfully logged out', 'info');
-                }
-            }
-
-            showDashboard() {
-                this.elements.mainContent.style.display = 'none';
-                this.elements.clientDashboard.classList.add('active');
-                
-                // Generate and display licenses
-                const licenseQR = this.generateLicense('qr');
-                const licenseTime = this.generateLicense('time');
-                
-                document.getElementById('license-qr').textContent = licenseQR;
-                document.getElementById('license-time').textContent = licenseTime;
-            }
-
-            showMainContent() {
-                this.elements.clientDashboard.classList.remove('active');
-                this.elements.mainContent.style.display = 'block';
-            }
-
-            generateLicense(type) {
-                const prefix = type === 'qr' ? 'SG-QR' : 'SG-TIME';
-                const year = new Date().getFullYear();
-                const random = Math.random().toString(36).substring(2, 14).toUpperCase();
-                return `${prefix}-${year}-${random.substring(0, 4)}-${random.substring(4, 8)}-${random.substring(8, 12)}`;
-            }
-
-            showMessage(text, type = 'info') {
-                // Remove existing message
-                const existingMessage = document.querySelector('.message');
-                if (existingMessage) {
-                    existingMessage.remove();
-                }
-                
-                // Create new message
-                const message = document.createElement('div');
-                message.className = `message ${type}`;
-                message.innerHTML = `
-                    <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
-                    <span>${text}</span>
-                `;
-                
-                document.body.appendChild(message);
-                
-                // Auto remove
-                setTimeout(() => {
-                    if (message.parentNode) {
-                        message.style.opacity = '0';
-                        setTimeout(() => message.remove(), 300);
-                    }
-                }, 5000);
-            }
-
-            initializePayPal() {
-                // PayPal initialization code
-                if (window.paypal) {
-                    paypal.Buttons({
-                        style: {
-                            shape: 'rect',
-                            color: 'gold',
-                            layout: 'vertical',
-                            label: 'subscribe'
-                        },
-                        createSubscription: (data, actions) => {
-                            return actions.subscription.create({
-                                plan_id: 'P-5WA45756CL7747454NEXAVJA'
-                            });
-                        },
-                        onApprove: (data, actions) => {
-                            const email = document.getElementById('payment-email').value;
-                            const business = document.getElementById('business-name').value;
-                            
-                            // Create user
-                            const user = {
-                                name: business || 'Restaurant Owner',
-                                email: email,
-                                license: this.selectedSoftware || 'qr'
-                            };
-                            
-                            localStorage.setItem('smartgastro_user', JSON.stringify(user));
-                            localStorage.setItem('smartgastro_license', 'true');
-                            
-                            this.currentUser = user;
-                            this.updateUI();
-                            this.hidePaymentModal();
-                            this.showDashboard();
-                            
-                            this.showMessage(this.currentLanguage === 'de' ?
-                                'Kauf erfolgreich! Lizenz aktiviert.' :
-                                'Purchase successful! License activated.', 'success');
-                        },
-                        onError: (err) => {
-                            console.error('PayPal Error:', err);
-                            this.showMessage(this.currentLanguage === 'de' ?
-                                'Fehler bei der Zahlung' :
-                                'Payment error', 'error');
-                        }
-                    }).render('#paypal-button-container');
-                }
-            }
-        }
-
-        // Initialize the system
-        document.addEventListener('DOMContentLoaded', () => {
-            window.authSystem = new AuthSystem();
-            window.authSystem.initializePayPal();
-            
-            // Smooth scrolling
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
-        });
-    </script>
+  window.addRecipeItem = () => { const pid = document.getElementById('recipeProductSelect').value; const qty = parseFloat(document.getElementById('recipeItemQty').value); if(!pid || qty<=0) { alert("Produkt und Menge"); return; } state.recipeDraft.push({ id: uid(), productId: pid, qty }); renderRecipeDraft(); saveState(); };
+  window.removeRecipeDraftItem = (id) => { state.recipeDraft = state.recipeDraft.filter(i=>i.id!==id); renderRecipeDraft(); saveState(); };
+  window.clearRecipeDraft = () => { state.recipeDraft = []; renderRecipeDraft(); saveState(); };
+  function renderRecipeDraft() { const total = state.recipeDraft.reduce((s,i)=>s+i.qty,0); document.getElementById('recipeTotalWeight').innerHTML = `<strong>Gesamt: ${total.toFixed(1)} g</strong>`; document.getElementById('recipeItemsTable').innerHTML = `<thead><tr><th>Produkt</th><th>Menge (g)</th><th>Anteil</th><th></th></tr></thead><tbody>${state.recipeDraft.map(it=>{ const prod = state.products.find(p=>p.id===it.productId); const percent = total ? (it.qty/total*100).toFixed(1) : 0; return `<tr><td>${prod?.name||'?'}</td><td>${it.qty.toFixed(1)} g</td><td>${percent}%</td><td><button class="danger" onclick="removeRecipeDraftItem('${it.id}')">X</button></td></tr>`; }).join('')}</tbody>`; }
+  window.saveRecipe = () => { const rid = document.getElementById('editRecipeId').value; const recipe = { id: rid || uid(), name: document.getElementById('recipeName').value.trim(), legalName: document.getElementById('recipeLegal').value.trim(), packaging: document.getElementById('recipePackaging').value, storage: document.getElementById('recipeStorage').value, manufacturer: document.getElementById('recipeManufacturer').value, mhd: document.getElementById('recipeMhd').value, items: [...state.recipeDraft] }; if(!recipe.name || !recipe.legalName) { alert("Name und Verkehrsbezeichnung"); return; } const idx = state.recipes.findIndex(r=>r.id===recipe.id); if(idx>=0) state.recipes[idx]=recipe; else state.recipes.push(recipe); state.recipeDraft=[]; document.getElementById('editRecipeId').value=''; document.getElementById('recipeName').value=''; document.getElementById('recipeLegal').value=''; renderSavedRecipes(); saveState(); };
+  function renderSavedRecipes() { const container = document.getElementById('savedRecipesList'); container.innerHTML = state.recipes.map(r => `<div class="product-item"><strong>${r.name}</strong> (${r.packaging}g) <button onclick="editRecipe('${r.id}')">Bearbeiten</button> <button class="danger" onclick="deleteRecipeById('${r.id}')">Löschen</button></div>`).join(''); const prodSelect = document.getElementById('recipeProductSelect'); prodSelect.innerHTML = '<option value="">Produkt wählen</option>' + state.products.map(p=>`<option value="${p.id}">${p.name}</option>`).join(''); document.getElementById('labelRecipeSelect').innerHTML = '<option value="">Rezept wählen</option>' + state.recipes.map(r=>`<option value="${r.id}">${r.name}</option>`).join(''); document.getElementById('validationSelect').innerHTML = '<option value="">Rezept wählen</option>' + state.recipes.map(r=>`<option value="${r.id}">${r.name}</option>`).join(''); document.getElementById('techProductSelect').innerHTML = '<option value="">Produkt wählen</option>' + state.products.map(p=>`<option value="${p.id}">${p.name}</option>`).join(''); document.getElementById('techRecipeSelect').innerHTML = '<option value="">Rezept wählen</option>' + state.recipes.map(r=>`<option value="${r.id}">${r.name}</option>`).join(''); }
+  window.editRecipe = (id) => { const r = state.recipes.find(rr=>rr.id===id); if(r) { document.getElementById('editRecipeId').value=r.id; document.getElementById('recipeName').value=r.name; document.getElementById('recipeLegal').value=r.legalName; document.getElementById('recipePackaging').value=r.packaging; document.getElementById('recipeStorage').value=r.storage; document.getElementById('recipeManufacturer').value=r.manufacturer; document.getElementById('recipeMhd').value=r.mhd; state.recipeDraft = JSON.parse(JSON.stringify(r.items)); renderRecipeDraft(); saveState(); } };
+  window.deleteRecipeById = (id) => { if(confirm("Rezept löschen?")) { state.recipes = state.recipes.filter(r=>r.id!==id); renderSavedRecipes(); saveState(); } };
+  window.validateRecipe = () => { const rid = document.getElementById('validationSelect').value; const r = state.recipes.find(rr=>rr.id===rid); const out = document.getElementById('validationResult'); if(!r) { out.innerHTML = '<span class="pill error">Rezept wählen</span>'; return; } out.innerHTML = '<span class="pill success">✅ LMIV konform – Reihenfolge nach Gewicht</span>'; };
+  window.generateLabel = () => { const rid = document.getElementById('labelRecipeSelect').value; const r = state.recipes.find(rr=>rr.id===rid); const preview = document.getElementById('labelPreviewText'); if(!r) { preview.innerHTML = 'Rezept wählen'; return; } const nutrition = computeRecipeNutrition(r); const ingredients = getWeightSortedIngredients(r); const allergens = new Set(); r.items.forEach(i => { const p = state.products.find(pp=>pp.id===i.productId); if(p && p.allergens) p.allergens.split(',').forEach(a => allergens.add(a.trim())); }); const fmt = v => (v||0).toFixed(1).replace('.',','); const fmtSalt = v => { let val=v||0; if(val<0.05) return '0,0'; return val.toFixed(1).replace('.',','); }; preview.textContent = `${r.legalName}\n\nZutaten: ${ingredients.join(', ')}.\nAllergene: ${allergens.size ? Array.from(allergens).join(', ') : 'keine'}.\n\nNährwerte pro 100g:\nEnergie ${fmt(nutrition.kj)} kJ / ${fmt(nutrition.kcal)} kcal\nFett ${fmt(nutrition.fat)} g (davon gesättigt ${fmt(nutrition.sat)} g)\nKohlenhydrate ${fmt(nutrition.carb)} g (davon Zucker ${fmt(nutrition.sugar)} g)\nEiweiß ${fmt(nutrition.protein)} g\nSalz ${fmtSalt(nutrition.salt)} g\n\nInhalt: ${r.packaging} g\n${r.storage}\n${r.mhd}\nHersteller: ${r.manufacturer}`; };
+  window.copyLabel = () => { const t = document.getElementById('labelPreviewText').textContent; if(t) { navigator.clipboard.writeText(t); alert("Kopiert"); } };
+  window.downloadLabelTxt = () => { const t = document.getElementById('labelPreviewText').textContent; if(t){ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([t],{type:'text/plain'})); a.download='etikett.txt'; a.click(); } };
+  window.generateProductTechSheet = () => { const pid = document.getElementById('techProductSelect').value; const p = state.products.find(pp=>pp.id===pid); const preview = document.getElementById('techSheetPreview'); if(!p) return; const sorted = [...p.composition].sort((a,b)=>b.percent-a.percent); const format = n => (n||0).toFixed(1).replace('.',','); const formatSalt = n => { let val=n||0; if(val<0.05) return '0,0'; return val.toFixed(1).replace('.',','); }; preview.innerHTML = `<div style="font-family:'Segoe UI'"><h2>📄 TECHNISCHES DATENBLATT - PRODUKT</h2><h3>${p.name}</h3><p>Kategorie: ${p.category} | LMIV: 100%</p><h3>Exakte Zusammensetzung</h3><table></table><th>Zutat</th><th>%</th></tr>${sorted.map(c=>`<tr><td>${c.name}</td><td>${c.percent.toFixed(2)}%</td></tr>`).join('')}</table><h3>Nährwerte pro 100g</h3><table><tr><th></th><th>Wert</th></tr><tr><td>Energie</td><td>${format(p.nutrition.kj)} kJ / ${format(p.nutrition.kcal)} kcal</td></tr><tr><td>Fett</td><td>${format(p.nutrition.fat)} g (davon gesättigt ${format(p.nutrition.sat)} g)</td></tr><tr><td>Kohlenhydrate</td><td>${format(p.nutrition.carb)} g (davon Zucker ${format(p.nutrition.sugar)} g)</td></tr><tr><td>Eiweiß</td><td>${format(p.nutrition.protein)} g</td></tr><tr><td>Salz</td><td>${formatSalt(p.nutrition.salt)} g</td></tr></table><h3>Allergene</h3><p>${p.allergens||'Keine'}</p><hr><p>Sanremo LMIV System • ${new Date().toLocaleDateString('de-DE')}</p></div>`; };
+  window.generateRecipeTechSheet = () => { const rid = document.getElementById('techRecipeSelect').value; const r = state.recipes.find(rr=>rr.id===rid); const preview = document.getElementById('techSheetPreview'); if(!r) return; const nutrition = computeRecipeNutrition(r); const ingredients = getWeightSortedIngredients(r); const allergens = new Set(); r.items.forEach(i => { const p = state.products.find(pp=>pp.id===i.productId); if(p && p.allergens) p.allergens.split(',').forEach(a => allergens.add(a.trim())); }); const format = n => (n||0).toFixed(1).replace('.',','); const formatSalt = n => { let val=n||0; if(val<0.05) return '0,0'; return val.toFixed(1).replace('.',','); }; preview.innerHTML = `<div style="font-family:'Segoe UI'"><h2>🍦 TECHNISCHES DATENBLATT - REZEPT</h2><h3>${r.name}</h3><p>${r.legalName} | ${r.packaging} g</p><h3>Zutaten (nach Gewicht)</h3><p>${ingredients.join(', ')}</p><p><strong>Allergene:</strong> ${allergens.size ? Array.from(allergens).join(', ') : 'keine'}</p><h3>Nährwerte pro 100g</h3><table><tr><th></th><th>Wert</th></tr><tr><td>Energie</td><td>${format(nutrition.kj)} kJ / ${format(nutrition.kcal)} kcal</td></tr><tr><td>Fett</td><td>${format(nutrition.fat)} g (davon gesättigt ${format(nutrition.sat)} g)</td></tr><tr><td>Kohlenhydrate</td><td>${format(nutrition.carb)} g (davon Zucker ${format(nutrition.sugar)} g)</td></tr><tr><td>Eiweiß</td><td>${format(nutrition.protein)} g</td></tr><tr><td>Salz</td><td>${formatSalt(nutrition.salt)} g</td></tr></table><hr><p>Sanremo LMIV System • LMIV Art. 18 Abs. 2</p></div>`; };
+  window.printTechSheet = () => { const c = document.getElementById('techSheetPreview').innerHTML; if(c){ const w=window.open('','_blank'); w.document.write(`<html><head><title>Datenblatt</title><style>body{font-family:sans-serif;padding:2rem;}</style></head><body>${c}</body></html>`); w.document.close(); w.print(); } };
+  window.exportData = () => { const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify({products:state.products,recipes:state.recipes},null,2)],{type:'application/json'})); a.download='sanremo_backup.json'; a.click(); };
+  window.importData = (e) => { const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=ev=>{ try{ const d=JSON.parse(ev.target.result); state.products=d.products||[]; state.recipes=d.recipes||[]; state.recipeDraft=[]; saveState(); alert("Import erfolgreich"); } catch(e){ alert("Fehler"); } }; r.readAsText(f); };
+  window.resetAll = () => { if(confirm("ALLE DATEN LÖSCHEN?")) { localStorage.removeItem(STORAGE_KEY); loadState(); saveState(); location.reload(); } };
+  function renderStats() { document.getElementById('statsArea').innerHTML = `<div>📦 ${state.products.length} Produkte</div><div>🍨 ${state.recipes.length} Rezepte</div><div>⚖️ Auto-Sortierung aktiv</div>`; document.getElementById('rawData').innerHTML = JSON.stringify({products:state.products.map(p=>p.name), recipes:state.recipes.map(r=>r.name)},null,2); }
+  function renderAll() { renderProductsList(); renderSavedRecipes(); renderRecipeDraft(); renderStats(); }
+  function switchScreen(id) { document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active')); document.getElementById(id).classList.add('active'); document.querySelector(`[data-screen="${id}"]`).classList.add('active'); }
+  document.querySelectorAll('.nav-btn').forEach(btn=>btn.addEventListener('click',()=>switchScreen(btn.dataset.screen)));
+  loadState();
+</script>
 </body>
 </html>
