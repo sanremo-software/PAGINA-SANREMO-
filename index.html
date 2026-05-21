@@ -34,14 +34,12 @@ body {
   --border-radius-lg: 1.75rem;
 }
 
-/* layout */
 .container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
-/* header glassmorphic */
 .topbar {
   position: sticky;
   top: 0;
@@ -130,13 +128,13 @@ body {
   transition: 0.2s;
 }
 
-/* HERO SECTION MODERNA (Sanremo Italy background) */
+/* HERO com a sua imagem de fundo */
 .hero {
   position: relative;
   min-height: 85vh;
   display: flex;
   align-items: center;
-  background: linear-gradient(105deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.1) 100%), url('https://images.unsplash.com/photo-1589653201960-5dee5a244a1c?auto=format&fit=crop&w=2000&q=90');
+  background: linear-gradient(105deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.1) 100%), url('WhatsApp Image 2026-05-21 at 15.10.03.jpeg');
   background-size: cover;
   background-position: center 30%;
   background-attachment: fixed;
@@ -222,7 +220,6 @@ body {
   color: white;
 }
 
-/* info strip */
 .info-strip {
   background: #2c211d;
   color: #fdebd0;
@@ -247,7 +244,6 @@ body {
   font-size: 2rem;
 }
 
-/* main 2 column layout */
 .main-grid {
   display: grid;
   grid-template-columns: 1fr 360px;
@@ -255,7 +251,6 @@ body {
   margin: 3rem auto;
 }
 
-/* category cards modern */
 .category-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -370,7 +365,6 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
-/* order tabs */
 .order-section {
   margin-top: 2rem;
 }
@@ -467,7 +461,6 @@ input, select, textarea {
   margin: 1rem 0;
 }
 
-/* cart sidebar */
 .cart-sidebar {
   position: sticky;
   top: 100px;
@@ -533,7 +526,6 @@ input, select, textarea {
   margin-top: 1rem;
 }
 
-/* admin modal */
 .modal {
   position: fixed;
   inset: 0;
@@ -648,15 +640,15 @@ input, select, textarea {
 
 <div class="container main-grid" id="produkte">
   <div class="main-content">
-    <!-- KATEGORIEN -->
+    <!-- KATEGORIEN mit SUAS IMAGENS -->
     <div class="category-grid">
-      <div class="cat-card"><div class="cat-img"><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&h=300&fit=crop" alt="Gelato"></div><div class="cat-body"><h3>Gelato</h3><div class="feature-list"><div>✓ Frische Sorten</div><div>✓ Cremig & intensiv</div></div><a class="btn btn-primary" style="padding:0.5rem 1rem; font-size:0.8rem;" onclick="switchTab('gelato')">Gelato wählen →</a></div></div>
-      <div class="cat-card"><div class="cat-img"><img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=400&h=300&fit=crop" alt="Eistorte"></div><div class="cat-body"><h3>Eistorten</h3><div class="feature-list"><div>✓ 18cm · 28€</div><div>✓ 24cm · 42,90€</div></div><a class="btn btn-primary" style="padding:0.5rem 1rem;" onclick="switchTab('cake')">Eistorte ansehen →</a></div></div>
-      <div class="cat-card"><div class="cat-img"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=300&fit=crop" alt="Spezialitäten"></div><div class="cat-body"><h3>Spezialitäten</h3><div class="feature-list"><div>✓ Spaghetti Eis</div><div>✓ Schoko Becher</div></div><a class="btn btn-primary" style="padding:0.5rem 1rem;" onclick="switchTab('special')">Spezialitäten →</a></div></div>
-      <div class="cat-card"><div class="cat-img"><img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?w=400&h=300&fit=crop" alt="REWE Becher"></div><div class="cat-body"><h3>REWE Becher</h3><div class="feature-list"><div>✓ 170g · 2,29€</div><div>✓ 750g · 8,90€</div></div><a class="btn btn-primary" style="padding:0.5rem 1rem;" onclick="switchTab('cups')">Becher bestellen →</a></div></div>
+      <div class="cat-card"><div class="cat-img"><img src="WhatsApp Image 2026-05-21 at 15.10.00 (1).jpeg" alt="Gelato"></div><div class="cat-body"><h3>Gelato</h3><div class="feature-list"><div>✓ Frische Sorten</div><div>✓ Cremig & intensiv</div></div><a class="btn btn-primary" style="padding:0.5rem 1rem; font-size:0.8rem;" onclick="switchTab('gelato')">Gelato wählen →</a></div></div>
+      <div class="cat-card"><div class="cat-img"><img src="WhatsApp Image 2026-05-21 at 15.10.00 (2).jpeg" alt="Eistorte"></div><div class="cat-body"><h3>Eistorten</h3><div class="feature-list"><div>✓ 18cm · 28€</div><div>✓ 24cm · 42,90€</div></div><a class="btn btn-primary" style="padding:0.5rem 1rem;" onclick="switchTab('cake')">Eistorte ansehen →</a></div></div>
+      <div class="cat-card"><div class="cat-img"><img src="WhatsApp Image 2026-05-21 at 15.10.01 (3).jpeg" alt="Spezialitäten"></div><div class="cat-body"><h3>Spezialitäten</h3><div class="feature-list"><div>✓ Spaghetti Eis</div><div>✓ Schoko Becher</div></div><a class="btn btn-primary" style="padding:0.5rem 1rem;" onclick="switchTab('special')">Spezialitäten →</a></div></div>
+      <div class="cat-card"><div class="cat-img"><img src="WhatsApp Image 2026-05-21 at 15.10.02 (4).jpeg" alt="REWE Becher"></div><div class="cat-body"><h3>REWE Becher</h3><div class="feature-list"><div>✓ 170g · 2,29€</div><div>✓ 750g · 8,90€</div></div><a class="btn btn-primary" style="padding:0.5rem 1rem;" onclick="switchTab('cups')">Becher bestellen →</a></div></div>
     </div>
 
-    <!-- Spezialitäten Slider -->
+    <!-- Spezialitäten miniaturas (usa a mesma imagem para todas, pode trocar depois) -->
     <div class="specialties-strip" id="spezial">
       <h3 style="font-family: 'Playfair Display';">🍨 Unsere Spezialitäten</h3>
       <div class="special-grid" id="specialListRender"></div>
@@ -668,7 +660,7 @@ input, select, textarea {
       <div class="info-panel" id="kontakt"><h3>📞 Kontakt</h3><p>Bad Berleburg<br>📱 0160 98434887<br>✉️ WhatsApp Nachricht</p></div>
     </div>
 
-    <!-- BESTELLFORMULAR -->
+    <!-- BESTELLFORMULAR (igual, funcional) -->
     <div class="order-section" id="bestellung">
       <h2 style="font-family: 'Playfair Display';">🍧 Bestellung zusammenstellen</h2>
       <div class="tabs" id="orderTabs">
@@ -755,7 +747,6 @@ function renderCart(){
 function removeItem(i){ cart.splice(i,1); renderCart(); }
 function addToCart(obj){ cart.push(obj); renderCart(); document.getElementById('warenkorb').scrollIntoView({behavior:'smooth'}); }
 
-// product helpers
 function calcGelato(){ let q=+gelatoQty.value, p=+gelatoPrice.value, t=q*p; gelatoSummary.innerHTML=`<div class="summary-line"><span>Sorte ${gelatoFlavour.value}</span><span>${money(p)} x${q}</span></div>`; gelatoTotal.innerText=money(t); return t; }
 function calcCake(){ let sz=+cakeSize.value, dec=+cakeDeko.value, t=sz+dec; cakeSummary.innerHTML=`<div class="summary-line"><span>Größe</span><span>${money(sz)} + Deko ${money(dec)}</span></div><div class="summary-line"><span>Sorten</span><span>${cakeF1.value}, ${cakeF2.value}, ${cakeF3.value}, ${cakeF4.value}</span></div>`; cakeTotal.innerText=money(t); return t; }
 function calcSpecial(){ let idx=spItem.value, s=getData('specials')[idx], q=+spQty.value, t=s.price*q; spSummary.innerHTML=`<div class="summary-line"><span>${s.name}</span><span>${money(s.price)} x${q}</span></div>`; spTotal.innerText=money(t); return t; }
@@ -772,9 +763,8 @@ function fillSelects(){
   cupFlavour.innerHTML=''; cups.forEach(c=>cupFlavour.innerHTML+=`<option>${c}</option>`);
   let specials=getData('specials');
   spItem.innerHTML=''; specials.forEach((s,i)=>spItem.innerHTML+=`<option value="${i}">${s.name} ${money(s.price)}</option>`);
-  // render special cards
   let specDiv=document.getElementById('specialListRender');
-  if(specDiv){ specDiv.innerHTML=''; specials.forEach((s,i)=>{ specDiv.innerHTML+=`<div class="mini-special" onclick="switchTab('special'); spItem.value='${i}'; calcSpecial();"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=150&h=100&fit=crop" alt="${s.name}"><b>${s.name}</b><span>${money(s.price)}</span></div>`; }); }
+  if(specDiv){ specDiv.innerHTML=''; specials.forEach((s,i)=>{ specDiv.innerHTML+=`<div class="mini-special" onclick="switchTab('special'); spItem.value='${i}'; calcSpecial();"><img src="WhatsApp Image 2026-05-21 at 15.10.01 (3).jpeg" alt="${s.name}"><b>${s.name}</b><span>${money(s.price)}</span></div>`; }); }
   calcGelato(); calcCake(); calcSpecial(); calcCups();
 }
 
@@ -803,7 +793,6 @@ function sendWhatsappOrder(){
   window.open(`https://wa.me/4916098434887?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
-// Admin
 function openAdmin(){ document.getElementById('adminModal').classList.add('show'); }
 function closeAdmin(){ document.getElementById('adminModal').classList.remove('show'); }
 function checkAdmin(){ if(adminPass.value==='2026'){ document.getElementById('adminPanelContent').style.display='block'; renderAdminList(); } else alert('Wrong password'); }
