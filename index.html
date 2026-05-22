@@ -80,108 +80,74 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 .nAdm:hover{background:#2d1208;}
 
 /* ═══════════════════════════════════════
-   HERO — COMPLETAMENTE NOVO
+   HERO — GALERIA DE GELADO
 ═══════════════════════════════════════ */
-.hero{
-  position:relative;
+.heroGallery{
+  margin-top:70px;
   width:100%;
-  height:100vh;
-  min-height:600px;
   overflow:hidden;
-  padding-top:70px;
+  background:#fff;
+  position:relative;
 }
 
-/* Slideshow de 3 fotos de Sanremo */
-.heroSlides{
-  position:absolute;
-  inset:0;
-  z-index:0;
-}
-.heroSlide{
-  position:absolute;
-  inset:0;
-  background-size:cover;
-  background-position:center;
-  opacity:0;
-  transition:opacity 1.8s ease-in-out;
-}
-.heroSlide.active{opacity:1;}
-
-/* Foto 1 – Porto di Sanremo */
-.slide1{
-  background-image:url('https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=2000&q=95');
-}
-/* Foto 2 – Riviera di Ponente / costeira */
-.slide2{
-  background-image:url('https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=2000&q=95');
-}
-/* Foto 3 – Cidade colorida italiana */
-.slide3{
-  background-image:url('https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=2000&q=95');
-}
-
-/* Overlay muito leve para não matar as cores */
-.heroOv{
-  position:absolute;
-  inset:0;
-  z-index:1;
-  background:linear-gradient(
-    to bottom,
-    rgba(0,0,0,.08) 0%,
-    rgba(0,0,0,.04) 40%,
-    rgba(0,0,0,.18) 80%,
-    rgba(0,0,0,.52) 100%
-  );
-}
-
-/* Dots de navegação */
-.heroDots{
-  position:absolute;
-  bottom:34px;
-  left:50%;
-  transform:translateX(-50%);
-  z-index:3;
+/* Linha 1 — scroll automático para a direita */
+.galleryTrack{
   display:flex;
   gap:10px;
+  padding:10px 5px 5px;
+  width:max-content;
+  animation:scrollLeft 40s linear infinite;
 }
-.heroDot{
-  width:10px;height:10px;border-radius:50%;
-  background:rgba(255,255,255,.45);
-  border:2px solid rgba(255,255,255,.7);
-  cursor:pointer;
-  transition:all .3s;
+.galleryTrack:hover{animation-play-state:paused;}
+
+/* Linha 2 — scroll automático para a esquerda */
+.galleryTrack2{
+  display:flex;
+  gap:10px;
+  padding:5px 5px 10px;
+  width:max-content;
+  animation:scrollRight 45s linear infinite;
 }
-.heroDot.active{
-  background:#fff;
-  width:28px;
-  border-radius:5px;
+.galleryTrack2:hover{animation-play-state:paused;}
+
+@keyframes scrollLeft{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-50%);}
+}
+@keyframes scrollRight{
+  0%{transform:translateX(-50%);}
+  100%{transform:translateX(0);}
 }
 
-/* Scroll arrow */
-.heroArrow{
+.galleryItem{
+  flex-shrink:0;
+  width:240px;
+  height:200px;
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 6px 20px rgba(0,0,0,.12);
+  transition:transform .3s;
+}
+.galleryItem:hover{transform:scale(1.03);}
+.galleryItem img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform .4s;
+}
+.galleryItem:hover img{transform:scale(1.08);}
+
+/* Badge flutuante sobre galeria */
+.galleryBadge{
   position:absolute;
-  bottom:34px;
-  right:40px;
-  z-index:3;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:4px;
-  cursor:pointer;
-}
-.heroArrow span{
-  display:block;
-  width:20px;height:20px;
-  border-right:2.5px solid rgba(255,255,255,.8);
-  border-bottom:2.5px solid rgba(255,255,255,.8);
-  transform:rotate(45deg);
-  animation:bounce 1.5s infinite;
-}
-.heroArrow span:nth-child(2){animation-delay:.2s;opacity:.6;}
-.heroArrow span:nth-child(3){animation-delay:.4s;opacity:.35;}
-@keyframes bounce{
-  0%,100%{transform:rotate(45deg) translateY(0);}
-  50%{transform:rotate(45deg) translateY(5px);}
+  top:12px;left:12px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(8px);
+  border-radius:50px;
+  padding:5px 12px;
+  font-size:11.5px;font-weight:800;
+  color:var(--r);
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
 /* ═══════════════════════════════════════
@@ -213,7 +179,7 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 .bTxt span{font-size:12px;color:var(--lt);}
 
 /* ═══════════════════════════════════════
-   SHARED SECTION STYLES
+   SHARED
 ═══════════════════════════════════════ */
 .wrap{max-width:1340px;margin:0 auto;padding:0 40px;}
 .secPad{padding:90px 0;}
@@ -316,20 +282,82 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 }
 .step b{font-size:14.5px;display:block;margin-bottom:3px;}
 .step span{font-size:13px;color:var(--md);}
+
+/* ═══════════════════════════════════════
+   DELIVERY PANEL — VAN ANIMADA
+═══════════════════════════════════════ */
 .delivPanel{
   background:linear-gradient(145deg,var(--r),var(--r2));
   position:relative;overflow:hidden;
-}
-.delivPanel::after{
-  content:'🚚';position:absolute;right:16px;bottom:10px;
-  font-size:88px;opacity:.18;
+  display:flex;flex-direction:column;
 }
 .delivPanel h2{font-family:'Playfair Display',serif;font-size:24px;color:#fff;margin-bottom:12px;}
 .delivPanel p{font-size:14px;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:22px;}
+
+/* Van SVG animada */
+.vanScene{
+  width:100%;height:110px;
+  position:relative;
+  margin-bottom:18px;
+  overflow:hidden;
+}
+.vanRoad{
+  position:absolute;bottom:0;left:0;right:0;
+  height:18px;
+  background:rgba(0,0,0,.25);
+  border-radius:4px;
+}
+.vanRoad::before{
+  content:'';
+  position:absolute;top:50%;left:0;right:0;
+  height:3px;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.5) 0,rgba(255,255,255,.5) 22px,transparent 22px,transparent 44px);
+  transform:translateY(-50%);
+  animation:road 0.5s linear infinite;
+}
+@keyframes road{from{background-position:0 0;}to{background-position:-44px 0;}}
+
+.vanSvg{
+  position:absolute;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:160px;
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,.35));
+  animation:vanBounce 0.6s ease-in-out infinite alternate;
+}
+@keyframes vanBounce{
+  from{transform:translateX(-50%) translateY(0);}
+  to{transform:translateX(-50%) translateY(-4px);}
+}
+
+/* Estrelinhas / velocidade */
+.vanSpeed{
+  position:absolute;
+  bottom:38px;
+  left:calc(50% - 108px);
+  display:flex;flex-direction:column;gap:5px;
+}
+.vanSpeed span{
+  display:block;
+  height:2.5px;
+  background:rgba(255,255,255,.6);
+  border-radius:2px;
+  animation:speedLine 0.8s ease-in-out infinite;
+}
+.vanSpeed span:nth-child(1){width:28px;animation-delay:0s;}
+.vanSpeed span:nth-child(2){width:20px;animation-delay:.15s;}
+.vanSpeed span:nth-child(3){width:14px;animation-delay:.3s;}
+@keyframes speedLine{
+  0%,100%{opacity:.6;transform:translateX(0);}
+  50%{opacity:1;transform:translateX(-6px);}
+}
+
 .btnWhite{
   background:#fff;color:var(--r);border:none;border-radius:var(--rad3);
   padding:12px 22px;font-size:14px;font-weight:800;
   cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:7px;
+  margin-top:auto;
 }
 .btnWhite:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.2);}
 
@@ -394,6 +422,33 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
   outline:none;transition:border .2s;
 }
 .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--r);}
+
+/* Kugeln selector — botões visuais */
+.kugelnGrid{
+  display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;
+}
+.kugelnBtn{
+  flex:1;min-width:72px;
+  padding:14px 8px;
+  border:2px solid var(--ln);
+  background:#fff;
+  border-radius:12px;
+  font-size:13px;font-weight:800;
+  color:var(--md);
+  cursor:pointer;
+  transition:all .22s;
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+.kugelnBtn .kIco{font-size:20px;}
+.kugelnBtn:hover{border-color:var(--r);color:var(--r);}
+.kugelnBtn.selected{
+  background:linear-gradient(135deg,var(--r),var(--r2));
+  color:#fff;border-color:transparent;
+  box-shadow:0 4px 14px rgba(139,15,20,.30);
+  transform:translateY(-2px);
+}
+
 .flavGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
 .sumLine{
   display:flex;justify-content:space-between;align-items:center;
@@ -562,15 +617,18 @@ footer a:hover{color:var(--gold2);}
   .cartBox{position:static;}
   .footInner{grid-template-columns:1fr 1fr;gap:24px;}
   .wrap{padding:0 20px;}
+  .kugelnBtn{min-width:56px;padding:10px 4px;}
 }
 @media(max-width:640px){
-  .heroArrow{right:20px;}
   .catGrid,.bInner,.specGrid,.fGrid,.tabs,.flavGrid{grid-template-columns:1fr;}
   .contactStrip{grid-template-columns:1fr;text-align:center;}
   .contactStrip .contactIco{margin:0 auto;}
   .footInner{grid-template-columns:1fr;}
   .footBot{flex-direction:column;gap:8px;text-align:center;}
   .adminGrid{grid-template-columns:1fr;}
+  .galleryItem{width:160px;height:140px;}
+  .kugelnGrid{gap:6px;}
+  .kugelnBtn{min-width:50px;font-size:12px;}
 }
 </style>
 </head>
@@ -599,37 +657,73 @@ footer a:hover{color:var(--gold2);}
   <button class="nAdm" onclick="openAdminLogin()">⚙ Admin</button>
 </nav>
 
-<!-- ══ HERO — NOVA VERSÃO ══ -->
-<section class="hero" id="top">
-  <div class="heroSlides">
-    <div class="heroSlide slide1 active"></div>
-    <div class="heroSlide slide2"></div>
-    <div class="heroSlide slide3"></div>
-  </div>
-  <div class="heroOv"></div>
+<!-- ══ HERO — GALERIA DE GELADO ══ -->
+<section class="heroGallery" id="top" style="padding-top:70px;">
 
-  <!-- Dots -->
-  <div class="heroDots">
-    <div class="heroDot active" onclick="goSlide(0)"></div>
-    <div class="heroDot" onclick="goSlide(1)"></div>
-    <div class="heroDot" onclick="goSlide(2)"></div>
+  <!-- Linha 1 — scroll para esquerda -->
+  <div style="overflow:hidden;">
+    <div class="galleryTrack" id="track1">
+      <!-- 10 imagens duplicadas para loop infinito -->
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?auto=format&fit=crop&w=500&q=85" alt="Gelato"><div class="galleryBadge">🍦 Gelato</div></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=500&q=85" alt="Eis Becher"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=500&q=85" alt="Eis Kugeln"><div class="galleryBadge">🍨 Frisch</div></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=500&q=85" alt="Eis Waffel"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=500&q=85" alt="Gelato Becher"><div class="galleryBadge">❤ Handgemacht</div></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1560008581-09826d1de69e?auto=format&fit=crop&w=500&q=85" alt="Schokoeis"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1576506295286-5cda18df43e7?auto=format&fit=crop&w=500&q=85" alt="Erdbeereis"><div class="galleryBadge">🌿 Frisch</div></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?auto=format&fit=crop&w=500&q=85" alt="Eis Torte"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=500&q=85" alt="Eis Kugeln Mix"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=500&q=85" alt="Spaghetti Eis"><div class="galleryBadge">🍝 Spaghetti</div></div>
+      <!-- DUPLICADO para loop contínuo -->
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?auto=format&fit=crop&w=500&q=85" alt="Gelato"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=500&q=85" alt="Eis Becher"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=500&q=85" alt="Eis Kugeln"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=500&q=85" alt="Eis Waffel"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=500&q=85" alt="Gelato Becher"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1560008581-09826d1de69e?auto=format&fit=crop&w=500&q=85" alt="Schokoeis"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1576506295286-5cda18df43e7?auto=format&fit=crop&w=500&q=85" alt="Erdbeereis"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?auto=format&fit=crop&w=500&q=85" alt="Eis Torte"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=500&q=85" alt="Eis Mix"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=500&q=85" alt="Spaghetti Eis"></div>
+    </div>
   </div>
 
-  <!-- Scroll arrow -->
-  <div class="heroArrow" onclick="document.querySelector('.benefits').scrollIntoView({behavior:'smooth'})">
-    <span></span>
-    <span></span>
-    <span></span>
+  <!-- Linha 2 — scroll para direita -->
+  <div style="overflow:hidden;">
+    <div class="galleryTrack2" id="track2">
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=500&q=85" alt="Eis 1"><div class="galleryBadge">🎂 Eistorte</div></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1633933358116-a27b902fad35?auto=format&fit=crop&w=500&q=85" alt="Eis 2"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=500&q=85" alt="Eis 3"><div class="galleryBadge">⭐ 4,9 Sterne</div></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1516559228935-0cf53b4cccb0?auto=format&fit=crop&w=500&q=85" alt="Eis 4"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=500&q=85" alt="Eis 5"><div class="galleryBadge">🇮🇹 Italiano</div></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=500&q=85" alt="Eis 6"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=500&q=85" alt="Eis 7"><div class="galleryBadge">🍦 Cremig</div></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1582716401301-b2407dc7563d?auto=format&fit=crop&w=500&q=85" alt="Eis 8"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=500&q=85" alt="Eis 9"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=500&q=85" alt="Eis 10"></div>
+      <!-- DUPLICADO -->
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=500&q=85" alt="Eis 1"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1633933358116-a27b902fad35?auto=format&fit=crop&w=500&q=85" alt="Eis 2"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=500&q=85" alt="Eis 3"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1516559228935-0cf53b4cccb0?auto=format&fit=crop&w=500&q=85" alt="Eis 4"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=500&q=85" alt="Eis 5"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=500&q=85" alt="Eis 6"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=500&q=85" alt="Eis 7"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1582716401301-b2407dc7563d?auto=format&fit=crop&w=500&q=85" alt="Eis 8"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=500&q=85" alt="Eis 9"></div>
+      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=500&q=85" alt="Eis 10"></div>
+    </div>
   </div>
+
 </section>
 
 <!-- ══ BENEFITS ══ -->
 <div class="benefits">
   <div class="bInner">
-    <div class="bItem"><div class="bIco">♡</div><div class="bTxt"><strong>Handgemacht</strong><span>Mit Liebe & Leidenschaft</span></div></div>
+    <div class="bItem"><div class="bIco">♡</div><div class="bTxt"><strong>Handgemacht</strong><span>Mit Liebe &amp; Leidenschaft</span></div></div>
     <div class="bItem"><div class="bIco">🌿</div><div class="bTxt"><strong>Frische Zutaten</strong><span>Höchste Qualität</span></div></div>
-    <div class="bItem"><div class="bIco">🚚</div><div class="bTxt"><strong>Lieferung & Abholung</strong><span>Bad Berleburg & Umgebung</span></div></div>
-    <div class="bItem"><div class="bIco">💬</div><div class="bTxt"><strong>Direkt per WhatsApp</strong><span>Schnell & einfach bestellen</span></div></div>
+    <div class="bItem"><div class="bIco">🚚</div><div class="bTxt"><strong>Lieferung &amp; Abholung</strong><span>Bad Berleburg &amp; Umgebung</span></div></div>
+    <div class="bItem"><div class="bIco">💬</div><div class="bTxt"><strong>Direkt per WhatsApp</strong><span>Schnell &amp; einfach bestellen</span></div></div>
   </div>
 </div>
 
@@ -741,12 +835,61 @@ footer a:hover{color:var(--gold2);}
         <div class="step"><div class="stepNum">3</div><div><b>Abholung oder Lieferung</b><span>Lieferung in Bad Berleburg nach Absprache</span></div></div>
         <div class="step"><div class="stepNum">4</div><div><b>Per WhatsApp bestellen</b><span>Wir bestätigen Ihre Bestellung schnell</span></div></div>
       </div>
+
+      <!-- DELIVERY PANEL COM VAN ANIMADA -->
       <div class="panel delivPanel">
         <h2>Lieferung ganz bequem</h2>
         <p>Wir liefern nach Absprache in Bad Berleburg und der gesamten Umgebung — schnell, frisch und direkt zu Ihnen.</p>
+
+        <!-- Cena da Van -->
+        <div class="vanScene">
+          <svg class="vanSvg" viewBox="0 0 220 80" xmlns="http://www.w3.org/2000/svg">
+            <!-- Carroceria principal -->
+            <rect x="10" y="18" width="165" height="46" rx="8" fill="#ffffff" opacity="0.95"/>
+            <!-- Cabine -->
+            <rect x="130" y="8" width="45" height="36" rx="6" fill="#ffffff" opacity="0.90"/>
+            <!-- Janela cabine -->
+            <rect x="137" y="14" width="30" height="20" rx="4" fill="#93c5fd" opacity="0.85"/>
+            <!-- Janela lateral traseira -->
+            <rect x="60" y="24" width="32" height="18" rx="3" fill="#bfdbfe" opacity="0.75"/>
+            <!-- Porta lateral -->
+            <line x1="97" y1="20" x2="97" y2="62" stroke="#e5e7eb" stroke-width="1.5"/>
+            <!-- Nome Sanremo na carroceria -->
+            <text x="30" y="46" font-family="Georgia, serif" font-size="12" font-weight="bold" fill="#8b0f14" letter-spacing="1">Sanremo</text>
+            <text x="33" y="57" font-family="Arial, sans-serif" font-size="7" fill="#5c3a2e" letter-spacing="2">GELATERIA</text>
+            <!-- Ícone gelado -->
+            <text x="154" y="54" font-size="14">🍦</text>
+            <!-- Para-choque frente -->
+            <rect x="173" y="52" width="12" height="6" rx="2" fill="#d1d5db"/>
+            <!-- Para-choque trás -->
+            <rect x="8" y="52" width="10" height="6" rx="2" fill="#d1d5db"/>
+            <!-- Roda trás -->
+            <circle cx="42" cy="66" r="13" fill="#374151"/>
+            <circle cx="42" cy="66" r="8" fill="#6b7280"/>
+            <circle cx="42" cy="66" r="4" fill="#fff" opacity="0.8"/>
+            <!-- Roda frente -->
+            <circle cx="155" cy="66" r="13" fill="#374151"/>
+            <circle cx="155" cy="66" r="8" fill="#6b7280"/>
+            <circle cx="155" cy="66" r="4" fill="#fff" opacity="0.8"/>
+            <!-- Luzes frente -->
+            <ellipse cx="178" cy="34" rx="5" ry="7" fill="#fde68a" opacity="0.9"/>
+            <!-- Luz traseira -->
+            <rect x="10" y="28" width="6" height="10" rx="2" fill="#fca5a5" opacity="0.85"/>
+          </svg>
+          <!-- Linhas de velocidade -->
+          <div class="vanSpeed">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <!-- Estrada -->
+          <div class="vanRoad"></div>
+        </div>
+
         <button class="btnWhite" onclick="document.getElementById('warenkorb').scrollIntoView({behavior:'smooth'})">🚚 Lieferung wählen</button>
       </div>
     </div>
+
     <div class="contactStrip" id="kontakt">
       <div class="contactIco">💬</div>
       <div class="contactTxt">
@@ -776,11 +919,11 @@ footer a:hover{color:var(--gold2);}
           <button class="tabBtn" id="tabCups" onclick="switchOrder('cups')">🛒 REWE Becher</button>
         </div>
         <div class="orderBox">
-          <!-- GELATO -->
+
+          <!-- ── GELATO ── -->
           <div id="gelatoForm" class="formSec active">
             <div class="fGrid">
-              <div class="fg"><label>Sorte</label><select id="gelatoFlavour"></select></div>
-              <div class="fg"><label>Kugeln / Portionen</label><input id="gelatoQty" type="number" min="1" value="1" oninput="calcGelato()"></div>
+              <div class="fg"><label>Eissorte</label><select id="gelatoFlavour"></select></div>
               <div class="fg"><label>Preis pro Portion</label>
                 <select id="gelatoPrice" onchange="calcGelato()">
                   <option value="1.50">1,50 €</option>
@@ -788,13 +931,35 @@ footer a:hover{color:var(--gold2);}
                   <option value="2.50">2,50 €</option>
                 </select>
               </div>
-              <div class="fg"><label>Bemerkung</label><input id="gelatoNote" placeholder="z. B. im Becher"></div>
+              <!-- KUGELN SELECTOR -->
+              <div class="fg full">
+                <label>Anzahl der Kugeln</label>
+                <div class="kugelnGrid" id="kugelnGrid">
+                  <button class="kugelnBtn selected" data-k="1" onclick="selectKugeln(1)">
+                    <span class="kIco">🍦</span>1 Kugel
+                  </button>
+                  <button class="kugelnBtn" data-k="2" onclick="selectKugeln(2)">
+                    <span class="kIco">🍦🍦</span>2 Kugeln
+                  </button>
+                  <button class="kugelnBtn" data-k="3" onclick="selectKugeln(3)">
+                    <span class="kIco">🍦🍦🍦</span>3 Kugeln
+                  </button>
+                  <button class="kugelnBtn" data-k="4" onclick="selectKugeln(4)">
+                    <span class="kIco">🍦🍦🍦🍦</span>4 Kugeln
+                  </button>
+                  <button class="kugelnBtn" data-k="5" onclick="selectKugeln(5)">
+                    <span class="kIco">🍦×5</span>5 Kugeln
+                  </button>
+                </div>
+              </div>
+              <div class="fg full"><label>Bemerkung</label><input id="gelatoNote" placeholder="z. B. im Becher, ohne Waffel"></div>
             </div>
             <div class="sumBox" id="gelatoSummary"></div>
             <div class="totLine" id="gelatoTotal"></div>
             <button class="btnRed" onclick="addGelatoToCart()">🛒 In den Warenkorb</button>
           </div>
-          <!-- CAKE -->
+
+          <!-- ── CAKE ── -->
           <div id="cakeForm" class="formSec">
             <div class="fGrid">
               <div class="fg"><label>Größe</label>
@@ -826,7 +991,8 @@ footer a:hover{color:var(--gold2);}
             <div class="totLine" id="cakeTotal"></div>
             <button class="btnRed" onclick="addCakeToCart()">🛒 In den Warenkorb</button>
           </div>
-          <!-- SPECIAL -->
+
+          <!-- ── SPECIAL ── -->
           <div id="specialForm" class="formSec">
             <div class="fGrid">
               <div class="fg"><label>Spezialität</label><select id="spItem" onchange="calcSpecial()"></select></div>
@@ -837,7 +1003,8 @@ footer a:hover{color:var(--gold2);}
             <div class="totLine" id="spTotal"></div>
             <button class="btnRed" onclick="addSpecialToCart()">🛒 In den Warenkorb</button>
           </div>
-          <!-- CUPS -->
+
+          <!-- ── CUPS ── -->
           <div id="cupsForm" class="formSec">
             <div class="fGrid">
               <div class="fg"><label>Bechergröße</label>
@@ -854,10 +1021,11 @@ footer a:hover{color:var(--gold2);}
             <div class="totLine" id="cupTotal"></div>
             <button class="btnRed" onclick="addCupsToCart()">🛒 In den Warenkorb</button>
           </div>
+
         </div>
       </div>
 
-      <!-- CART -->
+      <!-- ── CART ── -->
       <aside class="cartBox" id="warenkorb">
         <h3>🛒 Ihre Bestellung</h3>
         <div id="cartItems">
@@ -885,7 +1053,7 @@ footer a:hover{color:var(--gold2);}
         <button class="btnWA" onclick="sendCart()">
           💬 Jetzt per WhatsApp bestellen
         </button>
-        <p style="text-align:center;font-size:12px;color:var(--lt);margin-top:10px;">🔒 Sicher & direkt über WhatsApp</p>
+        <p style="text-align:center;font-size:12px;color:var(--lt);margin-top:10px;">🔒 Sicher &amp; direkt über WhatsApp</p>
       </aside>
     </div>
   </div>
@@ -959,20 +1127,16 @@ footer a:hover{color:var(--gold2);}
 
 <script>
 /* ══════════════════════════════
-   HERO SLIDESHOW
+   KUGELN SELECTOR
 ══════════════════════════════ */
-let currentSlide = 0;
-const slides = document.querySelectorAll('.heroSlide');
-const dots   = document.querySelectorAll('.heroDot');
-
-function goSlide(n){
-  slides[currentSlide].classList.remove('active');
-  dots[currentSlide].classList.remove('active');
-  currentSlide = (n + slides.length) % slides.length;
-  slides[currentSlide].classList.add('active');
-  dots[currentSlide].classList.add('active');
+let selectedKugeln = 1;
+function selectKugeln(n){
+  selectedKugeln = n;
+  document.querySelectorAll('.kugelnBtn').forEach(b=>{
+    b.classList.toggle('selected', +b.dataset.k === n);
+  });
+  calcGelato();
 }
-setInterval(()=>goSlide(currentSlide + 1), 5000);
 
 /* ══════════════════════════════
    DATA & STATE
@@ -1038,11 +1202,16 @@ function switchOrder(type){
 }
 
 function calcGelato(){
-  const q=+document.getElementById('gelatoQty').value||1,
-        p=+document.getElementById('gelatoPrice').value,
-        f=document.getElementById('gelatoFlavour').value,t=q*p;
-  document.getElementById('gelatoSummary').innerHTML=sumLine('Sorte',f)+sumLine('Portionen',q)+sumLine('Preis/Portion',money(p));
-  document.getElementById('gelatoTotal').textContent='Gesamt: '+money(t);
+  const p = +document.getElementById('gelatoPrice').value;
+  const f = document.getElementById('gelatoFlavour').value;
+  const k = selectedKugeln;
+  const t = k * p;
+  const kText = k === 1 ? '1 Kugel' : k + ' Kugeln';
+  document.getElementById('gelatoSummary').innerHTML =
+    sumLine('Sorte', f) +
+    sumLine('Kugeln', kText) +
+    sumLine('Preis/Kugel', money(p));
+  document.getElementById('gelatoTotal').textContent = 'Gesamt: ' + money(t);
   return t;
 }
 function calcCake(){
@@ -1077,9 +1246,14 @@ function addToCart(item){
   showToast(item.name+' hinzugefügt!');
 }
 function addGelatoToCart(){
-  addToCart({type:'Gelato',name:document.getElementById('gelatoFlavour').value,
-    details:`${document.getElementById('gelatoQty').value} Portion(en) · ${document.getElementById('gelatoNote').value}`,
-    price:calcGelato()});
+  const k = selectedKugeln;
+  const kText = k === 1 ? '1 Kugel' : k + ' Kugeln';
+  addToCart({
+    type:'Gelato',
+    name:document.getElementById('gelatoFlavour').value,
+    details:`${kText} · ${document.getElementById('gelatoNote').value}`,
+    price:calcGelato()
+  });
 }
 function addCakeToCart(){
   const sz=document.getElementById('cakeSize');
