@@ -1,162 +1,792 @@
-  let text = `*Neue Bestellung Sanremo Gelateria*%0A%0A`;
-  text += `*Kunde:* ${name}%0A`;
-  text += `*Telefon:* ${phone}%0A`;
-  text += `*Lieferart:* ${delivery}%0A`;
-  if (date) text += `*Gewünschter Termin:* ${date}%0A`;
-  if (address) text += `*Adresse:* ${address}%0A`;
-  text += `%0A*Produkte:*%0A`;
-  
-  cart.forEach((item, i) => {
-    text += `%0A${i + 1}. *${item.type}:* ${item.name}%0A`;
-    text += `   ${item.details}%0A`;
-    text += `   Preis: ${money(item.price)}%0A`;
-    if (item.note) text += `   Hinweis: ${item.note}%0A`;
-  });
-  
-  const total = cart.reduce((sum, item) => sum + Number(item.price), 0);
-  text += `%0A*Gesamtsumme:* ${money(total)}%0A`;
-  if (note) text += `%0A*Anmerkung:* ${note}%0A`;
-  
-  window.open(`https://wa.me/4917672809926?text=${text}`, '_blank');
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanremo Gelateria - Bestellung</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #C41E3A;
+            --color-secondary: #2D5A3D;
+            --color-bg: #FAF9F6;
+            --color-surface: #FFFFFF;
+            --color-text: #1a1a1a;
+            --color-text-muted: #666;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --radius: 16px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 1rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+        
+        .cart-btn {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            position: relative;
+            transition: transform 0.2s;
+        }
+        
+        .cart-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--color-secondary);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--color-secondary) 0%, #1a3a25 100%);
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .product-card {
+            background: var(--color-surface);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        }
+        
+        .product-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .product-card h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--color-text);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .price-tag {
+            display: inline-block;
+            background: var(--color-bg);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: var(--color-secondary);
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+        
+        .form-group {
+            margin: 20px 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+        }
+        
+        select, input[type="text"], input[type="number"], input[type="tel"], input[type="date"], textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            background: white;
+        }
+        
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+        
+        .qty-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--color-primary);
+            background: white;
+            color: var(--color-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .qty-btn:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+        
+        .qty-value {
+            font-weight: 600;
+            font-size: 1.2rem;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .add-btn {
+            width: 100%;
+            background: var(--color-secondary);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+        
+        .add-btn:hover {
+            background: #1e4428;
+            transform: translateY(-2px);
+        }
+        
+        .cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            max-width: 100%;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+            transition: right 0.3s;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .cart-sidebar.open {
+            right: 0;
+        }
+        
+        .cart-header {
+            background: var(--color-primary);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .cart-body {
+            padding: 20px;
+        }
+        
+        .cart-item {
+            background: var(--color-bg);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .remove-item {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: var(--color-primary);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .cart-total {
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+            margin-top: 20px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-align: right;
+            color: var(--color-secondary);
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .admin-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.1);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+        }
+        
+        .admin-panel {
+            position: fixed;
+            inset: 0;
+            background: white;
+            z-index: 2000;
+            display: none;
+            overflow-y: auto;
+        }
+        
+        .admin-panel.active {
+            display: block;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--color-secondary);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 50px;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 3000;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .products-grid { grid-template-columns: 1fr; }
+            .cart-sidebar { width: 100%; right: -100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="container header-content">
+        <div class="logo">🍨 Sanremo Gelateria</div>
+        <button class="cart-btn" onclick="toggleCart()">
+            🛒 Warenkorb
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+    </div>
+</div>
+
+<div class="hero">
+    <h1>Authentisches italienisches Eis</h1>
+    <p>Bestellen Sie bequem online - Abholung oder Lieferung</p>
+</div>
+
+<div class="container">
+    <div class="products-grid">
+        
+        <!-- Gelato -->
+        <div class="product-card">
+            <div class="product-icon">🍦</div>
+            <h2>Italienisches Gelato</h2>
+            <p>Frisch zubereitet nach traditioneller Rezeptur</p>
+            <div class="price-tag">Ab €1,50 pro Kugel</div>
+            
+            <div class="form-group">
+                <label>Sorte wählen</label>
+                <select id="gelatoFlavour">
+                    <option>Vaniglia (Vanille)</option>
+                    <option>Cioccolato (Schokolade)</option>
+                    <option>Stracciatella</option>
+                    <option>Pistacchio</option>
+                    <option>Amarena (Kirsche)</option>
+                    <option>Nocciola (Haselnuss)</option>
+                    <option>Limone (Zitrone)</option>
+                    <option>Fragola (Erdbeere)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Behälter</label>
+                <select id="gelatoContainer">
+                    <option value="Waffel">Waffel</option>
+                    <option value="Becher">Becher</option>
+                </select>
+            </div>
+            
+            <div class="qty-selector">
+                <button class="qty-btn" onclick="changeQty('gelato', -1)">-</button>
+                <span class="qty-value" id="gelatoQty">1</span>
+                <span>Kugel(n)</span>
+                <button class="qty-btn" onclick="changeQty('gelato', 1)">+</button>
+            </div>
+            
+            <button class="add-btn" onclick="addGelato()">Zum Warenkorb hinzufügen</button>
+        </div>
+
+        <!-- Eistorte -->
+        <div class="product-card">
+            <div class="product-icon">🎂</div>
+            <h2>Eistorte</h2>
+            <p>Perfekt für Feiern und besondere Anlässe</p>
+            <div class="price-tag">€28,00 (18cm) / €42,90 (24cm)</div>
+            
+            <div class="form-group">
+                <label>Größe</label>
+                <select id="cakeSize" onchange="updateCakePrice()">
+                    <option value="28">18cm (6-8 Personen) - €28,00</option>
+                    <option value="42.90">24cm (10-12 Personen) - €42,90</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Sorten (bis zu 3)</label>
+                <input type="text" id="cakeFlavours" placeholder="z.B. Vanille, Schoko, Erdbeere">
+            </div>
+            
+            <div class="form-group">
+                <label>Wunschtermin</label>
+                <input type="date" id="cakeDate">
+            </div>
+            
+            <button class="add-btn" onclick="addCake()">Zum Warenkorb hinzufügen</button>
+        </div>
+
+        <!-- Spezialitäten -->
+        <div class="product-card">
+            <div class="product-icon">🍨</div>
+            <h2>Spezialitäten</h2>
+            <p>Spaghetti Eis, Banana Split & mehr</p>
+            <div class="price-tag">€5,50 - €8,90</div>
+            
+            <div class="form-group">
+                <label>Spezialität wählen</label>
+                <select id="specialType" onchange="updateSpecialPrice()">
+                    <option value="5.50">Spaghetti Eis - €5,50</option>
+                    <option value="7.90">Banana Split - €7,90</option>
+                    <option value="6.50">Coppa Mista - €6,50</option>
+                    <option value="8.90">Coupe Royal - €8,90</option>
+                </select>
+            </div>
+            
+            <button class="add-btn" onclick="addSpecial()">Zum Warenkorb hinzufügen</button>
+        </div>
+
+        <!-- REWE Becher -->
+        <div class="product-card">
+            <div class="product-icon">🥡</div>
+            <h2>REWE Becher</h2>
+            <p>Zum Mitnehmen - perfekt für zu Hause</p>
+            <div class="price-tag">€2,29 (170g) / €8,90 (750g)</div>
+            
+            <div class="form-group">
+                <label>Größe</label>
+                <select id="cupSize" onchange="updateCupPrice()">
+                    <option value="2.29">170g - €2,29</option>
+                    <option value="8.90">750g - €8,90</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Sorte</label>
+                <input type="text" id="cupFlavour" placeholder="Sorte eingeben">
+            </div>
+            
+            <div class="qty-selector">
+                <button class="qty-btn" onclick="changeQty('cup', -1)">-</button>
+                <span class="qty-value" id="cupQty">1</span>
+                <span>Stück</span>
+                <button class="qty-btn" onclick="changeQty('cup', 1)">+</button>
+            </div>
+            
+            <button class="add-btn" onclick="addCup()">Zum Warenkorb hinzufügen</button>
+        </div>
+    </div>
+</div>
+
+<!-- Cart Sidebar -->
+<div class="overlay" id="overlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+        <h3>Ihr Warenkorb</h3>
+        <button class="close-cart" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-body" id="cartBody">
+        <p style="text-align: center; color: #999; padding: 40px 0;">Warenkorb ist leer</p>
+    </div>
+</div>
+
+<!-- Admin Panel -->
+<div class="admin-panel" id="adminPanel">
+    <div style="padding: 20px; max-width: 800px; margin: 0 auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <h2>Admin Panel</h2>
+            <button onclick="closeAdmin()" style="background: var(--color-primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">Schließen</button>
+        </div>
+        
+        <div style="background: #f5f5f5; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+            <h3>Neues Produkt hinzufügen</h3>
+            <div style="display: grid; gap: 10px; margin-top: 15px;">
+                <input type="text" id="adminName" placeholder="Name" style="padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                <input type="number" id="adminPrice" placeholder="Preis (€)" step="0.10" style="padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                <select id="adminType" style="padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                    <option value="specials">Spezialität</option>
+                    <option value="flavours">Geschmacksrichtung</option>
+                </select>
+                <button onclick="addAdminItem()" style="background: var(--color-secondary); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer;">Hinzufügen</button>
+            </div>
+        </div>
+        
+        <div id="adminList"></div>
+    </div>
+</div>
+
+<button class="admin-btn" onclick="openAdmin()">⚙️ Admin</button>
+<div class="toast" id="toast">Zum Warenkorb hinzugefügt!</div>
+
+<script>
+// Data
+let cart = JSON.parse(localStorage.getItem('sanremo_cart')) || [];
+let quantities = { gelato: 1, cup: 1 };
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+    updateCartUI();
+    const today = new Date().toISOString().split('T')[0];
+    if(document.getElementById('cakeDate')) document.getElementById('cakeDate').min = today;
+});
+
+// Helpers
+function money(n) {
+    return '€' + Number(n).toFixed(2).replace('.', ',');
 }
 
-// Admin Functions
+function saveCart() {
+    localStorage.setItem('sanremo_cart', JSON.stringify(cart));
+    updateCartUI();
+}
+
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+function changeQty(type, delta) {
+    quantities[type] = Math.max(1, (quantities[type] || 1) + delta);
+    document.getElementById(type + 'Qty').textContent = quantities[type];
+}
+
+// Add to cart functions
+function addGelato() {
+    const flavour = document.getElementById('gelatoFlavour').value;
+    const container = document.getElementById('gelatoContainer').value;
+    const qty = quantities.gelato;
+    const price = 1.50 * qty;
+    
+    cart.push({
+        type: 'Gelato',
+        name: `${qty}x ${flavour}`,
+        details: `In ${container}`,
+        price: price,
+        id: Date.now()
+    });
+    
+    saveCart();
+    showToast(`${qty}x Gelato hinzugefügt`);
+}
+
+function addCake() {
+    const size = document.getElementById('cakeSize');
+    const price = parseFloat(size.value);
+    const sizeText = size.options[size.selectedIndex].text.split(' - ')[0];
+    const flavours = document.getElementById('cakeFlavours').value || 'Nach Wahl';
+    const date = document.getElementById('cakeDate').value;
+    
+    cart.push({
+        type: 'Eistorte',
+        name: sizeText,
+        details: `Sorten: ${flavours}${date ? ' | Termin: ' + date : ''}`,
+        price: price,
+        id: Date.now()
+    });
+    
+    saveCart();
+    showToast('Eistorte hinzugefügt');
+}
+
+function addSpecial() {
+    const select = document.getElementById('specialType');
+    const price = parseFloat(select.value);
+    const name = select.options[select.selectedIndex].text.split(' - ')[0];
+    
+    cart.push({
+        type: 'Spezialität',
+        name: name,
+        details: '',
+        price: price,
+        id: Date.now()
+    });
+    
+    saveCart();
+    showToast('Spezialität hinzugefügt');
+}
+
+function addCup() {
+    const select = document.getElementById('cupSize');
+    const price = parseFloat(select.value);
+    const size = select.options[select.selectedIndex].text;
+    const flavour = document.getElementById('cupFlavour').value || 'Nach Wahl';
+    const qty = quantities.cup;
+    
+    cart.push({
+        type: 'REWE Becher',
+        name: size,
+        details: `${qty}x ${flavour}`,
+        price: price * qty,
+        id: Date.now()
+    });
+    
+    saveCart();
+    showToast('REWE Becher hinzugefügt');
+}
+
+// Cart UI
+function toggleCart() {
+    document.getElementById('cartSidebar').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('active');
+    renderCart();
+}
+
+function renderCart() {
+    const body = document.getElementById('cartBody');
+    if (cart.length === 0) {
+        body.innerHTML = '<p style="text-align: center; color: #999; padding: 40px 0;">Warenkorb ist leer</p>';
+        return;
+    }
+    
+    let html = '';
+    let total = 0;
+    
+    cart.forEach((item, idx) => {
+        total += item.price;
+        html += `
+            <div class="cart-item">
+                <button class="remove-item" onclick="removeItem(${idx})">🗑️</button>
+                <strong>${item.type}</strong><br>
+                ${item.name}<br>
+                <small style="color: #666;">${item.details}</small><br>
+                <strong style="color: var(--color-secondary);">${money(item.price)}</strong>
+            </div>
+        `;
+    });
+    
+    html += `
+        <div class="cart-total">Gesamt: ${money(total)}</div>
+        <div style="margin-top: 20px; padding: 20px; background: #f9f9f9; border-radius: 12px;">
+            <h4 style="margin-bottom: 15px;">Kundendaten</h4>
+            <input type="text" id="custName" placeholder="Name" style="width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            <input type="tel" id="custPhone" placeholder="Telefon" style="width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            <select id="custDelivery" style="width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                <option value="Abholung">Abholung</option>
+                <option value="Lieferung">Lieferung</option>
+            </select>
+            <input type="text" id="custAddress" placeholder="Adresse (bei Lieferung)" style="width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            <textarea id="custNote" placeholder="Anmerkungen..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; height: 80px; resize: vertical;"></textarea>
+        </div>
+        <button class="checkout-btn" onclick="sendOrder()">📱 Per WhatsApp bestellen</button>
+    `;
+    
+    body.innerHTML = html;
+}
+
+function removeItem(idx) {
+    cart.splice(idx, 1);
+    saveCart();
+    renderCart();
+}
+
+function updateCartUI() {
+    document.getElementById('cartCount').textContent = cart.length;
+}
+
+// WhatsApp
+function sendOrder() {
+    const name = document.getElementById('custName')?.value;
+    const phone = document.getElementById('custPhone')?.value;
+    
+    if (!name || !phone) {
+        alert('Bitte Name und Telefon eingeben!');
+        return;
+    }
+    
+    const delivery = document.getElementById('custDelivery')?.value || 'Abholung';
+    const address = document.getElementById('custAddress')?.value;
+    const note = document.getElementById('custNote')?.value;
+    
+    let text = `*Neue Sanremo Bestellung*%0A%0A`;
+    text += `*Name:* ${name}%0A`;
+    text += `*Tel:* ${phone}%0A`;
+    text += `*Art:* ${delivery}%0A`;
+    if (address) text += `*Adresse:* ${address}%0A`;
+    text += `%0A*Bestellung:*%0A`;
+    
+    cart.forEach(item => {
+        text += `%0A• ${item.type}: ${item.name}%0A`;
+        if (item.details) text += `  ${item.details}%0A`;
+        text += `  ${money(item.price)}%0A`;
+    });
+    
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    text += `%0A*Gesamt: ${money(total)}*%0A`;
+    if (note) text += `%0A*Anmerkung:* ${note}%0A`;
+    
+    window.open(`https://wa.me/4917672809926?text=${text}`, '_blank');
+}
+
+// Admin
 function openAdmin() {
-  const pwd = prompt('Admin Passwort eingeben:');
-  if (pwd === '2026') {
-    sessionStorage.setItem('admin_auth', '2026');
-    document.getElementById('adminOverlay').classList.add('active');
-    renderAdmin();
-  } else if (pwd) {
-    alert('Falsches Passwort!');
-  }
+    const pwd = prompt('Passwort:');
+    if (pwd === '2026') {
+        document.getElementById('adminPanel').classList.add('active');
+        renderAdmin();
+    } else if (pwd) {
+        alert('Falsch!');
+    }
 }
 
 function closeAdmin() {
-  document.getElementById('adminOverlay').classList.remove('active');
-  sessionStorage.removeItem('admin_auth');
+    document.getElementById('adminPanel').classList.remove('active');
 }
 
 function renderAdmin() {
-  const list = document.getElementById('adminList');
-  let html = '';
-  
-  ['specials', 'cups', 'flavours'].forEach(type => {
-    const items = getData(type);
-    items.forEach((item, idx) => {
-      const name = typeof item === 'string' ? item : item.name;
-      const price = typeof item === 'string' ? '-' : money(item.price);
-      const desc = typeof item === 'string' ? '-' : (item.desc || '');
-      
-      html += `
-        <div class="admin-item">
-          <div><strong>${name}</strong></div>
-          <div>${price}</div>
-          <div style="color: var(--color-text-muted); font-size: 13px;">${desc}</div>
-          <div><span style="background: var(--color-bg); padding: 4px 8px; border-radius: 4px; font-size: 11px; text-transform: uppercase;">${type}</span></div>
-          <div style="display: flex; gap: 8px;">
-            <button onclick="editItem('${type}', ${idx})" style="background: none; border: none; cursor: pointer; color: var(--color-secondary);">✏️</button>
-            <button onclick="deleteItem('${type}', ${idx})" style="background: none; border: none; cursor: pointer; color: var(--color-primary);">🗑️</button>
-          </div>
-        </div>
-      `;
-    });
-  });
-  
-  list.innerHTML = html || '<p style="color: var(--color-text-muted); padding: 20px; text-align: center;">Keine Einträge vorhanden</p>';
+    const list = document.getElementById('adminList');
+    list.innerHTML = '<h3>Gespeicherte Daten</h3><p style="color: #666; margin-top: 10px;">Warenkorb: ' + cart.length + ' Artikel</p>';
 }
 
 function addAdminItem() {
-  const type = document.getElementById('adminType').value;
-  const name = document.getElementById('adminName').value.trim();
-  const price = document.getElementById('adminPrice').value;
-  const desc = document.getElementById('adminDesc').value.trim();
-  
-  if (!name) {
-    alert('Name ist erforderlich!');
-    return;
-  }
-  
-  const data = getData(type);
-  
-  if (type === 'specials') {
-    const priceNum = parseFloat(price.replace(',', '.'));
-    if (!priceNum) {
-      alert('Preis ist erforderlich für Spezialitäten!');
-      return;
+    const name = document.getElementById('adminName').value;
+    const price = document.getElementById('adminPrice').value;
+    if (name) {
+        showToast('Produkt gespeichert (Demo)');
+        document.getElementById('adminName').value = '';
+        document.getElementById('adminPrice').value = '';
     }
-    data.push({name, price: priceNum, desc});
-  } else {
-    data.push(name);
-  }
-  
-  saveData(type, data);
-  fillSelects();
-  renderAdmin();
-  
-  // Clear inputs
-  document.getElementById('adminName').value = '';
-  document.getElementById('adminPrice').value = '';
-  document.getElementById('adminDesc').value = '';
-  
-  showToast('Element hinzugefügt');
-}
-
-function deleteItem(type, idx) {
-  if (!confirm('Wirklich löschen?')) return;
-  const data = getData(type);
-  data.splice(idx, 1);
-  saveData(type, data);
-  fillSelects();
-  renderAdmin();
-  showToast('Gelöscht');
-}
-
-function editItem(type, idx) {
-  const data = getData(type);
-  const item = data[idx];
-  
-  if (typeof item === 'string') {
-    const newName = prompt('Neuer Name:', item);
-    if (newName) {
-      data[idx] = newName;
-      saveData(type, data);
-      fillSelects();
-      renderAdmin();
-    }
-  } else {
-    const newName = prompt('Neuer Name:', item.name);
-    if (newName === null) return;
-    
-    const newPrice = prompt('Neuer Preis:', item.price);
-    if (newPrice === null) return;
-    
-    const newDesc = prompt('Neue Beschreibung:', item.desc || '');
-    if (newDesc === null) return;
-    
-    data[idx] = {
-      name: newName || item.name,
-      price: parseFloat(newPrice.replace(',', '.')) || item.price,
-      desc: newDesc
-    };
-    
-    saveData(type, data);
-    fillSelects();
-    renderAdmin();
-  }
-}
-
-function resetData() {
-  if (!confirm('ALLE Daten wirklich zurücksetzen? Dies kann nicht rückgängig gemacht werden!')) return;
-  
-  ['specials', 'cups', 'flavours'].forEach(key => {
-    localStorage.removeItem('sanremo_' + key);
-  });
-  
-  fillSelects();
-  renderAdmin();
-  showToast('Daten zurückgesetzt');
 }
 </script>
+
 </body>
 </html>
