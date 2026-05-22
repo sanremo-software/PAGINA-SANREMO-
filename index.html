@@ -6,9 +6,6 @@
 <title>Sanremo Gelateria – Eis Online Bestellen</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════
-   TOKENS
-═══════════════════════════════════════ */
 :root{
   --r:#8b0f14;--r2:#b71921;--r3:#d42020;
   --g:#0f9f4d;--g2:#12bd5e;
@@ -83,107 +80,109 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 .nAdm:hover{background:#2d1208;}
 
 /* ═══════════════════════════════════════
-   HERO
+   HERO — COMPLETAMENTE NOVO
 ═══════════════════════════════════════ */
 .hero{
-  min-height:100vh;padding-top:70px;
-  position:relative;overflow:hidden;
-  display:flex;align-items:center;
+  position:relative;
+  width:100%;
+  height:100vh;
+  min-height:600px;
+  overflow:hidden;
+  padding-top:70px;
 }
-.heroBgImg{
-  position:absolute;inset:0;
-  background:url('https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1800&q=85') center/cover;
+
+/* Slideshow de 3 fotos de Sanremo */
+.heroSlides{
+  position:absolute;
+  inset:0;
   z-index:0;
 }
-.heroBgOv{
-  position:absolute;inset:0;z-index:1;
-  background:linear-gradient(100deg,
-    rgba(26,10,7,.93) 0%,
-    rgba(90,25,18,.85) 45%,
-    rgba(139,15,20,.55) 75%,
-    rgba(180,40,30,.25) 100%);
+.heroSlide{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  transition:opacity 1.8s ease-in-out;
 }
-.heroInner{
-  position:relative;z-index:2;
-  max-width:1340px;margin:0 auto;
-  padding:80px 40px;
-  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
-  width:100%;
+.heroSlide.active{opacity:1;}
+
+/* Foto 1 – Porto di Sanremo */
+.slide1{
+  background-image:url('https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=2000&q=95');
 }
-.heroBadge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(212,168,67,.18);border:1px solid rgba(212,168,67,.35);
-  color:var(--gold2);padding:6px 18px;border-radius:50px;
-  font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
-  margin-bottom:26px;
+/* Foto 2 – Riviera di Ponente / costeira */
+.slide2{
+  background-image:url('https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=2000&q=95');
 }
-.hero h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(42px,5.5vw,74px);
-  line-height:1.04;color:#fff;margin-bottom:20px;
+/* Foto 3 – Cidade colorida italiana */
+.slide3{
+  background-image:url('https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=2000&q=95');
 }
-.hero h1 em{color:var(--gold2);font-style:italic;}
-.heroSub{
-  font-size:17px;color:rgba(255,255,255,.72);
-  line-height:1.65;max-width:520px;margin-bottom:38px;
+
+/* Overlay muito leve para não matar as cores */
+.heroOv{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,.08) 0%,
+    rgba(0,0,0,.04) 40%,
+    rgba(0,0,0,.18) 80%,
+    rgba(0,0,0,.52) 100%
+  );
 }
-.heroBtns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:52px;}
-.btnGold{
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  color:var(--dk);border:none;border-radius:13px;
-  padding:14px 28px;font-size:15px;font-weight:800;
-  display:inline-flex;align-items:center;gap:8px;cursor:pointer;
-  box-shadow:0 8px 28px rgba(212,168,67,.4);transition:all .3s;
+
+/* Dots de navegação */
+.heroDots{
+  position:absolute;
+  bottom:34px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:3;
+  display:flex;
+  gap:10px;
 }
-.btnGold:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(212,168,67,.5);}
-.btnOutline{
-  background:transparent;color:#fff;
-  border:2px solid rgba(255,255,255,.4);border-radius:13px;
-  padding:14px 28px;font-size:15px;font-weight:700;
-  display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+.heroDot{
+  width:10px;height:10px;border-radius:50%;
+  background:rgba(255,255,255,.45);
+  border:2px solid rgba(255,255,255,.7);
+  cursor:pointer;
   transition:all .3s;
 }
-.btnOutline:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.7);}
-.heroStats{display:flex;gap:48px;flex-wrap:wrap;}
-.hStat .n{
-  font-family:'Playfair Display',serif;
-  font-size:42px;font-weight:700;color:var(--gold2);line-height:1;
+.heroDot.active{
+  background:#fff;
+  width:28px;
+  border-radius:5px;
 }
-.hStat .l{font-size:12px;color:rgba(255,255,255,.5);margin-top:4px;letter-spacing:.3px;}
 
-/* Right: floating cards */
-.heroRight{position:relative;height:520px;}
-.hCard{
+/* Scroll arrow */
+.heroArrow{
   position:absolute;
-  background:rgba(255,252,246,.97);
-  border:1px solid rgba(232,213,192,.8);
-  border-radius:var(--rad);overflow:hidden;
-  box-shadow:var(--sh3);
+  bottom:34px;
+  right:40px;
+  z-index:3;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  cursor:pointer;
 }
-.hCardMain{
-  right:0;top:0;width:340px;height:340px;
+.heroArrow span{
+  display:block;
+  width:20px;height:20px;
+  border-right:2.5px solid rgba(255,255,255,.8);
+  border-bottom:2.5px solid rgba(255,255,255,.8);
+  transform:rotate(45deg);
+  animation:bounce 1.5s infinite;
 }
-.hCardMain img{width:100%;height:220px;object-fit:cover;}
-.hCardMain .hcb{padding:20px;}
-.hCardMain .hcb h3{font-family:'Playfair Display',serif;font-size:20px;color:var(--r);margin-bottom:6px;}
-.hCardMain .hcb p{font-size:13px;color:var(--md);line-height:1.5;}
-.hCardSm{
-  left:0;bottom:60px;width:200px;
-  padding:18px;
+.heroArrow span:nth-child(2){animation-delay:.2s;opacity:.6;}
+.heroArrow span:nth-child(3){animation-delay:.4s;opacity:.35;}
+@keyframes bounce{
+  0%,100%{transform:rotate(45deg) translateY(0);}
+  50%{transform:rotate(45deg) translateY(5px);}
 }
-.hCardSm .ico{font-size:32px;margin-bottom:8px;}
-.hCardSm b{font-size:14px;display:block;margin-bottom:3px;}
-.hCardSm span{font-size:12px;color:var(--lt);}
-.hStamp{
-  position:absolute;right:10px;bottom:20px;
-  width:110px;height:110px;border-radius:50%;
-  background:linear-gradient(135deg,var(--r),var(--r2));
-  color:#fff;border:5px solid var(--gold2);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;font-weight:900;font-size:11px;line-height:1.3;
-  box-shadow:0 12px 30px rgba(139,15,20,.4);
-}
-.hStamp strong{font-size:15px;display:block;}
 
 /* ═══════════════════════════════════════
    BENEFITS BAR
@@ -290,7 +289,7 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 .specCard .scb span{font-size:12.5px;color:var(--r);font-weight:800;}
 
 /* ═══════════════════════════════════════
-   INFO GRID (Story / Steps / Delivery)
+   INFO GRID
 ═══════════════════════════════════════ */
 .infoSection{background:var(--cr);}
 .infoGrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;}
@@ -522,18 +521,9 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
   font-size:13.5px;
 }
 .aRowBtns{display:flex;gap:6px;}
-.aEdit{
-  padding:5px 12px;background:var(--cr3);border:none;border-radius:7px;
-  font-size:12px;font-weight:700;cursor:pointer;
-}
-.aDelBtn{
-  padding:5px 10px;background:#fee2e2;color:#b91c1c;border:none;
-  border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;
-}
-.closeBtn{
-  background:var(--dk);color:#fff;border:none;border-radius:50px;
-  padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;
-}
+.aEdit{padding:5px 12px;background:var(--cr3);border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;}
+.aDelBtn{padding:5px 10px;background:#fee2e2;color:#b91c1c;border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;}
+.closeBtn{background:var(--dk);color:#fff;border:none;border-radius:50px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;}
 
 /* ═══════════════════════════════════════
    FOOTER
@@ -564,8 +554,6 @@ footer a:hover{color:var(--gold2);}
 @media(max-width:1100px){
   .nLinks{display:none;}
   #nav{padding:0 20px;}
-  .heroInner{grid-template-columns:1fr;padding:60px 20px;}
-  .heroRight{display:none;}
   .bInner{grid-template-columns:repeat(2,1fr);}
   .catGrid{grid-template-columns:repeat(2,1fr);}
   .specGrid{grid-template-columns:repeat(3,1fr);}
@@ -576,16 +564,12 @@ footer a:hover{color:var(--gold2);}
   .wrap{padding:0 20px;}
 }
 @media(max-width:640px){
-  .hero h1{font-size:38px;}
+  .heroArrow{right:20px;}
   .catGrid,.bInner,.specGrid,.fGrid,.tabs,.flavGrid{grid-template-columns:1fr;}
-  .fGrid{grid-template-columns:1fr;}
-  .flavGrid{grid-template-columns:1fr 1fr;}
   .contactStrip{grid-template-columns:1fr;text-align:center;}
   .contactStrip .contactIco{margin:0 auto;}
   .footInner{grid-template-columns:1fr;}
   .footBot{flex-direction:column;gap:8px;text-align:center;}
-  .heroBtns{flex-direction:column;}
-  .heroStats{gap:24px;}
   .adminGrid{grid-template-columns:1fr;}
 }
 </style>
@@ -615,44 +599,27 @@ footer a:hover{color:var(--gold2);}
   <button class="nAdm" onclick="openAdminLogin()">⚙ Admin</button>
 </nav>
 
-<!-- ══ HERO ══ -->
+<!-- ══ HERO — NOVA VERSÃO ══ -->
 <section class="hero" id="top">
-  <div class="heroBgImg"></div>
-  <div class="heroBgOv"></div>
-  <div class="heroInner">
-    <div>
-      <div class="heroBadge">⭐ Seit 2010 · Bad Berleburg · 100% Handgemacht</div>
-      <h1>Echtes Italienisches<br><em>Gelato</em><br>— frisch & cremig</h1>
-      <p class="heroSub">Handgemachte Eistorten, Spezialitäten und über 30 Sorten Gelato. Direkt per WhatsApp bestellen — Lieferung oder Abholung.</p>
-      <div class="heroBtns">
-        <button class="btnGold" onclick="document.getElementById('bestellung').scrollIntoView({behavior:'smooth'})">🛒 Jetzt bestellen</button>
-        <a href="https://wa.me/4917672809926" target="_blank" class="btnOutline">💬 WhatsApp öffnen</a>
-      </div>
-      <div class="heroStats">
-        <div class="hStat"><div class="n">30+</div><div class="l">Gelato-Sorten</div></div>
-        <div class="hStat"><div class="n">4.9★</div><div class="l">Bewertung</div></div>
-        <div class="hStat"><div class="n">14 J.</div><div class="l">Erfahrung</div></div>
-        <div class="hStat"><div class="n">100%</div><div class="l">Handgemacht</div></div>
-      </div>
-    </div>
-    <div class="heroRight">
-      <div class="hCard hCardMain">
-        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=700&q=90" alt="Gelato">
-        <div class="hcb">
-          <h3>Tagesfrisches Gelato</h3>
-          <p>Täglich frisch zubereitet nach original italienischem Rezept</p>
-        </div>
-      </div>
-      <div class="hCard hCardSm">
-        <div class="ico">🎂</div>
-        <b>Eistorten</b>
-        <span>ab € 28,00 · 18 cm</span>
-      </div>
-      <div class="hStamp">
-        <strong>100%</strong>
-        HANDGEMACHT<br>ITALIENISCH
-      </div>
-    </div>
+  <div class="heroSlides">
+    <div class="heroSlide slide1 active"></div>
+    <div class="heroSlide slide2"></div>
+    <div class="heroSlide slide3"></div>
+  </div>
+  <div class="heroOv"></div>
+
+  <!-- Dots -->
+  <div class="heroDots">
+    <div class="heroDot active" onclick="goSlide(0)"></div>
+    <div class="heroDot" onclick="goSlide(1)"></div>
+    <div class="heroDot" onclick="goSlide(2)"></div>
+  </div>
+
+  <!-- Scroll arrow -->
+  <div class="heroArrow" onclick="document.querySelector('.benefits').scrollIntoView({behavior:'smooth'})">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </section>
 
@@ -801,7 +768,6 @@ footer a:hover{color:var(--gold2);}
       <p class="secSub">Wählen Sie Ihre Produkte, legen Sie alles in den Warenkorb und senden Sie die Bestellung per WhatsApp</p>
     </div>
     <div class="shopLayout">
-      <!-- ORDER FORMS -->
       <div>
         <div class="tabs">
           <button class="tabBtn active" id="tabGelato" onclick="switchOrder('gelato')">🍦 Gelato</button>
@@ -993,6 +959,22 @@ footer a:hover{color:var(--gold2);}
 
 <script>
 /* ══════════════════════════════
+   HERO SLIDESHOW
+══════════════════════════════ */
+let currentSlide = 0;
+const slides = document.querySelectorAll('.heroSlide');
+const dots   = document.querySelectorAll('.heroDot');
+
+function goSlide(n){
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+  currentSlide = (n + slides.length) % slides.length;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+}
+setInterval(()=>goSlide(currentSlide + 1), 5000);
+
+/* ══════════════════════════════
    DATA & STATE
 ══════════════════════════════ */
 const WA = '4917672809926';
@@ -1016,9 +998,6 @@ function getData(k){ const s=localStorage.getItem('sr_'+k); return s ? JSON.pars
 function saveData(k,v){ localStorage.setItem('sr_'+k, JSON.stringify(v)); }
 function sumLine(a,b){ return `<div class="sumLine"><span>${a}</span><b>${b}</b></div>`; }
 
-/* ══════════════════════════════
-   FILL SELECTS
-══════════════════════════════ */
 function fillSelects(){
   const fl = getData('flavours');
   ['cakeF1','cakeF2','cakeF3','cakeF4','gelatoFlavour'].forEach(id=>{
@@ -1031,9 +1010,6 @@ function fillSelects(){
   calcGelato(); calcCake(); calcSpecial(); calcCups();
 }
 
-/* ══════════════════════════════
-   SPECIAL CARDS
-══════════════════════════════ */
 const SPECIAL_IMGS = [
   'https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=300&q=80',
   'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=300&q=80',
@@ -1050,9 +1026,6 @@ function renderSpecialCards(){
     </div>`).join('');
 }
 
-/* ══════════════════════════════
-   TAB SWITCHING
-══════════════════════════════ */
 function switchOrder(type){
   const map = {gelato:'Gelato',cake:'Cake',special:'Special',cups:'Cups'};
   ['gelato','cake','special','cups'].forEach(t=>{
@@ -1061,23 +1034,19 @@ function switchOrder(type){
   });
   document.getElementById(type+'Form').classList.add('active');
   document.getElementById('tab'+map[type]).classList.add('active');
+  document.getElementById('bestellung').scrollIntoView({behavior:'smooth'});
 }
 
-/* ══════════════════════════════
-   CALCULATORS
-══════════════════════════════ */
 function calcGelato(){
   const q=+document.getElementById('gelatoQty').value||1,
         p=+document.getElementById('gelatoPrice').value,
-        f=document.getElementById('gelatoFlavour').value,
-        t=q*p;
+        f=document.getElementById('gelatoFlavour').value,t=q*p;
   document.getElementById('gelatoSummary').innerHTML=sumLine('Sorte',f)+sumLine('Portionen',q)+sumLine('Preis/Portion',money(p));
   document.getElementById('gelatoTotal').textContent='Gesamt: '+money(t);
   return t;
 }
 function calcCake(){
-  const sz=document.getElementById('cakeSize'), dk=document.getElementById('cakeDeko'),
-        t=+sz.value + +dk.value;
+  const sz=document.getElementById('cakeSize'),dk=document.getElementById('cakeDeko'),t=+sz.value+ +dk.value;
   document.getElementById('cakeSummary').innerHTML=
     sumLine('Größe',sz.options[sz.selectedIndex].text)+
     sumLine('Dekoration',dk.options[dk.selectedIndex].text)+
@@ -1086,29 +1055,24 @@ function calcCake(){
   return t;
 }
 function calcSpecial(){
-  const specs=getData('specials'),
-        s=specs[+document.getElementById('spItem').value||0]||specs[0],
+  const specs=getData('specials'),s=specs[+document.getElementById('spItem').value||0]||specs[0],
         q=+document.getElementById('spQty').value||1,t=s.price*q;
   document.getElementById('spSummary').innerHTML=sumLine('Spezialität',s.name)+sumLine('Menge',q)+sumLine('Preis/Stück',money(s.price));
   document.getElementById('spTotal').textContent='Gesamt: '+money(t);
   return t;
 }
 function calcCups(){
-  const cs=document.getElementById('cupSize'),
-        p=+cs.value, q=+document.getElementById('cupQty').value||1,
-        f=document.getElementById('cupFlavour').value, t=p*q;
+  const cs=document.getElementById('cupSize'),p=+cs.value,
+        q=+document.getElementById('cupQty').value||1,
+        f=document.getElementById('cupFlavour').value,t=p*q;
   document.getElementById('cupSummary').innerHTML=sumLine('Größe',cs.options[cs.selectedIndex].text)+sumLine('Sorte',f)+sumLine('Menge',q);
   document.getElementById('cupTotal').textContent='Gesamt: '+money(t);
   return t;
 }
 
-/* ══════════════════════════════
-   CART LOGIC
-══════════════════════════════ */
 function addToCart(item){
-  cart.push({...item, id:Date.now()});
-  saveCart();
-  renderCart();
+  cart.push({...item,id:Date.now()});
+  saveCart(); renderCart();
   document.getElementById('warenkorb').scrollIntoView({behavior:'smooth'});
   showToast(item.name+' hinzugefügt!');
 }
@@ -1124,20 +1088,17 @@ function addCakeToCart(){
     price:calcCake()});
 }
 function addSpecialToCart(){
-  const s=getData('specials')[+document.getElementById('spItem').value||0], q=+document.getElementById('spQty').value||1;
+  const s=getData('specials')[+document.getElementById('spItem').value||0],q=+document.getElementById('spQty').value||1;
   addToCart({type:'Spezialität',name:s.name,details:`Menge: ${q} · Extra: ${document.getElementById('spExtra').value}`,price:s.price*q});
 }
 function addCupsToCart(){
-  const cs=document.getElementById('cupSize'), q=+document.getElementById('cupQty').value||1;
+  const cs=document.getElementById('cupSize'),q=+document.getElementById('cupQty').value||1;
   addToCart({type:'Becher',name:cs.options[cs.selectedIndex].text,
     details:`Sorte: ${document.getElementById('cupFlavour').value} · Menge: ${q} · ${document.getElementById('cupNote').value}`,
     price:+cs.value*q});
 }
-function removeCart(id){
-  cart = cart.filter(i=>i.id!==id);
-  saveCart(); renderCart();
-}
-function saveCart(){ localStorage.setItem('sr_cart_v3', JSON.stringify(cart)); }
+function removeCart(id){ cart=cart.filter(i=>i.id!==id); saveCart(); renderCart(); }
+function saveCart(){ localStorage.setItem('sr_cart_v3',JSON.stringify(cart)); }
 function renderCart(){
   const el=document.getElementById('cartItems');
   if(!cart.length){
@@ -1146,55 +1107,44 @@ function renderCart(){
     updateBadge(0); return;
   }
   const total=cart.reduce((s,i)=>s+Number(i.price),0);
-  el.innerHTML = cart.map(i=>`
+  el.innerHTML=cart.map(i=>`
     <div class="cItem">
       <div class="cThumb"></div>
-      <div>
-        <b>${i.name}</b>
-        <small>${i.type} · ${i.details}</small>
-        <strong>${money(i.price)}</strong>
-      </div>
+      <div><b>${i.name}</b><small>${i.type} · ${i.details}</small><strong>${money(i.price)}</strong></div>
       <button class="cDel" onclick="removeCart(${i.id})">×</button>
     </div>`).join('');
-  document.getElementById('cartTotal').textContent = money(total);
+  document.getElementById('cartTotal').textContent=money(total);
   updateBadge(cart.length);
 }
 function updateBadge(n){
-  document.getElementById('cartCountTop').textContent = n;
-  document.getElementById('cartCountFloat').textContent = n;
+  document.getElementById('cartCountTop').textContent=n;
+  document.getElementById('cartCountFloat').textContent=n;
 }
 
-/* ══════════════════════════════
-   SEND WHATSAPP
-══════════════════════════════ */
 function sendCart(){
-  if(!cart.length){ alert('Ihr Warenkorb ist leer.'); return; }
-  const name=document.getElementById('custName').value.trim();
-  const phone=document.getElementById('custPhone').value.trim();
-  if(!name||!phone){ alert('Bitte Name und Telefon eingeben.'); return; }
-  const total=cart.reduce((s,i)=>s+Number(i.price),0);
-  const dl=document.querySelector('input[name="delivery"]:checked').value;
+  if(!cart.length){alert('Ihr Warenkorb ist leer.');return;}
+  const name=document.getElementById('custName').value.trim(),
+        phone=document.getElementById('custPhone').value.trim();
+  if(!name||!phone){alert('Bitte Name und Telefon eingeben.');return;}
+  const total=cart.reduce((s,i)=>s+Number(i.price),0),
+        dl=document.querySelector('input[name="delivery"]:checked').value;
   let txt=`🍦 *NEUE BESTELLUNG – Sanremo Gelateria*\n\n`;
   txt+=`👤 *Name:* ${name}\n📞 *Telefon:* ${phone}\n`;
   txt+=`📅 *Wunschtermin:* ${document.getElementById('custDate').value||'–'}\n`;
   txt+=`🚗 *Art:* ${dl}\n`;
   if(dl!=='Abholung') txt+=`📍 *Adresse:* ${document.getElementById('custAddress').value}\n`;
   txt+=`\n📋 *Bestellung:*\n`;
-  cart.forEach((i,n)=>{ txt+=`${n+1}. ${i.type}: *${i.name}*\n   ${i.details}\n   💰 ${money(i.price)}\n\n`; });
+  cart.forEach((i,n)=>{txt+=`${n+1}. ${i.type}: *${i.name}*\n   ${i.details}\n   💰 ${money(i.price)}\n\n`;});
   txt+=`💳 *Gesamtbetrag: ${money(total)}*`;
   const note=document.getElementById('custNote').value;
   if(note) txt+=`\n\n📝 *Nachricht:* ${note}`;
-  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(txt)}`, '_blank');
+  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(txt)}`,'_blank');
 }
 
-/* ══════════════════════════════
-   TOAST
-══════════════════════════════ */
 function showToast(msg){
   let t=document.getElementById('_toast');
   if(!t){
-    t=document.createElement('div');
-    t.id='_toast';
+    t=document.createElement('div');t.id='_toast';
     t.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:#1a0a07;color:#fff;padding:12px 24px;border-radius:12px;font-size:14px;font-weight:700;z-index:9999;opacity:0;transition:all .3s;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.3);';
     document.body.appendChild(t);
   }
@@ -1203,26 +1153,19 @@ function showToast(msg){
   setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(20px)';},2800);
 }
 
-/* ══════════════════════════════
-   ADMIN
-══════════════════════════════ */
-let adminUnlocked = false;
+let adminUnlocked=false;
 function openAdminLogin(){
-  if(!adminUnlocked){
-    const p=prompt('Admin-Passwort:');
-    if(p!=='2026'){ if(p!==null) alert('Falsches Passwort!'); return; }
-    adminUnlocked=true;
-  }
+  if(!adminUnlocked){const p=prompt('Admin-Passwort:');if(p!=='2026'){if(p!==null)alert('Falsches Passwort!');return;}adminUnlocked=true;}
   document.getElementById('adminPanel').classList.add('show');
   renderAdminList();
 }
-function closeAdmin(){ document.getElementById('adminPanel').classList.remove('show'); }
+function closeAdmin(){document.getElementById('adminPanel').classList.remove('show');}
 function addAdminItem(){
   const type=document.getElementById('adminType').value,
         name=document.getElementById('adminName').value.trim(),
         price=Number(document.getElementById('adminPrice').value.replace(',','.'))||0,
         desc=document.getElementById('adminDesc').value.trim();
-  if(!name){ alert('Name fehlt!'); return; }
+  if(!name){alert('Name fehlt!');return;}
   const key=type==='special'?'specials':type==='cup'?'cups':'flavours';
   const arr=getData(key);
   if(type==='special') arr.push({name,price,desc});
@@ -1234,7 +1177,7 @@ function addAdminItem(){
   fillSelects(); renderAdminList();
 }
 function renderAdminList(){
-  document.getElementById('adminList').innerHTML =
+  document.getElementById('adminList').innerHTML=
     ['specials','cups','flavours'].flatMap(k=>getData(k).map((it,idx)=>{
       const name=typeof it==='string'?it:it.name;
       return `<div class="aRow"><span><b style="color:var(--r)">${k}:</b> ${name}${typeof it!=='string'?' – '+money(it.price):''}</span>
@@ -1244,28 +1187,25 @@ function renderAdminList(){
         </div></div>`;
     })).join('');
 }
-function deleteItem(k,idx){ const a=getData(k); a.splice(idx,1); saveData(k,a); fillSelects(); renderAdminList(); }
+function deleteItem(k,idx){const a=getData(k);a.splice(idx,1);saveData(k,a);fillSelects();renderAdminList();}
 function editItem(k,idx){
   const a=getData(k),it=a[idx],old=typeof it==='string'?it:it.name;
-  const neu=prompt('Neuer Name:',old); if(!neu) return;
+  const neu=prompt('Neuer Name:',old);if(!neu)return;
   if(typeof it==='string') a[idx]=neu;
   else{
     a[idx].name=neu;
-    const p=prompt('Preis:',a[idx].price); if(p!==null) a[idx].price=Number(p.replace(',','.'))||a[idx].price;
-    const d=prompt('Beschreibung:',a[idx].desc||''); if(d!==null) a[idx].desc=d;
+    const p=prompt('Preis:',a[idx].price);if(p!==null) a[idx].price=Number(p.replace(',','.'))||a[idx].price;
+    const d=prompt('Beschreibung:',a[idx].desc||'');if(d!==null) a[idx].desc=d;
   }
-  saveData(k,a); fillSelects(); renderAdminList();
+  saveData(k,a);fillSelects();renderAdminList();
 }
 function resetAll(){
   if(confirm('Alle Daten zurücksetzen?')){
     ['specials','cups','flavours'].forEach(k=>localStorage.removeItem('sr_'+k));
-    fillSelects(); renderAdminList();
+    fillSelects();renderAdminList();
   }
 }
 
-/* ══════════════════════════════
-   INIT
-══════════════════════════════ */
 fillSelects();
 renderCart();
 </script>
