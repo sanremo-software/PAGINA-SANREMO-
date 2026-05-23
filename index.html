@@ -12,8 +12,7 @@
   --gold:#d4a843;--gold2:#f0c84a;
   --cr:#fff8ee;--cr2:#fdf4e7;--cr3:#f5e8d0;
   --dk:#1a0a07;--md:#5c3a2e;--lt:#9b7b6e;
-  --wh:#ffffff;
-  --ln:#e8d5c0;
+  --wh:#ffffff;--ln:#e8d5c0;
   --sh1:0 4px 16px rgba(83,31,18,.08);
   --sh2:0 12px 40px rgba(83,31,18,.14);
   --sh3:0 24px 72px rgba(83,31,18,.20);
@@ -22,619 +21,612 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'Inter',sans-serif;background:var(--cr);color:var(--dk);overflow-x:hidden;}
-img{display:block;width:100%;}
+img{display:block;max-width:100%;}
 a{text-decoration:none;color:inherit;}
 button,input,select,textarea{font-family:'Inter',sans-serif;}
 ::-webkit-scrollbar{width:5px;}
 ::-webkit-scrollbar-thumb{background:var(--r);border-radius:3px;}
 
-/* ═══════════════════════════════════════
-   NAV
-═══════════════════════════════════════ */
+/* ═══════ NAV ═══════ */
 #nav{
   position:fixed;top:0;left:0;right:0;z-index:999;
-  height:70px;
-  background:rgba(255,252,246,.96);
+  height:64px;
+  background:rgba(255,252,246,.97);
   backdrop-filter:blur(24px);
   border-bottom:1px solid rgba(139,15,20,.10);
   display:flex;align-items:center;
-  padding:0 40px;gap:0;
+  padding:0 32px;gap:12px;
 }
 .nLogo{display:flex;align-items:center;gap:10px;margin-right:auto;}
 .nLogoIco{
-  width:42px;height:42px;border-radius:11px;
+  width:40px;height:40px;border-radius:10px;
   background:linear-gradient(135deg,var(--r),var(--r2));
   display:flex;align-items:center;justify-content:center;
-  font-size:20px;flex-shrink:0;
+  font-size:19px;flex-shrink:0;
 }
-.nLogoTxt{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--r);}
-.nLogoSub{font-size:10px;letter-spacing:2.5px;font-weight:700;text-transform:uppercase;color:var(--md);display:block;margin-top:-2px;}
+.nLogoTxt{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--r);}
+.nLogoSub{font-size:9.5px;letter-spacing:2px;font-weight:700;text-transform:uppercase;color:var(--md);display:block;margin-top:-2px;}
 .nLinks{display:flex;align-items:center;gap:2px;}
 .nLinks a{
-  font-size:13px;font-weight:600;color:var(--md);
-  padding:8px 14px;border-radius:9px;
+  font-size:12.5px;font-weight:600;color:var(--md);
+  padding:7px 12px;border-radius:8px;
   transition:all .2s;white-space:nowrap;
 }
 .nLinks a:hover{background:var(--cr3);color:var(--r);}
 .nCart{
-  margin-left:18px;
   background:linear-gradient(135deg,var(--r),var(--r2));
-  color:#fff;border:none;border-radius:12px;
-  padding:10px 20px;font-size:13.5px;font-weight:700;
-  display:flex;align-items:center;gap:9px;cursor:pointer;
+  color:#fff;border:none;border-radius:11px;
+  padding:9px 18px;font-size:13px;font-weight:700;
+  display:flex;align-items:center;gap:8px;cursor:pointer;
   transition:all .3s;white-space:nowrap;
 }
 .nCart:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(139,15,20,.35);}
 .nBadge{
   background:var(--gold2);color:var(--dk);
-  width:22px;height:22px;border-radius:50%;
+  width:20px;height:20px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:900;
+  font-size:10px;font-weight:900;
 }
 .nAdm{
-  margin-left:8px;
-  background:#1a0a07;color:#fff;border:none;border-radius:10px;
-  padding:9px 14px;font-size:12px;font-weight:700;cursor:pointer;
+  background:#1a0a07;color:#fff;border:none;border-radius:9px;
+  padding:8px 13px;font-size:12px;font-weight:700;cursor:pointer;
   transition:all .2s;
 }
 .nAdm:hover{background:#2d1208;}
+.nHamb{
+  display:none;background:none;border:2px solid var(--ln);
+  border-radius:8px;width:38px;height:38px;
+  align-items:center;justify-content:center;
+  font-size:18px;cursor:pointer;color:var(--r);
+}
+.mobileMenu{
+  display:none;position:fixed;top:64px;left:0;right:0;
+  background:#fff;border-bottom:2px solid var(--ln);
+  z-index:998;padding:16px;
+  flex-direction:column;gap:6px;
+  box-shadow:0 8px 24px rgba(0,0,0,.1);
+}
+.mobileMenu.open{display:flex;}
+.mobileMenu a{
+  font-size:15px;font-weight:600;color:var(--md);
+  padding:12px 16px;border-radius:10px;
+  transition:background .2s;
+}
+.mobileMenu a:hover{background:var(--cr3);color:var(--r);}
 
-/* ═══════════════════════════════════════
-   HERO — GALERIA DE GELADO
-═══════════════════════════════════════ */
+/* ═══════ HERO GALERIA ═══════ */
 .heroGallery{
-  margin-top:70px;
+  margin-top:64px;
   width:100%;
   overflow:hidden;
-  background:#fff;
-  position:relative;
+  background:var(--cr);
+  padding:16px 0 8px;
 }
-
-/* Linha 1 — scroll automático para a direita */
+.galleryRow{overflow:hidden;padding:5px 0;}
 .galleryTrack{
-  display:flex;
-  gap:10px;
-  padding:10px 5px 5px;
+  display:flex;gap:12px;
   width:max-content;
   animation:scrollLeft 40s linear infinite;
 }
 .galleryTrack:hover{animation-play-state:paused;}
-
-/* Linha 2 — scroll automático para a esquerda */
 .galleryTrack2{
-  display:flex;
-  gap:10px;
-  padding:5px 5px 10px;
+  display:flex;gap:12px;
   width:max-content;
-  animation:scrollRight 45s linear infinite;
+  animation:scrollRight 46s linear infinite;
 }
 .galleryTrack2:hover{animation-play-state:paused;}
-
-@keyframes scrollLeft{
-  0%{transform:translateX(0);}
-  100%{transform:translateX(-50%);}
-}
-@keyframes scrollRight{
-  0%{transform:translateX(-50%);}
-  100%{transform:translateX(0);}
-}
+@keyframes scrollLeft{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+@keyframes scrollRight{0%{transform:translateX(-50%);}100%{transform:translateX(0);}}
 
 .galleryItem{
   flex-shrink:0;
-  width:240px;
-  height:200px;
-  border-radius:16px;
-  overflow:hidden;
-  position:relative;
-  box-shadow:0 6px 20px rgba(0,0,0,.12);
-  transition:transform .3s;
+  width:220px;height:180px;
+  border-radius:14px;overflow:hidden;position:relative;
+  box-shadow:0 4px 16px rgba(0,0,0,.12);
+  background:#f0e0c8;
 }
-.galleryItem:hover{transform:scale(1.03);}
 .galleryItem img{
-  width:100%;height:100%;
-  object-fit:cover;
+  width:100%;height:100%;object-fit:cover;
+  display:block;
   transition:transform .4s;
 }
-.galleryItem:hover img{transform:scale(1.08);}
-
-/* Badge flutuante sobre galeria */
-.galleryBadge{
-  position:absolute;
-  top:12px;left:12px;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(8px);
-  border-radius:50px;
-  padding:5px 12px;
-  font-size:11.5px;font-weight:800;
-  color:var(--r);
-  box-shadow:0 2px 8px rgba(0,0,0,.1);
+.galleryItem:hover img{transform:scale(1.07);}
+.gBadge{
+  position:absolute;top:10px;left:10px;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+  border-radius:50px;padding:4px 10px;
+  font-size:11px;font-weight:800;color:var(--r);
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  pointer-events:none;
 }
 
-/* ═══════════════════════════════════════
-   BENEFITS BAR
-═══════════════════════════════════════ */
-.benefits{
-  background:#fff;
-  border-bottom:1px solid var(--ln);
-}
+/* ═══════ BENEFITS ═══════ */
+.benefits{background:#fff;border-bottom:1px solid var(--ln);}
 .bInner{
-  max-width:1340px;margin:0 auto;padding:0 40px;
+  max-width:1300px;margin:0 auto;padding:0 32px;
   display:grid;grid-template-columns:repeat(4,1fr);
 }
 .bItem{
-  display:flex;align-items:center;gap:14px;
-  padding:24px 28px;
-  border-right:1px solid var(--ln);
+  display:flex;align-items:center;gap:13px;
+  padding:22px 24px;border-right:1px solid var(--ln);
   transition:background .2s;
 }
 .bItem:last-child{border-right:none;}
 .bItem:hover{background:var(--cr);}
 .bIco{
-  width:46px;height:46px;border-radius:12px;flex-shrink:0;
-  background:rgba(139,15,20,.08);
+  width:44px;height:44px;border-radius:11px;flex-shrink:0;
+  background:rgba(139,15,20,.07);
   display:flex;align-items:center;justify-content:center;
-  font-size:22px;
+  font-size:21px;
 }
-.bTxt strong{font-size:14px;font-weight:700;display:block;}
+.bTxt strong{font-size:13.5px;font-weight:700;display:block;}
 .bTxt span{font-size:12px;color:var(--lt);}
 
-/* ═══════════════════════════════════════
-   SHARED
-═══════════════════════════════════════ */
-.wrap{max-width:1340px;margin:0 auto;padding:0 40px;}
-.secPad{padding:90px 0;}
+/* ═══════ SHARED ═══════ */
+.wrap{max-width:1300px;margin:0 auto;padding:0 32px;}
+.secPad{padding:80px 0;}
 .secEye{
   display:inline-block;
   background:rgba(139,15,20,.08);color:var(--r);
-  padding:5px 15px;border-radius:50px;
+  padding:4px 14px;border-radius:50px;
   font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
-  margin-bottom:12px;
+  margin-bottom:11px;
 }
 .secTitle{
   font-family:'Playfair Display',serif;
-  font-size:clamp(26px,3.5vw,42px);font-weight:700;
-  color:var(--dk);margin-bottom:10px;
+  font-size:clamp(24px,3vw,40px);font-weight:700;
+  color:var(--dk);margin-bottom:9px;line-height:1.2;
 }
-.secSub{font-size:15.5px;color:var(--md);max-width:500px;line-height:1.6;}
-.secHead{margin-bottom:48px;}
+.secSub{font-size:15px;color:var(--md);max-width:480px;line-height:1.65;}
+.secHead{margin-bottom:44px;}
 .secHead.center{text-align:center;}
 .secHead.center .secSub{margin:0 auto;}
 
-/* ═══════════════════════════════════════
-   CATEGORY CARDS
-═══════════════════════════════════════ */
+/* ═══════ CATEGORY CARDS — altura igual ═══════ */
 .catSection{background:var(--cr);}
-.catGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.catGrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  align-items:stretch;   /* todas as colunas com a mesma altura */
+}
 .catCard{
   background:#fff;border-radius:var(--rad);
   border:1px solid var(--ln);overflow:hidden;
   display:flex;flex-direction:column;
   box-shadow:var(--sh1);transition:all .35s;
+  height:100%;           /* ocupa toda a altura da linha */
 }
-.catCard:hover{transform:translateY(-7px);box-shadow:var(--sh3);}
-.catImg{height:195px;position:relative;overflow:hidden;}
-.catImg img{height:100%;object-fit:cover;transition:transform .4s;}
+.catCard:hover{transform:translateY(-6px);box-shadow:var(--sh3);}
+.catImg{
+  height:185px;position:relative;overflow:hidden;
+  flex-shrink:0;
+}
+.catImg img{
+  width:100%;height:100%;object-fit:cover;
+  display:block;transition:transform .4s;
+  background:#f0e0c8;
+}
 .catCard:hover .catImg img{transform:scale(1.07);}
 .catBadge{
-  position:absolute;top:14px;right:14px;
-  width:44px;height:44px;border-radius:50%;
+  position:absolute;top:12px;right:12px;
+  width:42px;height:42px;border-radius:50%;
   background:#fff;box-shadow:var(--sh2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:20px;
+  display:flex;align-items:center;justify-content:center;font-size:19px;
 }
-.catBody{padding:22px;display:flex;flex-direction:column;flex:1;}
-.catBody h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--r);margin-bottom:8px;}
-.catBody p{font-size:13.5px;color:var(--md);line-height:1.5;margin-bottom:14px;}
-.catCheck{margin-bottom:18px;}
-.catCheck div{font-size:13px;font-weight:600;padding:4px 0;display:flex;align-items:center;gap:7px;}
-.catCheck div::before{content:'✓';color:var(--g);font-weight:900;font-size:14px;}
+.catBody{
+  padding:20px;display:flex;flex-direction:column;
+  flex:1;                /* expande para preencher o espaço restante */
+}
+.catBody h3{font-family:'Playfair Display',serif;font-size:21px;color:var(--r);margin-bottom:7px;}
+.catBody p{font-size:13px;color:var(--md);line-height:1.5;margin-bottom:13px;}
+.catCheck{margin-bottom:16px;flex:1;}  /* flex:1 empurra o botão para baixo */
+.catCheck div{font-size:12.5px;font-weight:600;padding:3px 0;display:flex;align-items:center;gap:6px;}
+.catCheck div::before{content:'✓';color:var(--g);font-weight:900;font-size:13px;}
+
+/* ═══════ BUTTONS ═══════ */
 .btnRed{
   background:linear-gradient(135deg,var(--r),var(--r2));
   color:#fff;border:none;border-radius:var(--rad3);
-  padding:12px 20px;font-size:13.5px;font-weight:700;
-  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  padding:11px 18px;font-size:13px;font-weight:700;
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
   cursor:pointer;transition:all .3s;
 }
 .btnRed:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(139,15,20,.35);}
-.catCard .btnRed{margin-top:auto;width:100%;}
+.catCard .btnRed{width:100%;}   /* sempre na base do card */
+.btnGreen{
+  background:linear-gradient(135deg,var(--g),var(--g2));
+  color:#fff;border:none;border-radius:var(--rad3);
+  padding:11px 20px;font-size:13.5px;font-weight:700;
+  cursor:pointer;transition:all .3s;
+  display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+}
+.btnGreen:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(15,159,77,.35);}
+.btnWhite{
+  background:#fff;color:var(--r);border:none;border-radius:var(--rad3);
+  padding:11px 20px;font-size:13.5px;font-weight:800;
+  cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:7px;
+  margin-top:auto;
+}
+.btnWhite:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.2);}
 
-/* ═══════════════════════════════════════
-   SPECIALS SECTION
-═══════════════════════════════════════ */
+/* ═══════ SPECIALS ═══════ */
 .specsSection{background:#fff;}
-.specGrid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;}
+.specGrid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;}
 .specCard{
   background:var(--cr);border:1px solid var(--ln);
   border-radius:var(--rad2);overflow:hidden;
   cursor:pointer;transition:all .3s;
 }
 .specCard:hover{transform:translateY(-5px);box-shadow:var(--sh2);border-color:var(--r);}
-.specCard img{height:105px;object-fit:cover;}
-.specCard .scb{padding:12px;}
-.specCard .scb b{font-size:13px;font-weight:700;display:block;margin-bottom:4px;}
-.specCard .scb span{font-size:12.5px;color:var(--r);font-weight:800;}
+.specCard img{width:100%;height:100px;object-fit:cover;background:#f0e0c8;}
+.specCard .scb{padding:11px;}
+.specCard .scb b{font-size:12.5px;font-weight:700;display:block;margin-bottom:3px;color:var(--dk);}
+.specCard .scb span{font-size:12px;color:var(--r);font-weight:800;}
 
-/* ═══════════════════════════════════════
-   INFO GRID
-═══════════════════════════════════════ */
+/* ═══════ INFO GRID ═══════ */
 .infoSection{background:var(--cr);}
-.infoGrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;}
+.infoGrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;}
 .panel{
   background:#fff;border:1px solid var(--ln);
-  border-radius:var(--rad);padding:30px;
-  box-shadow:var(--sh1);
+  border-radius:var(--rad);padding:28px;
+  box-shadow:var(--sh1);display:flex;flex-direction:column;
 }
 .storyPanel .storyImg{
-  width:100%;height:180px;border-radius:var(--rad2);
-  background:url('https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=800&q=80') center/cover;
-  margin-bottom:20px;
+  width:100%;height:170px;border-radius:var(--rad2);
+  overflow:hidden;margin-bottom:18px;
+  background:#f0e0c8;
 }
-.storyPanel h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--r);margin-bottom:10px;}
-.storyPanel p{font-size:14px;color:var(--md);line-height:1.6;margin-bottom:20px;}
-.stepsPanel h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--r);margin-bottom:20px;}
-.step{display:flex;gap:14px;padding:14px 0;border-bottom:1px dashed var(--ln);}
+.storyPanel .storyImg img{width:100%;height:100%;object-fit:cover;}
+.storyPanel h2{font-family:'Playfair Display',serif;font-size:22px;color:var(--r);margin-bottom:9px;}
+.storyPanel p{font-size:13.5px;color:var(--md);line-height:1.6;margin-bottom:18px;}
+.stepsPanel h2{font-family:'Playfair Display',serif;font-size:22px;color:var(--r);margin-bottom:18px;}
+.step{display:flex;gap:13px;padding:13px 0;border-bottom:1px dashed var(--ln);}
 .step:last-child{border-bottom:none;}
 .stepNum{
-  width:30px;height:30px;border-radius:50%;flex-shrink:0;
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
   background:linear-gradient(135deg,var(--r),var(--r2));
   color:#fff;display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:900;
+  font-size:12px;font-weight:900;
 }
-.step b{font-size:14.5px;display:block;margin-bottom:3px;}
-.step span{font-size:13px;color:var(--md);}
+.step b{font-size:13.5px;display:block;margin-bottom:2px;}
+.step span{font-size:12.5px;color:var(--md);}
 
-/* ═══════════════════════════════════════
-   DELIVERY PANEL — VAN ANIMADA
-═══════════════════════════════════════ */
+/* ═══════ DELIVERY + VAN ═══════ */
 .delivPanel{
   background:linear-gradient(145deg,var(--r),var(--r2));
   position:relative;overflow:hidden;
-  display:flex;flex-direction:column;
 }
-.delivPanel h2{font-family:'Playfair Display',serif;font-size:24px;color:#fff;margin-bottom:12px;}
-.delivPanel p{font-size:14px;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:22px;}
-
-/* Van SVG animada */
+.delivPanel h2{font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin-bottom:10px;}
+.delivPanel p{font-size:13.5px;color:rgba(255,255,255,.78);line-height:1.6;margin-bottom:20px;}
 .vanScene{
-  width:100%;height:110px;
-  position:relative;
-  margin-bottom:18px;
-  overflow:hidden;
+  width:100%;height:105px;
+  position:relative;overflow:hidden;margin-bottom:16px;
 }
 .vanRoad{
   position:absolute;bottom:0;left:0;right:0;
-  height:18px;
-  background:rgba(0,0,0,.25);
-  border-radius:4px;
+  height:16px;background:rgba(0,0,0,.22);border-radius:4px;
 }
 .vanRoad::before{
-  content:'';
-  position:absolute;top:50%;left:0;right:0;
+  content:'';position:absolute;top:50%;left:0;right:0;
   height:3px;
-  background:repeating-linear-gradient(90deg,rgba(255,255,255,.5) 0,rgba(255,255,255,.5) 22px,transparent 22px,transparent 44px);
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.5) 0,rgba(255,255,255,.5) 20px,transparent 20px,transparent 40px);
   transform:translateY(-50%);
-  animation:road 0.5s linear infinite;
+  animation:road .5s linear infinite;
 }
-@keyframes road{from{background-position:0 0;}to{background-position:-44px 0;}}
-
+@keyframes road{from{background-position:0 0;}to{background-position:-40px 0;}}
 .vanSvg{
-  position:absolute;
-  bottom:18px;
-  left:50%;
-  transform:translateX(-50%);
-  width:160px;
-  filter:drop-shadow(0 6px 14px rgba(0,0,0,.35));
-  animation:vanBounce 0.6s ease-in-out infinite alternate;
+  position:absolute;bottom:16px;left:50%;
+  transform:translateX(-50%);width:155px;
+  filter:drop-shadow(0 5px 12px rgba(0,0,0,.3));
+  animation:vanBounce .6s ease-in-out infinite alternate;
 }
 @keyframes vanBounce{
   from{transform:translateX(-50%) translateY(0);}
   to{transform:translateX(-50%) translateY(-4px);}
 }
-
-/* Estrelinhas / velocidade */
 .vanSpeed{
-  position:absolute;
-  bottom:38px;
-  left:calc(50% - 108px);
+  position:absolute;bottom:36px;
+  left:calc(50% - 105px);
   display:flex;flex-direction:column;gap:5px;
 }
 .vanSpeed span{
-  display:block;
-  height:2.5px;
-  background:rgba(255,255,255,.6);
-  border-radius:2px;
-  animation:speedLine 0.8s ease-in-out infinite;
+  display:block;height:2.5px;
+  background:rgba(255,255,255,.55);border-radius:2px;
+  animation:speedLine .8s ease-in-out infinite;
 }
-.vanSpeed span:nth-child(1){width:28px;animation-delay:0s;}
-.vanSpeed span:nth-child(2){width:20px;animation-delay:.15s;}
-.vanSpeed span:nth-child(3){width:14px;animation-delay:.3s;}
+.vanSpeed span:nth-child(1){width:26px;animation-delay:0s;}
+.vanSpeed span:nth-child(2){width:18px;animation-delay:.15s;}
+.vanSpeed span:nth-child(3){width:13px;animation-delay:.3s;}
 @keyframes speedLine{
-  0%,100%{opacity:.6;transform:translateX(0);}
-  50%{opacity:1;transform:translateX(-6px);}
+  0%,100%{opacity:.55;transform:translateX(0);}
+  50%{opacity:1;transform:translateX(-5px);}
 }
 
-.btnWhite{
-  background:#fff;color:var(--r);border:none;border-radius:var(--rad3);
-  padding:12px 22px;font-size:14px;font-weight:800;
-  cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:7px;
-  margin-top:auto;
-}
-.btnWhite:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.2);}
-
-/* ═══════════════════════════════════════
-   CONTACT STRIP
-═══════════════════════════════════════ */
+/* ═══════ CONTACT ═══════ */
 .contactStrip{
   background:#fff;border:1px solid var(--ln);
-  border-radius:var(--rad);padding:28px 32px;
-  margin-top:24px;
-  display:grid;grid-template-columns:64px 1fr auto;gap:22px;align-items:center;
+  border-radius:var(--rad);padding:26px 28px;
+  margin-top:22px;
+  display:grid;grid-template-columns:60px 1fr auto;gap:20px;align-items:center;
   box-shadow:var(--sh1);
 }
 .contactIco{
-  width:62px;height:62px;border-radius:50%;
+  width:58px;height:58px;border-radius:50%;
   background:linear-gradient(135deg,var(--g),var(--g2));
   color:#fff;display:flex;align-items:center;justify-content:center;
-  font-size:28px;flex-shrink:0;
+  font-size:26px;flex-shrink:0;
 }
-.contactTxt h2{font-family:'Playfair Display',serif;font-size:20px;color:var(--r);margin-bottom:4px;}
+.contactTxt h2{font-family:'Playfair Display',serif;font-size:19px;color:var(--r);margin-bottom:3px;}
 .contactTxt p{font-size:13px;color:var(--md);}
-.contactPhone{font-size:22px;font-weight:800;color:var(--g);}
-.btnGreen{
-  background:linear-gradient(135deg,var(--g),var(--g2));
-  color:#fff;border:none;border-radius:var(--rad3);
-  padding:12px 22px;font-size:14px;font-weight:700;
-  cursor:pointer;transition:all .3s;
-  display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
-}
-.btnGreen:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(15,159,77,.35);}
+.contactPhone{font-size:21px;font-weight:800;color:var(--g);}
 
-/* ═══════════════════════════════════════
-   ORDER SECTION
-═══════════════════════════════════════ */
+/* ═══════ ORDER SECTION ═══════ */
 .orderSection{background:var(--cr);}
-.shopLayout{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start;}
+.shopLayout{display:grid;grid-template-columns:1fr 370px;gap:26px;align-items:start;}
 .orderBox{
   background:#fff;border:1px solid var(--ln);
-  border-radius:var(--rad);padding:28px;box-shadow:var(--sh2);
+  border-radius:var(--rad);padding:26px;box-shadow:var(--sh2);
 }
-.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px;}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:22px;}
 .tabBtn{
-  padding:13px;border:2px solid var(--ln);background:#fff;
-  border-radius:var(--rad2);font-size:13px;font-weight:700;
+  padding:12px 8px;border:2px solid var(--ln);background:#fff;
+  border-radius:var(--rad2);font-size:12.5px;font-weight:700;
   color:var(--md);cursor:pointer;transition:all .25s;text-align:center;
 }
 .tabBtn:hover{border-color:var(--r);color:var(--r);}
 .tabBtn.active{background:linear-gradient(135deg,var(--r),var(--r2));color:#fff;border-color:transparent;}
 .formSec{display:none;}
 .formSec.active{display:block;}
-.fGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.fGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;}
 .fGrid .full{grid-column:1/-1;}
 .fg label{
-  display:block;font-size:12px;font-weight:800;
-  color:var(--r);letter-spacing:.5px;text-transform:uppercase;
-  margin-bottom:6px;
+  display:block;font-size:11.5px;font-weight:800;
+  color:var(--r);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px;
 }
 .fg input,.fg select,.fg textarea{
-  width:100%;padding:11px 14px;
+  width:100%;padding:10px 13px;
   border:1.5px solid var(--ln);border-radius:var(--rad3);
-  font-size:14px;font-weight:500;background:#fff;
+  font-size:13.5px;font-weight:500;background:#fff;
   outline:none;transition:border .2s;
+  -webkit-appearance:none;appearance:none;
 }
 .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--r);}
 
-/* Kugeln selector — botões visuais */
-.kugelnGrid{
-  display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;
-}
+/* Kugeln */
+.kugelnGrid{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;}
 .kugelnBtn{
-  flex:1;min-width:72px;
-  padding:14px 8px;
-  border:2px solid var(--ln);
-  background:#fff;
-  border-radius:12px;
-  font-size:13px;font-weight:800;
-  color:var(--md);
-  cursor:pointer;
-  transition:all .22s;
-  text-align:center;
-  display:flex;flex-direction:column;align-items:center;gap:4px;
+  flex:1;min-width:70px;padding:13px 6px;
+  border:2px solid var(--ln);background:#fff;
+  border-radius:11px;font-size:12px;font-weight:800;
+  color:var(--md);cursor:pointer;transition:all .22s;
+  text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px;
 }
-.kugelnBtn .kIco{font-size:20px;}
+.kugelnBtn .kIco{font-size:18px;}
 .kugelnBtn:hover{border-color:var(--r);color:var(--r);}
 .kugelnBtn.selected{
   background:linear-gradient(135deg,var(--r),var(--r2));
   color:#fff;border-color:transparent;
-  box-shadow:0 4px 14px rgba(139,15,20,.30);
+  box-shadow:0 4px 14px rgba(139,15,20,.28);
   transform:translateY(-2px);
 }
-
-.flavGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.flavGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;}
 .sumLine{
   display:flex;justify-content:space-between;align-items:center;
-  padding:8px 0;border-bottom:1px dashed var(--ln);
-  font-size:14px;font-weight:600;
+  padding:7px 0;border-bottom:1px dashed var(--ln);font-size:13.5px;font-weight:600;
 }
 .sumLine:last-child{border:none;}
 .sumBox{
   background:var(--cr);border:1px solid var(--ln);
-  border-radius:var(--rad3);padding:14px;margin:16px 0;
+  border-radius:var(--rad3);padding:13px;margin:14px 0;
 }
-.totLine{
-  font-size:22px;font-weight:900;color:var(--g);
-  text-align:right;margin:8px 0 16px;
-}
+.totLine{font-size:21px;font-weight:900;color:var(--g);text-align:right;margin:6px 0 14px;}
 
-/* ═══════════════════════════════════════
-   CART SIDEBAR
-═══════════════════════════════════════ */
+/* ═══════ CART ═══════ */
 .cartBox{
   background:#fff;border:1px solid var(--ln);
-  border-radius:var(--rad);padding:24px;
-  box-shadow:var(--sh2);position:sticky;top:86px;
+  border-radius:var(--rad);padding:22px;
+  box-shadow:var(--sh2);position:sticky;top:80px;
 }
-.cartBox h3{font-family:'Playfair Display',serif;font-size:24px;color:var(--r);margin-bottom:16px;}
+.cartBox h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--r);margin-bottom:14px;}
 .cItem{
-  display:grid;grid-template-columns:48px 1fr auto;gap:10px;
-  align-items:center;padding:12px 0;border-bottom:1px solid var(--ln);
+  display:grid;grid-template-columns:44px 1fr auto;gap:9px;
+  align-items:start;padding:11px 0;border-bottom:1px solid var(--ln);
 }
 .cThumb{
-  width:46px;height:46px;border-radius:10px;
-  background:url('https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=200&q=80') center/cover;
-  flex-shrink:0;
+  width:44px;height:44px;border-radius:9px;
+  background:#f5e8d0;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:20px;
 }
-.cItem b{font-size:13.5px;font-weight:700;display:block;}
-.cItem small{font-size:11.5px;color:var(--lt);}
-.cItem strong{font-size:13px;font-weight:800;color:var(--r);}
+.cItem b{font-size:13px;font-weight:700;display:block;}
+.cItem small{font-size:11px;color:var(--lt);display:block;margin-top:2px;line-height:1.4;}
+.cItem strong{font-size:12.5px;font-weight:800;color:var(--r);display:block;margin-top:4px;}
 .cDel{
   background:#fee2e2;color:#b91c1c;border:none;
   border-radius:7px;width:26px;height:26px;
   font-size:14px;font-weight:900;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
-  transition:all .2s;
+  transition:all .2s;flex-shrink:0;
 }
 .cDel:hover{background:#b91c1c;color:#fff;}
 .cTotal{
   display:flex;justify-content:space-between;align-items:center;
-  font-size:16px;font-weight:800;color:var(--r);
-  margin:16px 0;padding-top:8px;
+  font-size:15px;font-weight:800;color:var(--r);
+  margin:14px 0;padding-top:6px;
 }
-.cTotal span:last-child{font-size:22px;font-family:'Playfair Display',serif;}
-.dlChoice{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0;}
+.cTotal span:last-child{font-size:21px;font-family:'Playfair Display',serif;}
+.dlChoice{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0;}
 .dlLabel{
   border:2px solid var(--ln);border-radius:var(--rad3);
-  padding:12px 8px;text-align:center;cursor:pointer;
-  font-size:13px;font-weight:700;transition:all .2s;
-  display:block;
+  padding:11px 7px;text-align:center;cursor:pointer;
+  font-size:12.5px;font-weight:700;transition:all .2s;display:block;
 }
 .dlLabel:has(input:checked){border-color:var(--r);background:rgba(139,15,20,.05);color:var(--r);}
 .dlLabel input{display:none;}
-.miniForm{display:grid;gap:10px;margin-bottom:14px;}
+.miniForm{display:grid;gap:9px;margin-bottom:12px;}
 .miniForm input,.miniForm textarea{
-  width:100%;padding:11px 14px;
+  width:100%;padding:10px 13px;
   border:1.5px solid var(--ln);border-radius:var(--rad3);
-  font-size:13.5px;outline:none;transition:border .2s;
+  font-size:13px;outline:none;transition:border .2s;
 }
 .miniForm input:focus,.miniForm textarea:focus{border-color:var(--r);}
-.miniForm textarea{min-height:70px;resize:none;}
+.miniForm textarea{min-height:65px;resize:none;}
 .btnWA{
-  width:100%;padding:14px;
+  width:100%;padding:13px;
   background:linear-gradient(135deg,#1DB954,#128C7E);
   color:#fff;border:none;border-radius:var(--rad2);
-  font-size:15px;font-weight:800;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:9px;
+  font-size:14.5px;font-weight:800;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
   transition:all .3s;
 }
 .btnWA:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(18,140,126,.4);}
-.emptyCart{text-align:center;padding:40px 0;color:var(--lt);}
-.emptyCart .ei{font-size:48px;margin-bottom:12px;}
-.emptyCart p{font-size:14px;}
+.emptyCart{text-align:center;padding:36px 0;color:var(--lt);}
+.emptyCart .ei{font-size:44px;margin-bottom:10px;}
+.emptyCart p{font-size:13.5px;}
 
-/* ═══════════════════════════════════════
-   FLOAT BUTTON
-═══════════════════════════════════════ */
+/* ═══════ FLOAT ═══════ */
 .floatBtn{
-  position:fixed;right:22px;bottom:22px;z-index:500;
+  position:fixed;right:18px;bottom:18px;z-index:500;
   background:linear-gradient(135deg,var(--g),var(--g2));
   color:#fff;border:none;border-radius:50px;
-  padding:14px 22px;font-size:14px;font-weight:800;
-  box-shadow:0 12px 36px rgba(0,0,0,.22);cursor:pointer;
-  display:flex;align-items:center;gap:9px;
+  padding:13px 20px;font-size:13.5px;font-weight:800;
+  box-shadow:0 10px 32px rgba(0,0,0,.20);cursor:pointer;
+  display:flex;align-items:center;gap:8px;
   transition:all .3s;
 }
-.floatBtn:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(0,0,0,.28);}
+.floatBtn:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.26);}
 .floatBadge{
   background:#fff;color:var(--g);
-  width:22px;height:22px;border-radius:50%;
+  width:21px;height:21px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:900;
+  font-size:10.5px;font-weight:900;
 }
 
-/* ═══════════════════════════════════════
-   ADMIN
-═══════════════════════════════════════ */
+/* ═══════ ADMIN ═══════ */
 .adminOv{
   position:fixed;inset:0;background:rgba(0,0,0,.6);
-  z-index:9000;display:none;align-items:center;justify-content:center;padding:20px;
+  z-index:9000;display:none;align-items:center;justify-content:center;padding:16px;
 }
 .adminOv.show{display:flex;}
 .adminBox{
-  width:min(1080px,100%);max-height:88vh;overflow:auto;
-  background:var(--cr);border-radius:24px;padding:32px;
+  width:min(1020px,100%);max-height:90vh;overflow:auto;
+  background:var(--cr);border-radius:22px;padding:28px;
   box-shadow:0 32px 80px rgba(0,0,0,.4);
 }
-.adminHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;}
-.adminHead h2{font-family:'Playfair Display',serif;font-size:26px;color:var(--r);}
-.adminGrid{display:grid;grid-template-columns:1.3fr .7fr 1.8fr .9fr;gap:10px;margin-bottom:12px;}
+.adminHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;flex-wrap:wrap;gap:10px;}
+.adminHead h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--r);}
+.adminGrid{display:grid;grid-template-columns:1.3fr .7fr 1.8fr .9fr;gap:9px;margin-bottom:12px;}
 .adminGrid input,.adminGrid select{
-  padding:10px 12px;border:1.5px solid var(--ln);border-radius:var(--rad3);font-size:13.5px;
+  padding:9px 11px;border:1.5px solid var(--ln);border-radius:var(--rad3);font-size:13px;
 }
-.aList{display:grid;gap:8px;max-height:300px;overflow-y:auto;}
+.aList{display:grid;gap:7px;max-height:280px;overflow-y:auto;margin-top:16px;}
 .aRow{
   background:#fff;border:1px solid var(--ln);border-radius:var(--rad3);
-  padding:10px 14px;display:flex;justify-content:space-between;align-items:center;
-  font-size:13.5px;
+  padding:9px 13px;display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;gap:8px;flex-wrap:wrap;
 }
-.aRowBtns{display:flex;gap:6px;}
-.aEdit{padding:5px 12px;background:var(--cr3);border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;}
-.aDelBtn{padding:5px 10px;background:#fee2e2;color:#b91c1c;border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;}
-.closeBtn{background:var(--dk);color:#fff;border:none;border-radius:50px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;}
+.aRowBtns{display:flex;gap:5px;}
+.aEdit{padding:5px 11px;background:var(--cr3);border:none;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer;}
+.aDelBtn{padding:5px 9px;background:#fee2e2;color:#b91c1c;border:none;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer;}
+.closeBtn{background:var(--dk);color:#fff;border:none;border-radius:50px;padding:8px 16px;font-size:12.5px;font-weight:700;cursor:pointer;}
 
-/* ═══════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════ */
+/* ═══════ FOOTER ═══════ */
 footer{
   background:linear-gradient(135deg,#3d0709,#6b1015);
-  color:#fff;padding:56px 40px 36px;
+  color:#fff;padding:52px 32px 32px;
 }
 .footInner{
-  max-width:1340px;margin:0 auto;
-  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:36px;
+  max-width:1300px;margin:0 auto;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:32px;
 }
-.footBrand .fl{font-family:'Playfair Display',serif;font-size:28px;color:#fff;margin-bottom:8px;}
-.footBrand p{font-size:13.5px;color:rgba(255,255,255,.6);line-height:1.6;}
-footer h4{font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold2);margin-bottom:14px;}
-footer p,footer a{font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;}
+.footBrand .fl{font-family:'Playfair Display',serif;font-size:26px;color:#fff;margin-bottom:7px;}
+.footBrand p{font-size:13px;color:rgba(255,255,255,.58);line-height:1.65;}
+footer h4{font-size:11.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold2);margin-bottom:13px;}
+footer p,footer a{font-size:13px;color:rgba(255,255,255,.62);line-height:1.7;}
 footer a:hover{color:var(--gold2);}
 .footBot{
-  max-width:1340px;margin:32px auto 0;padding-top:24px;
+  max-width:1300px;margin:28px auto 0;padding-top:22px;
   border-top:1px solid rgba(255,255,255,.1);
   display:flex;justify-content:space-between;align-items:center;
-  font-size:12.5px;color:rgba(255,255,255,.35);
+  font-size:12px;color:rgba(255,255,255,.32);flex-wrap:wrap;gap:8px;
 }
 
-/* ═══════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════ */
+/* ═══════ RESPONSIVE ≤1100 ═══════ */
 @media(max-width:1100px){
   .nLinks{display:none;}
-  #nav{padding:0 20px;}
+  .nHamb{display:flex;}
   .bInner{grid-template-columns:repeat(2,1fr);}
+  .bItem{padding:18px 20px;}
   .catGrid{grid-template-columns:repeat(2,1fr);}
   .specGrid{grid-template-columns:repeat(3,1fr);}
-  .infoGrid{grid-template-columns:1fr;}
+  .infoGrid{grid-template-columns:1fr 1fr;}
   .shopLayout{grid-template-columns:1fr;}
   .cartBox{position:static;}
   .footInner{grid-template-columns:1fr 1fr;gap:24px;}
-  .wrap{padding:0 20px;}
-  .kugelnBtn{min-width:56px;padding:10px 4px;}
+  .wrap{padding:0 22px;}
+  .secPad{padding:60px 0;}
+  .adminGrid{grid-template-columns:1fr 1fr;}
 }
-@media(max-width:640px){
-  .catGrid,.bInner,.specGrid,.fGrid,.tabs,.flavGrid{grid-template-columns:1fr;}
-  .contactStrip{grid-template-columns:1fr;text-align:center;}
+
+/* ═══════ RESPONSIVE ≤768 ═══════ */
+@media(max-width:768px){
+  #nav{padding:0 16px;height:60px;}
+  .mobileMenu{top:60px;}
+  .heroGallery{margin-top:60px;padding:10px 0 4px;}
+  .galleryItem{width:155px;height:130px;border-radius:11px;}
+  .bInner{grid-template-columns:1fr 1fr;}
+  .bItem{padding:14px 16px;gap:10px;}
+  .bIco{width:38px;height:38px;font-size:18px;}
+  .bTxt strong{font-size:12.5px;}
+  .bTxt span{font-size:11px;}
+  .catGrid{grid-template-columns:1fr 1fr;gap:14px;}
+  .catImg{height:150px;}
+  .catBody{padding:16px;}
+  .catBody h3{font-size:18px;}
+  .specGrid{grid-template-columns:repeat(2,1fr);gap:11px;}
+  .infoGrid{grid-template-columns:1fr;}
+  .contactStrip{grid-template-columns:1fr;text-align:center;gap:14px;padding:20px;}
   .contactStrip .contactIco{margin:0 auto;}
-  .footInner{grid-template-columns:1fr;}
-  .footBot{flex-direction:column;gap:8px;text-align:center;}
-  .adminGrid{grid-template-columns:1fr;}
-  .galleryItem{width:160px;height:140px;}
+  .tabs{grid-template-columns:repeat(2,1fr);gap:7px;}
+  .tabBtn{font-size:12px;padding:10px 6px;}
+  .fGrid{grid-template-columns:1fr;}
+  .fGrid .full{grid-column:1;}
+  .flavGrid{grid-template-columns:1fr 1fr;}
   .kugelnGrid{gap:6px;}
-  .kugelnBtn{min-width:50px;font-size:12px;}
+  .kugelnBtn{min-width:54px;padding:10px 4px;font-size:11.5px;}
+  .kugelnBtn .kIco{font-size:16px;}
+  .shopLayout{gap:18px;}
+  .orderBox{padding:18px;}
+  .cartBox{padding:18px;}
+  .footInner{grid-template-columns:1fr;}
+  .footBot{flex-direction:column;text-align:center;}
+  .floatBtn{right:14px;bottom:14px;padding:11px 16px;font-size:13px;}
+  .secPad{padding:48px 0;}
+  .wrap{padding:0 16px;}
+  .adminGrid{grid-template-columns:1fr;}
+  .adminBox{padding:20px;}
+  .panel{padding:20px;}
+}
+
+/* ═══════ RESPONSIVE ≤420 ═══════ */
+@media(max-width:420px){
+  .catGrid{grid-template-columns:1fr;}
+  .specGrid{grid-template-columns:1fr 1fr;}
+  .bInner{grid-template-columns:1fr;}
+  .bItem{border-right:none;border-bottom:1px solid var(--ln);}
+  .bItem:last-child{border-bottom:none;}
+  .kugelnGrid{gap:5px;}
+  .kugelnBtn{min-width:46px;font-size:11px;padding:9px 3px;}
+  .flavGrid{grid-template-columns:1fr 1fr;}
+  .tabs{grid-template-columns:1fr 1fr;}
+  .nLogoTxt{font-size:17px;}
+  .galleryItem{width:130px;height:115px;}
 }
 </style>
 </head>
 <body>
 
-<!-- ══ NAV ══ -->
+<!-- ══════════════ NAV ══════════════ -->
 <nav id="nav">
   <a href="#top" class="nLogo">
     <div class="nLogoIco">🍦</div>
@@ -654,70 +646,35 @@ footer a:hover{color:var(--gold2);}
     🛒 Warenkorb
     <span class="nBadge" id="cartCountTop">0</span>
   </button>
-  <button class="nAdm" onclick="openAdminLogin()">⚙ Admin</button>
+  <button class="nAdm" onclick="openAdminLogin()">⚙</button>
+  <button class="nHamb" onclick="toggleMenu()" id="hambBtn">☰</button>
 </nav>
 
-<!-- ══ HERO — GALERIA DE GELADO ══ -->
-<section class="heroGallery" id="top" style="padding-top:70px;">
+<div class="mobileMenu" id="mobileMenu">
+  <a href="#gelato" onclick="closeMenu()">🍦 Gelato</a>
+  <a href="#eistorten" onclick="closeMenu()">🎂 Eistorten</a>
+  <a href="#spezialitaeten" onclick="closeMenu()">🍨 Spezialitäten</a>
+  <a href="#becher" onclick="closeMenu()">🛍️ REWE Becher</a>
+  <a href="#kontakt" onclick="closeMenu()">📞 Kontakt</a>
+  <a href="#bestellung" onclick="closeMenu()">🛒 Jetzt Bestellen</a>
+</div>
 
-  <!-- Linha 1 — scroll para esquerda -->
-  <div style="overflow:hidden;">
-    <div class="galleryTrack" id="track1">
-      <!-- 10 imagens duplicadas para loop infinito -->
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?auto=format&fit=crop&w=500&q=85" alt="Gelato"><div class="galleryBadge">🍦 Gelato</div></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=500&q=85" alt="Eis Becher"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=500&q=85" alt="Eis Kugeln"><div class="galleryBadge">🍨 Frisch</div></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=500&q=85" alt="Eis Waffel"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=500&q=85" alt="Gelato Becher"><div class="galleryBadge">❤ Handgemacht</div></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1560008581-09826d1de69e?auto=format&fit=crop&w=500&q=85" alt="Schokoeis"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1576506295286-5cda18df43e7?auto=format&fit=crop&w=500&q=85" alt="Erdbeereis"><div class="galleryBadge">🌿 Frisch</div></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?auto=format&fit=crop&w=500&q=85" alt="Eis Torte"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=500&q=85" alt="Eis Kugeln Mix"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=500&q=85" alt="Spaghetti Eis"><div class="galleryBadge">🍝 Spaghetti</div></div>
-      <!-- DUPLICADO para loop contínuo -->
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?auto=format&fit=crop&w=500&q=85" alt="Gelato"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=500&q=85" alt="Eis Becher"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=500&q=85" alt="Eis Kugeln"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=500&q=85" alt="Eis Waffel"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=500&q=85" alt="Gelato Becher"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1560008581-09826d1de69e?auto=format&fit=crop&w=500&q=85" alt="Schokoeis"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1576506295286-5cda18df43e7?auto=format&fit=crop&w=500&q=85" alt="Erdbeereis"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?auto=format&fit=crop&w=500&q=85" alt="Eis Torte"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=500&q=85" alt="Eis Mix"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=500&q=85" alt="Spaghetti Eis"></div>
-    </div>
+<!-- ══════════════ HERO GALERIA — apenas gelado ══════════════ -->
+<section class="heroGallery" id="top">
+
+  <!-- FILA 1 — rola para a esquerda -->
+  <div class="galleryRow">
+    <div class="galleryTrack" id="track1"></div>
   </div>
 
-  <!-- Linha 2 — scroll para direita -->
-  <div style="overflow:hidden;">
-    <div class="galleryTrack2" id="track2">
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=500&q=85" alt="Eis 1"><div class="galleryBadge">🎂 Eistorte</div></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1633933358116-a27b902fad35?auto=format&fit=crop&w=500&q=85" alt="Eis 2"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=500&q=85" alt="Eis 3"><div class="galleryBadge">⭐ 4,9 Sterne</div></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1516559228935-0cf53b4cccb0?auto=format&fit=crop&w=500&q=85" alt="Eis 4"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=500&q=85" alt="Eis 5"><div class="galleryBadge">🇮🇹 Italiano</div></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=500&q=85" alt="Eis 6"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=500&q=85" alt="Eis 7"><div class="galleryBadge">🍦 Cremig</div></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1582716401301-b2407dc7563d?auto=format&fit=crop&w=500&q=85" alt="Eis 8"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=500&q=85" alt="Eis 9"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=500&q=85" alt="Eis 10"></div>
-      <!-- DUPLICADO -->
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=500&q=85" alt="Eis 1"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1633933358116-a27b902fad35?auto=format&fit=crop&w=500&q=85" alt="Eis 2"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=500&q=85" alt="Eis 3"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1516559228935-0cf53b4cccb0?auto=format&fit=crop&w=500&q=85" alt="Eis 4"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=500&q=85" alt="Eis 5"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=500&q=85" alt="Eis 6"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=500&q=85" alt="Eis 7"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1582716401301-b2407dc7563d?auto=format&fit=crop&w=500&q=85" alt="Eis 8"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=500&q=85" alt="Eis 9"></div>
-      <div class="galleryItem"><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=500&q=85" alt="Eis 10"></div>
-    </div>
+  <!-- FILA 2 — rola para a direita -->
+  <div class="galleryRow">
+    <div class="galleryTrack2" id="track2"></div>
   </div>
 
 </section>
 
-<!-- ══ BENEFITS ══ -->
+<!-- ══════════════ BENEFITS ══════════════ -->
 <div class="benefits">
   <div class="bInner">
     <div class="bItem"><div class="bIco">♡</div><div class="bTxt"><strong>Handgemacht</strong><span>Mit Liebe &amp; Leidenschaft</span></div></div>
@@ -727,7 +684,7 @@ footer a:hover{color:var(--gold2);}
   </div>
 </div>
 
-<!-- ══ CATEGORIES ══ -->
+<!-- ══════════════ CATEGORIES ══════════════ -->
 <div class="catSection secPad" id="gelato">
   <div class="wrap">
     <div class="secHead">
@@ -736,9 +693,10 @@ footer a:hover{color:var(--gold2);}
       <p class="secSub">Frisch zubereitet — wählen Sie Ihre Favoriten und bestellen Sie bequem per WhatsApp</p>
     </div>
     <div class="catGrid">
+
       <article class="catCard" id="eistorten">
         <div class="catImg">
-          <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=85" alt="Gelato">
+          <img src="https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?auto=format&fit=crop&w=600&q=80" alt="Gelato">
           <div class="catBadge">🍦</div>
         </div>
         <div class="catBody">
@@ -752,9 +710,10 @@ footer a:hover{color:var(--gold2);}
           <button class="btnRed" onclick="switchOrder('gelato')">Gelato wählen →</button>
         </div>
       </article>
+
       <article class="catCard" id="spezialitaeten">
         <div class="catImg">
-          <img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=800&q=85" alt="Eistorte">
+          <img src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=600&q=80" alt="Eistorte">
           <div class="catBadge">🎂</div>
         </div>
         <div class="catBody">
@@ -768,9 +727,10 @@ footer a:hover{color:var(--gold2);}
           <button class="btnRed" onclick="switchOrder('cake')">Eistorten ansehen →</button>
         </div>
       </article>
+
       <article class="catCard">
         <div class="catImg">
-          <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800&q=85" alt="Spezialitäten">
+          <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80" alt="Spezialitäten">
           <div class="catBadge">🍨</div>
         </div>
         <div class="catBody">
@@ -778,15 +738,16 @@ footer a:hover{color:var(--gold2);}
           <p>Unsere beliebten Becher und Eis-Spezialitäten für besondere Momente.</p>
           <div class="catCheck">
             <div>Spaghetti Eis</div>
-            <div>Schoko &amp; After Eight Becher</div>
+            <div>Schoko &amp; After Eight</div>
             <div>Viele Variationen</div>
           </div>
           <button class="btnRed" onclick="switchOrder('special')">Spezialitäten ansehen →</button>
         </div>
       </article>
+
       <article class="catCard" id="becher">
         <div class="catImg">
-          <img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=800&q=85" alt="REWE Becher">
+          <img src="https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=600&q=80" alt="REWE Becher">
           <div class="catBadge">🛍️</div>
         </div>
         <div class="catBody">
@@ -800,34 +761,39 @@ footer a:hover{color:var(--gold2);}
           <button class="btnRed" onclick="switchOrder('cups')">Becher bestellen →</button>
         </div>
       </article>
+
     </div>
   </div>
 </div>
 
-<!-- ══ SPECIALS ══ -->
-<div class="specsSection secPad">
+<!-- ══════════════ SPECIALS ══════════════ -->
+<div class="specsSection secPad" id="spezialitaeten">
   <div class="wrap">
-    <div class="secHead" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;">
+    <div class="secHead" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px;">
       <div>
         <div class="secEye">Beliebt</div>
         <h2 class="secTitle" style="margin-bottom:0;">Unsere Spezialitäten</h2>
       </div>
-      <a href="#bestellung" style="font-size:14px;font-weight:700;color:var(--r);" onclick="switchOrder('special')">Alle ansehen →</a>
+      <a href="#bestellung" style="font-size:13.5px;font-weight:700;color:var(--r);" onclick="switchOrder('special')">Alle ansehen →</a>
     </div>
     <div class="specGrid" id="specialCards"></div>
   </div>
 </div>
 
-<!-- ══ INFO GRID ══ -->
+<!-- ══════════════ INFO GRID ══════════════ -->
 <div class="infoSection secPad">
   <div class="wrap">
     <div class="infoGrid">
+
       <div class="panel storyPanel">
-        <div class="storyImg"></div>
+        <div class="storyImg">
+          <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=700&q=80" alt="Gelateria">
+        </div>
         <h2>Ein Stück Italien in Bad Berleburg</h2>
         <p>Unsere Gelato-Kreationen werden nach original italienischer Art hergestellt — cremig, frisch und voller Geschmack. Seit 2010 mit Liebe gemacht.</p>
         <button class="btnRed" onclick="document.getElementById('bestellung').scrollIntoView({behavior:'smooth'})">Jetzt probieren</button>
       </div>
+
       <div class="panel stepsPanel">
         <h2>So funktioniert's</h2>
         <div class="step"><div class="stepNum">1</div><div><b>Produkte auswählen</b><span>Gelato, Eistorte, Spezialität oder Becher wählen</span></div></div>
@@ -836,58 +802,36 @@ footer a:hover{color:var(--gold2);}
         <div class="step"><div class="stepNum">4</div><div><b>Per WhatsApp bestellen</b><span>Wir bestätigen Ihre Bestellung schnell</span></div></div>
       </div>
 
-      <!-- DELIVERY PANEL COM VAN ANIMADA -->
       <div class="panel delivPanel">
         <h2>Lieferung ganz bequem</h2>
         <p>Wir liefern nach Absprache in Bad Berleburg und der gesamten Umgebung — schnell, frisch und direkt zu Ihnen.</p>
-
-        <!-- Cena da Van -->
         <div class="vanScene">
           <svg class="vanSvg" viewBox="0 0 220 80" xmlns="http://www.w3.org/2000/svg">
-            <!-- Carroceria principal -->
             <rect x="10" y="18" width="165" height="46" rx="8" fill="#ffffff" opacity="0.95"/>
-            <!-- Cabine -->
             <rect x="130" y="8" width="45" height="36" rx="6" fill="#ffffff" opacity="0.90"/>
-            <!-- Janela cabine -->
             <rect x="137" y="14" width="30" height="20" rx="4" fill="#93c5fd" opacity="0.85"/>
-            <!-- Janela lateral traseira -->
             <rect x="60" y="24" width="32" height="18" rx="3" fill="#bfdbfe" opacity="0.75"/>
-            <!-- Porta lateral -->
             <line x1="97" y1="20" x2="97" y2="62" stroke="#e5e7eb" stroke-width="1.5"/>
-            <!-- Nome Sanremo na carroceria -->
-            <text x="30" y="46" font-family="Georgia, serif" font-size="12" font-weight="bold" fill="#8b0f14" letter-spacing="1">Sanremo</text>
-            <text x="33" y="57" font-family="Arial, sans-serif" font-size="7" fill="#5c3a2e" letter-spacing="2">GELATERIA</text>
-            <!-- Ícone gelado -->
-            <text x="154" y="54" font-size="14">🍦</text>
-            <!-- Para-choque frente -->
+            <text x="28" y="46" font-family="Georgia,serif" font-size="12" font-weight="bold" fill="#8b0f14" letter-spacing="1">Sanremo</text>
+            <text x="31" y="57" font-family="Arial,sans-serif" font-size="7" fill="#5c3a2e" letter-spacing="2">GELATERIA</text>
+            <text x="152" y="54" font-size="14">🍦</text>
             <rect x="173" y="52" width="12" height="6" rx="2" fill="#d1d5db"/>
-            <!-- Para-choque trás -->
             <rect x="8" y="52" width="10" height="6" rx="2" fill="#d1d5db"/>
-            <!-- Roda trás -->
             <circle cx="42" cy="66" r="13" fill="#374151"/>
             <circle cx="42" cy="66" r="8" fill="#6b7280"/>
             <circle cx="42" cy="66" r="4" fill="#fff" opacity="0.8"/>
-            <!-- Roda frente -->
             <circle cx="155" cy="66" r="13" fill="#374151"/>
             <circle cx="155" cy="66" r="8" fill="#6b7280"/>
             <circle cx="155" cy="66" r="4" fill="#fff" opacity="0.8"/>
-            <!-- Luzes frente -->
             <ellipse cx="178" cy="34" rx="5" ry="7" fill="#fde68a" opacity="0.9"/>
-            <!-- Luz traseira -->
             <rect x="10" y="28" width="6" height="10" rx="2" fill="#fca5a5" opacity="0.85"/>
           </svg>
-          <!-- Linhas de velocidade -->
-          <div class="vanSpeed">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <!-- Estrada -->
+          <div class="vanSpeed"><span></span><span></span><span></span></div>
           <div class="vanRoad"></div>
         </div>
-
         <button class="btnWhite" onclick="document.getElementById('warenkorb').scrollIntoView({behavior:'smooth'})">🚚 Lieferung wählen</button>
       </div>
+
     </div>
 
     <div class="contactStrip" id="kontakt">
@@ -902,7 +846,7 @@ footer a:hover{color:var(--gold2);}
   </div>
 </div>
 
-<!-- ══ ORDER + CART ══ -->
+<!-- ══════════════ ORDER + CART ══════════════ -->
 <div class="orderSection secPad" id="bestellung">
   <div class="wrap">
     <div class="secHead">
@@ -911,6 +855,7 @@ footer a:hover{color:var(--gold2);}
       <p class="secSub">Wählen Sie Ihre Produkte, legen Sie alles in den Warenkorb und senden Sie die Bestellung per WhatsApp</p>
     </div>
     <div class="shopLayout">
+
       <div>
         <div class="tabs">
           <button class="tabBtn active" id="tabGelato" onclick="switchOrder('gelato')">🍦 Gelato</button>
@@ -920,46 +865,35 @@ footer a:hover{color:var(--gold2);}
         </div>
         <div class="orderBox">
 
-          <!-- ── GELATO ── -->
+          <!-- GELATO -->
           <div id="gelatoForm" class="formSec active">
             <div class="fGrid">
               <div class="fg"><label>Eissorte</label><select id="gelatoFlavour"></select></div>
-              <div class="fg"><label>Preis pro Portion</label>
+              <div class="fg"><label>Preis pro Kugel</label>
                 <select id="gelatoPrice" onchange="calcGelato()">
                   <option value="1.50">1,50 €</option>
                   <option value="2.00">2,00 €</option>
                   <option value="2.50">2,50 €</option>
                 </select>
               </div>
-              <!-- KUGELN SELECTOR -->
               <div class="fg full">
                 <label>Anzahl der Kugeln</label>
                 <div class="kugelnGrid" id="kugelnGrid">
-                  <button class="kugelnBtn selected" data-k="1" onclick="selectKugeln(1)">
-                    <span class="kIco">🍦</span>1 Kugel
-                  </button>
-                  <button class="kugelnBtn" data-k="2" onclick="selectKugeln(2)">
-                    <span class="kIco">🍦🍦</span>2 Kugeln
-                  </button>
-                  <button class="kugelnBtn" data-k="3" onclick="selectKugeln(3)">
-                    <span class="kIco">🍦🍦🍦</span>3 Kugeln
-                  </button>
-                  <button class="kugelnBtn" data-k="4" onclick="selectKugeln(4)">
-                    <span class="kIco">🍦🍦🍦🍦</span>4 Kugeln
-                  </button>
-                  <button class="kugelnBtn" data-k="5" onclick="selectKugeln(5)">
-                    <span class="kIco">🍦×5</span>5 Kugeln
-                  </button>
+                  <button class="kugelnBtn selected" data-k="1" onclick="selectKugeln(1)"><span class="kIco">🍦</span>1 Kugel</button>
+                  <button class="kugelnBtn" data-k="2" onclick="selectKugeln(2)"><span class="kIco">🍦🍦</span>2 Kugeln</button>
+                  <button class="kugelnBtn" data-k="3" onclick="selectKugeln(3)"><span class="kIco">🍦🍦🍦</span>3 Kugeln</button>
+                  <button class="kugelnBtn" data-k="4" onclick="selectKugeln(4)"><span class="kIco">🍦×4</span>4 Kugeln</button>
+                  <button class="kugelnBtn" data-k="5" onclick="selectKugeln(5)"><span class="kIco">🍦×5</span>5 Kugeln</button>
                 </div>
               </div>
               <div class="fg full"><label>Bemerkung</label><input id="gelatoNote" placeholder="z. B. im Becher, ohne Waffel"></div>
             </div>
             <div class="sumBox" id="gelatoSummary"></div>
             <div class="totLine" id="gelatoTotal"></div>
-            <button class="btnRed" onclick="addGelatoToCart()">🛒 In den Warenkorb</button>
+            <button class="btnRed" style="width:100%" onclick="addGelatoToCart()">🛒 In den Warenkorb</button>
           </div>
 
-          <!-- ── CAKE ── -->
+          <!-- CAKE -->
           <div id="cakeForm" class="formSec">
             <div class="fGrid">
               <div class="fg"><label>Größe</label>
@@ -989,10 +923,10 @@ footer a:hover{color:var(--gold2);}
             </div>
             <div class="sumBox" id="cakeSummary"></div>
             <div class="totLine" id="cakeTotal"></div>
-            <button class="btnRed" onclick="addCakeToCart()">🛒 In den Warenkorb</button>
+            <button class="btnRed" style="width:100%" onclick="addCakeToCart()">🛒 In den Warenkorb</button>
           </div>
 
-          <!-- ── SPECIAL ── -->
+          <!-- SPECIAL -->
           <div id="specialForm" class="formSec">
             <div class="fGrid">
               <div class="fg"><label>Spezialität</label><select id="spItem" onchange="calcSpecial()"></select></div>
@@ -1001,10 +935,10 @@ footer a:hover{color:var(--gold2);}
             </div>
             <div class="sumBox" id="spSummary"></div>
             <div class="totLine" id="spTotal"></div>
-            <button class="btnRed" onclick="addSpecialToCart()">🛒 In den Warenkorb</button>
+            <button class="btnRed" style="width:100%" onclick="addSpecialToCart()">🛒 In den Warenkorb</button>
           </div>
 
-          <!-- ── CUPS ── -->
+          <!-- CUPS -->
           <div id="cupsForm" class="formSec">
             <div class="fGrid">
               <div class="fg"><label>Bechergröße</label>
@@ -1019,13 +953,13 @@ footer a:hover{color:var(--gold2);}
             </div>
             <div class="sumBox" id="cupSummary"></div>
             <div class="totLine" id="cupTotal"></div>
-            <button class="btnRed" onclick="addCupsToCart()">🛒 In den Warenkorb</button>
+            <button class="btnRed" style="width:100%" onclick="addCupsToCart()">🛒 In den Warenkorb</button>
           </div>
 
         </div>
       </div>
 
-      <!-- ── CART ── -->
+      <!-- CART -->
       <aside class="cartBox" id="warenkorb">
         <h3>🛒 Ihre Bestellung</h3>
         <div id="cartItems">
@@ -1038,7 +972,7 @@ footer a:hover{color:var(--gold2);}
           <span>Gesamt</span>
           <span id="cartTotal">0,00 €</span>
         </div>
-        <b style="font-size:13px;display:block;margin-bottom:10px;">Abholung oder Lieferung?</b>
+        <b style="font-size:13px;display:block;margin-bottom:9px;color:var(--dk);">Abholung oder Lieferung?</b>
         <div class="dlChoice">
           <label class="dlLabel"><input type="radio" name="delivery" value="Abholung" checked>🚗 Abholung</label>
           <label class="dlLabel"><input type="radio" name="delivery" value="Lieferung nach Absprache">🚚 Lieferung</label>
@@ -1050,16 +984,15 @@ footer a:hover{color:var(--gold2);}
           <input id="custAddress" placeholder="Adresse (bei Lieferung)">
           <textarea id="custNote" placeholder="Nachricht oder besondere Wünsche"></textarea>
         </div>
-        <button class="btnWA" onclick="sendCart()">
-          💬 Jetzt per WhatsApp bestellen
-        </button>
-        <p style="text-align:center;font-size:12px;color:var(--lt);margin-top:10px;">🔒 Sicher &amp; direkt über WhatsApp</p>
+        <button class="btnWA" onclick="sendCart()">💬 Jetzt per WhatsApp bestellen</button>
+        <p style="text-align:center;font-size:11.5px;color:var(--lt);margin-top:9px;">🔒 Sicher &amp; direkt über WhatsApp</p>
       </aside>
+
     </div>
   </div>
 </div>
 
-<!-- ══ FOOTER ══ -->
+<!-- ══════════════ FOOTER ══════════════ -->
 <footer>
   <div class="footInner">
     <div class="footBrand">
@@ -1084,7 +1017,7 @@ footer a:hover{color:var(--gold2);}
     </div>
     <div>
       <h4>Öffnungszeiten</h4>
-      <p>Mo–Do: 12–20:30<br>Sa–So: 12–20:30<br>Freitag: Ruhetag</p>
+      <p>Mo–Do: 12–20:30<br>Sa–So: 12–20:30<br><span style="color:#f87171;">Freitag: Ruhetag</span></p>
     </div>
   </div>
   <div class="footBot">
@@ -1093,20 +1026,19 @@ footer a:hover{color:var(--gold2);}
   </div>
 </footer>
 
-<!-- ══ FLOAT BUTTON ══ -->
 <button class="floatBtn" onclick="document.getElementById('warenkorb').scrollIntoView({behavior:'smooth'})">
   🛒 Warenkorb
   <span class="floatBadge" id="cartCountFloat">0</span>
 </button>
 
-<!-- ══ ADMIN ══ -->
+<!-- ADMIN -->
 <div class="adminOv" id="adminPanel">
   <div class="adminBox">
     <div class="adminHead">
       <h2>⚙️ Admin Panel</h2>
       <button class="closeBtn" onclick="closeAdmin()">Schließen ✕</button>
     </div>
-    <p style="font-size:14px;color:var(--md);margin-bottom:20px;">Produkte, Spezialitäten und Sorten verwalten</p>
+    <p style="font-size:13.5px;color:var(--md);margin-bottom:18px;">Produkte, Spezialitäten und Sorten verwalten</p>
     <div class="adminGrid">
       <input id="adminName" placeholder="Name des Produkts">
       <input id="adminPrice" placeholder="Preis z.B. 5.90">
@@ -1117,81 +1049,139 @@ footer a:hover{color:var(--gold2);}
         <option value="flavour">Gelato/Eistorten-Sorte</option>
       </select>
     </div>
-    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+    <div style="margin-top:11px;display:flex;gap:9px;flex-wrap:wrap;">
       <button class="btnGreen" onclick="addAdminItem()">+ Hinzufügen</button>
       <button class="btnRed" onclick="resetAll()">↺ Zurücksetzen</button>
     </div>
-    <div class="aList" id="adminList" style="margin-top:20px;"></div>
+    <div class="aList" id="adminList"></div>
   </div>
 </div>
 
 <script>
-/* ══════════════════════════════
-   KUGELN SELECTOR
-══════════════════════════════ */
-let selectedKugeln = 1;
+/* ══ MOBILE MENU ══ */
+function toggleMenu(){
+  const m=document.getElementById('mobileMenu'),b=document.getElementById('hambBtn');
+  m.classList.toggle('open');b.textContent=m.classList.contains('open')?'✕':'☰';
+}
+function closeMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hambBtn').textContent='☰';
+}
+document.addEventListener('click',function(e){
+  const m=document.getElementById('mobileMenu'),b=document.getElementById('hambBtn');
+  if(!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');b.textContent='☰';}
+});
+
+/* ══ GALERIA — apenas fotos de gelado ══ */
+const ICE_PHOTOS=[
+  {url:'https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?auto=format&fit=crop&w=480&q=80', badge:'🍦 Gelato'},
+  {url:'https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=480&q=80', badge:'🍨 Frisch'},
+  {url:'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=480&q=80', badge:null},
+  {url:'https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=480&q=80', badge:'⭐ 4,9 Sterne'},
+  {url:'https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=480&q=80', badge:'🎂 Eistorte'},
+  {url:'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=480&q=80', badge:'🍦 Cremig'},
+  {url:'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=480&q=80', badge:null},
+  {url:'https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=480&q=80', badge:'❤ Handgemacht'},
+  {url:'https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=480&q=80', badge:'🇮🇹 Italiano'},
+  {url:'https://images.unsplash.com/photo-1576506295286-5cda18df43e7?auto=format&fit=crop&w=480&q=80', badge:'🌿 Natürlich'},
+  {url:'https://images.unsplash.com/photo-1560008581-09826d1de69e?auto=format&fit=crop&w=480&q=80', badge:null},
+  {url:'https://images.unsplash.com/photo-1582716401301-b2407dc7563d?auto=format&fit=crop&w=480&q=80', badge:null},
+];
+
+function buildGalleryItem(p){
+  const d=document.createElement('div');
+  d.className='galleryItem';
+  const img=document.createElement('img');
+  img.src=p.url;
+  img.alt='Eis';
+  img.loading='lazy';
+  /* fallback: se a imagem falhar, esconde o item */
+  img.onerror=function(){d.style.display='none';};
+  d.appendChild(img);
+  if(p.badge){
+    const b=document.createElement('div');
+    b.className='gBadge';b.textContent=p.badge;
+    d.appendChild(b);
+  }
+  return d;
+}
+
+function buildTrack(trackEl, photos){
+  /* duplica para loop infinito */
+  const all=[...photos,...photos];
+  all.forEach(p=>trackEl.appendChild(buildGalleryItem(p)));
+}
+
+// Fila 1: fotos 0-7 (pares)
+const row1=[ICE_PHOTOS[0],ICE_PHOTOS[1],ICE_PHOTOS[2],ICE_PHOTOS[3],
+             ICE_PHOTOS[4],ICE_PHOTOS[5],ICE_PHOTOS[6],ICE_PHOTOS[7]];
+// Fila 2: fotos 4-11 (ordem diferente)
+const row2=[ICE_PHOTOS[8],ICE_PHOTOS[9],ICE_PHOTOS[10],ICE_PHOTOS[11],
+             ICE_PHOTOS[3],ICE_PHOTOS[1],ICE_PHOTOS[5],ICE_PHOTOS[7]];
+
+buildTrack(document.getElementById('track1'), row1);
+buildTrack(document.getElementById('track2'), row2);
+
+/* ══ KUGELN ══ */
+let selectedKugeln=1;
 function selectKugeln(n){
-  selectedKugeln = n;
+  selectedKugeln=n;
   document.querySelectorAll('.kugelnBtn').forEach(b=>{
-    b.classList.toggle('selected', +b.dataset.k === n);
+    b.classList.toggle('selected',+b.dataset.k===n);
   });
   calcGelato();
 }
 
-/* ══════════════════════════════
-   DATA & STATE
-══════════════════════════════ */
-const WA = '4917672809926';
-const defaults = {
+/* ══ DATA ══ */
+const WA='4917672809926';
+const defaults={
   specials:[
-    {name:'Spaghetti Eis',      price:5.50, desc:'Klassiker'},
-    {name:'After Eight Becher', price:5.50, desc:'Minze & Schoko'},
-    {name:'Schoko Becher',      price:5.50, desc:'Schokolade'},
-    {name:'Spaghetti Erdbeere', price:6.50, desc:'Fruchtig'},
-    {name:'Spaghetti Kiwi',     price:6.50, desc:'Fruchtig'},
-    {name:'Spaghetti Carbonara',price:6.90, desc:'Spezial'},
+    {name:'Spaghetti Eis',      price:5.50,desc:'Klassiker'},
+    {name:'After Eight Becher', price:5.50,desc:'Minze & Schoko'},
+    {name:'Schoko Becher',      price:5.50,desc:'Schokolade'},
+    {name:'Spaghetti Erdbeere', price:6.50,desc:'Fruchtig'},
+    {name:'Spaghetti Kiwi',     price:6.50,desc:'Fruchtig'},
+    {name:'Spaghetti Carbonara',price:6.90,desc:'Spezial'},
   ],
   cups:['Vanille','Schokolade','Stracciatella','Amarena Kirsch','Cookies','Toffifee','Spaghetti','Erdbeer','Mango','Joghurt Orange'],
-  flavours:['Vanille','Schokolade','Stracciatella','Erdbeer','Mango','Amarena','Cookies','Toffifee','Pistazie','Zitrone','Banana'],
+  flavours:['Vanille','Schokolade','Stracciatella','Erdbeer','Mango','Amarena','Cookies','Toffifee','Pistazie','Zitrone','Banane','Haselnuss'],
 };
+let cart=JSON.parse(localStorage.getItem('sr_cart_v3')||'[]');
+function money(n){return Number(n||0).toLocaleString('de-DE',{style:'currency',currency:'EUR'});}
+function getData(k){const s=localStorage.getItem('sr_'+k);return s?JSON.parse(s):defaults[k];}
+function saveData(k,v){localStorage.setItem('sr_'+k,JSON.stringify(v));}
+function sumLine(a,b){return`<div class="sumLine"><span>${a}</span><b>${b}</b></div>`;}
 
-let cart = JSON.parse(localStorage.getItem('sr_cart_v3') || '[]');
-
-function money(n){ return Number(n||0).toLocaleString('de-DE',{style:'currency',currency:'EUR'}); }
-function getData(k){ const s=localStorage.getItem('sr_'+k); return s ? JSON.parse(s) : defaults[k]; }
-function saveData(k,v){ localStorage.setItem('sr_'+k, JSON.stringify(v)); }
-function sumLine(a,b){ return `<div class="sumLine"><span>${a}</span><b>${b}</b></div>`; }
-
-function fillSelects(){
-  const fl = getData('flavours');
-  ['cakeF1','cakeF2','cakeF3','cakeF4','gelatoFlavour'].forEach(id=>{
-    const el = document.getElementById(id);
-    el.innerHTML = fl.map(f=>`<option>${f}</option>`).join('');
-  });
-  document.getElementById('cupFlavour').innerHTML = getData('cups').map(c=>`<option>${c}</option>`).join('');
-  document.getElementById('spItem').innerHTML = getData('specials').map((s,i)=>`<option value="${i}">${s.name} – ${money(s.price)}</option>`).join('');
-  renderSpecialCards();
-  calcGelato(); calcCake(); calcSpecial(); calcCups();
-}
-
-const SPECIAL_IMGS = [
-  'https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=300&q=80',
-  'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=300&q=80',
+const SPECIAL_IMGS=[
+  'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=300&q=80',
   'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=300&q=80',
+  'https://images.unsplash.com/photo-1560008581-09826d1de69e?auto=format&fit=crop&w=300&q=80',
   'https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=300&q=80',
   'https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?auto=format&fit=crop&w=300&q=80',
-  'https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=300&q=80',
+  'https://images.unsplash.com/photo-1576506295286-5cda18df43e7?auto=format&fit=crop&w=300&q=80',
 ];
+
+function fillSelects(){
+  const fl=getData('flavours');
+  ['cakeF1','cakeF2','cakeF3','cakeF4','gelatoFlavour'].forEach(id=>{
+    document.getElementById(id).innerHTML=fl.map(f=>`<option>${f}</option>`).join('');
+  });
+  document.getElementById('cupFlavour').innerHTML=getData('cups').map(c=>`<option>${c}</option>`).join('');
+  document.getElementById('spItem').innerHTML=getData('specials').map((s,i)=>`<option value="${i}">${s.name} – ${money(s.price)}</option>`).join('');
+  renderSpecialCards();
+  calcGelato();calcCake();calcSpecial();calcCups();
+}
+
 function renderSpecialCards(){
-  document.getElementById('specialCards').innerHTML = getData('specials').map((s,i)=>`
+  document.getElementById('specialCards').innerHTML=getData('specials').map((s,i)=>`
     <div class="specCard" onclick="switchOrder('special');document.getElementById('spItem').value='${i}';calcSpecial();document.getElementById('bestellung').scrollIntoView({behavior:'smooth'})">
-      <img src="${SPECIAL_IMGS[i % SPECIAL_IMGS.length]}" alt="${s.name}">
+      <img src="${SPECIAL_IMGS[i%SPECIAL_IMGS.length]}" alt="${s.name}" loading="lazy">
       <div class="scb"><b>${s.name}</b><span>${money(s.price)}</span></div>
     </div>`).join('');
 }
 
 function switchOrder(type){
-  const map = {gelato:'Gelato',cake:'Cake',special:'Special',cups:'Cups'};
+  const map={gelato:'Gelato',cake:'Cake',special:'Special',cups:'Cups'};
   ['gelato','cake','special','cups'].forEach(t=>{
     document.getElementById(t+'Form').classList.remove('active');
     document.getElementById('tab'+map[t]).classList.remove('active');
@@ -1202,20 +1192,19 @@ function switchOrder(type){
 }
 
 function calcGelato(){
-  const p = +document.getElementById('gelatoPrice').value;
-  const f = document.getElementById('gelatoFlavour').value;
-  const k = selectedKugeln;
-  const t = k * p;
-  const kText = k === 1 ? '1 Kugel' : k + ' Kugeln';
-  document.getElementById('gelatoSummary').innerHTML =
-    sumLine('Sorte', f) +
-    sumLine('Kugeln', kText) +
-    sumLine('Preis/Kugel', money(p));
-  document.getElementById('gelatoTotal').textContent = 'Gesamt: ' + money(t);
+  const p=+document.getElementById('gelatoPrice').value;
+  const f=document.getElementById('gelatoFlavour').value;
+  const k=selectedKugeln;
+  const t=k*p;
+  const kText=k===1?'1 Kugel':k+' Kugeln';
+  document.getElementById('gelatoSummary').innerHTML=
+    sumLine('Sorte',f)+sumLine('Kugeln',kText)+sumLine('Preis/Kugel',money(p));
+  document.getElementById('gelatoTotal').textContent='Gesamt: '+money(t);
   return t;
 }
 function calcCake(){
-  const sz=document.getElementById('cakeSize'),dk=document.getElementById('cakeDeko'),t=+sz.value+ +dk.value;
+  const sz=document.getElementById('cakeSize'),dk=document.getElementById('cakeDeko');
+  const t=+sz.value+ +dk.value;
   document.getElementById('cakeSummary').innerHTML=
     sumLine('Größe',sz.options[sz.selectedIndex].text)+
     sumLine('Dekoration',dk.options[dk.selectedIndex].text)+
@@ -1224,66 +1213,69 @@ function calcCake(){
   return t;
 }
 function calcSpecial(){
-  const specs=getData('specials'),s=specs[+document.getElementById('spItem').value||0]||specs[0],
-        q=+document.getElementById('spQty').value||1,t=s.price*q;
+  const specs=getData('specials'),s=specs[+document.getElementById('spItem').value||0]||specs[0];
+  const q=+document.getElementById('spQty').value||1,t=s.price*q;
   document.getElementById('spSummary').innerHTML=sumLine('Spezialität',s.name)+sumLine('Menge',q)+sumLine('Preis/Stück',money(s.price));
   document.getElementById('spTotal').textContent='Gesamt: '+money(t);
   return t;
 }
 function calcCups(){
-  const cs=document.getElementById('cupSize'),p=+cs.value,
-        q=+document.getElementById('cupQty').value||1,
-        f=document.getElementById('cupFlavour').value,t=p*q;
+  const cs=document.getElementById('cupSize'),p=+cs.value;
+  const q=+document.getElementById('cupQty').value||1;
+  const f=document.getElementById('cupFlavour').value,t=p*q;
   document.getElementById('cupSummary').innerHTML=sumLine('Größe',cs.options[cs.selectedIndex].text)+sumLine('Sorte',f)+sumLine('Menge',q);
   document.getElementById('cupTotal').textContent='Gesamt: '+money(t);
   return t;
 }
 
+/* ══ CART ══ */
+const EMOJI_MAP={Gelato:'🍦',Eistorte:'🎂',Spezialität:'🍨',Becher:'🛒'};
 function addToCart(item){
   cart.push({...item,id:Date.now()});
-  saveCart(); renderCart();
+  saveCart();renderCart();
   document.getElementById('warenkorb').scrollIntoView({behavior:'smooth'});
   showToast(item.name+' hinzugefügt!');
 }
 function addGelatoToCart(){
-  const k = selectedKugeln;
-  const kText = k === 1 ? '1 Kugel' : k + ' Kugeln';
-  addToCart({
-    type:'Gelato',
-    name:document.getElementById('gelatoFlavour').value,
-    details:`${kText} · ${document.getElementById('gelatoNote').value}`,
-    price:calcGelato()
-  });
+  const k=selectedKugeln;
+  addToCart({type:'Gelato',name:document.getElementById('gelatoFlavour').value,
+    details:(k===1?'1 Kugel':k+' Kugeln')+' · '+document.getElementById('gelatoNote').value,
+    price:calcGelato()});
 }
 function addCakeToCart(){
   const sz=document.getElementById('cakeSize');
   addToCart({type:'Eistorte',name:sz.options[sz.selectedIndex].text,
-    details:`Deko: ${document.getElementById('cakeDeko').options[document.getElementById('cakeDeko').selectedIndex].text} · Sorten: ${['cakeF1','cakeF2','cakeF3','cakeF4'].map(id=>document.getElementById(id).value).join(', ')} · Text: ${document.getElementById('cakeText').value}`,
+    details:'Deko: '+document.getElementById('cakeDeko').options[document.getElementById('cakeDeko').selectedIndex].text+
+      ' · Sorten: '+['cakeF1','cakeF2','cakeF3','cakeF4'].map(id=>document.getElementById(id).value).join(', ')+
+      ' · Text: '+document.getElementById('cakeText').value,
     price:calcCake()});
 }
 function addSpecialToCart(){
-  const s=getData('specials')[+document.getElementById('spItem').value||0],q=+document.getElementById('spQty').value||1;
-  addToCart({type:'Spezialität',name:s.name,details:`Menge: ${q} · Extra: ${document.getElementById('spExtra').value}`,price:s.price*q});
+  const s=getData('specials')[+document.getElementById('spItem').value||0];
+  const q=+document.getElementById('spQty').value||1;
+  addToCart({type:'Spezialität',name:s.name,
+    details:'Menge: '+q+' · Extra: '+document.getElementById('spExtra').value,
+    price:s.price*q});
 }
 function addCupsToCart(){
   const cs=document.getElementById('cupSize'),q=+document.getElementById('cupQty').value||1;
   addToCart({type:'Becher',name:cs.options[cs.selectedIndex].text,
-    details:`Sorte: ${document.getElementById('cupFlavour').value} · Menge: ${q} · ${document.getElementById('cupNote').value}`,
+    details:'Sorte: '+document.getElementById('cupFlavour').value+' · Menge: '+q+' · '+document.getElementById('cupNote').value,
     price:+cs.value*q});
 }
-function removeCart(id){ cart=cart.filter(i=>i.id!==id); saveCart(); renderCart(); }
-function saveCart(){ localStorage.setItem('sr_cart_v3',JSON.stringify(cart)); }
+function removeCart(id){cart=cart.filter(i=>i.id!==id);saveCart();renderCart();}
+function saveCart(){localStorage.setItem('sr_cart_v3',JSON.stringify(cart));}
 function renderCart(){
   const el=document.getElementById('cartItems');
   if(!cart.length){
     el.innerHTML='<div class="emptyCart"><div class="ei">🍦</div><p>Noch keine Produkte im Warenkorb</p></div>';
     document.getElementById('cartTotal').textContent='0,00 €';
-    updateBadge(0); return;
+    updateBadge(0);return;
   }
   const total=cart.reduce((s,i)=>s+Number(i.price),0);
   el.innerHTML=cart.map(i=>`
     <div class="cItem">
-      <div class="cThumb"></div>
+      <div class="cThumb">${EMOJI_MAP[i.type]||'🍦'}</div>
       <div><b>${i.name}</b><small>${i.type} · ${i.details}</small><strong>${money(i.price)}</strong></div>
       <button class="cDel" onclick="removeCart(${i.id})">×</button>
     </div>`).join('');
@@ -1294,14 +1286,13 @@ function updateBadge(n){
   document.getElementById('cartCountTop').textContent=n;
   document.getElementById('cartCountFloat').textContent=n;
 }
-
 function sendCart(){
   if(!cart.length){alert('Ihr Warenkorb ist leer.');return;}
-  const name=document.getElementById('custName').value.trim(),
-        phone=document.getElementById('custPhone').value.trim();
+  const name=document.getElementById('custName').value.trim();
+  const phone=document.getElementById('custPhone').value.trim();
   if(!name||!phone){alert('Bitte Name und Telefon eingeben.');return;}
-  const total=cart.reduce((s,i)=>s+Number(i.price),0),
-        dl=document.querySelector('input[name="delivery"]:checked').value;
+  const total=cart.reduce((s,i)=>s+Number(i.price),0);
+  const dl=document.querySelector('input[name="delivery"]:checked').value;
   let txt=`🍦 *NEUE BESTELLUNG – Sanremo Gelateria*\n\n`;
   txt+=`👤 *Name:* ${name}\n📞 *Telefon:* ${phone}\n`;
   txt+=`📅 *Wunschtermin:* ${document.getElementById('custDate').value||'–'}\n`;
@@ -1314,19 +1305,19 @@ function sendCart(){
   if(note) txt+=`\n\n📝 *Nachricht:* ${note}`;
   window.open(`https://wa.me/${WA}?text=${encodeURIComponent(txt)}`,'_blank');
 }
-
 function showToast(msg){
   let t=document.getElementById('_toast');
   if(!t){
     t=document.createElement('div');t.id='_toast';
-    t.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:#1a0a07;color:#fff;padding:12px 24px;border-radius:12px;font-size:14px;font-weight:700;z-index:9999;opacity:0;transition:all .3s;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.3);';
+    t.style.cssText='position:fixed;bottom:76px;left:50%;transform:translateX(-50%) translateY(20px);background:#1a0a07;color:#fff;padding:11px 22px;border-radius:11px;font-size:13.5px;font-weight:700;z-index:9999;opacity:0;transition:all .3s;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.28);pointer-events:none;';
     document.body.appendChild(t);
   }
   t.textContent='✓ '+msg;
   t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';
-  setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(20px)';},2800);
+  setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(20px)';},2600);
 }
 
+/* ══ ADMIN ══ */
 let adminUnlocked=false;
 function openAdminLogin(){
   if(!adminUnlocked){const p=prompt('Admin-Passwort:');if(p!=='2026'){if(p!==null)alert('Falsches Passwort!');return;}adminUnlocked=true;}
@@ -1335,10 +1326,10 @@ function openAdminLogin(){
 }
 function closeAdmin(){document.getElementById('adminPanel').classList.remove('show');}
 function addAdminItem(){
-  const type=document.getElementById('adminType').value,
-        name=document.getElementById('adminName').value.trim(),
-        price=Number(document.getElementById('adminPrice').value.replace(',','.'))||0,
-        desc=document.getElementById('adminDesc').value.trim();
+  const type=document.getElementById('adminType').value;
+  const name=document.getElementById('adminName').value.trim();
+  const price=Number(document.getElementById('adminPrice').value.replace(',','.'))||0;
+  const desc=document.getElementById('adminDesc').value.trim();
   if(!name){alert('Name fehlt!');return;}
   const key=type==='special'?'specials':type==='cup'?'cups':'flavours';
   const arr=getData(key);
@@ -1348,13 +1339,14 @@ function addAdminItem(){
   document.getElementById('adminName').value='';
   document.getElementById('adminPrice').value='';
   document.getElementById('adminDesc').value='';
-  fillSelects(); renderAdminList();
+  fillSelects();renderAdminList();
 }
 function renderAdminList(){
   document.getElementById('adminList').innerHTML=
     ['specials','cups','flavours'].flatMap(k=>getData(k).map((it,idx)=>{
       const name=typeof it==='string'?it:it.name;
-      return `<div class="aRow"><span><b style="color:var(--r)">${k}:</b> ${name}${typeof it!=='string'?' – '+money(it.price):''}</span>
+      return`<div class="aRow">
+        <span><b style="color:var(--r)">${k}:</b> ${name}${typeof it!=='string'?' – '+money(it.price):''}</span>
         <div class="aRowBtns">
           <button class="aEdit" onclick="editItem('${k}',${idx})">✏ Bearbeiten</button>
           <button class="aDelBtn" onclick="deleteItem('${k}',${idx})">🗑 Löschen</button>
@@ -1380,6 +1372,7 @@ function resetAll(){
   }
 }
 
+/* ══ INIT ══ */
 fillSelects();
 renderCart();
 </script>
