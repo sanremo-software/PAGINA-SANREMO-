@@ -38,186 +38,67 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
   padding:0 32px;gap:12px;
 }
 .nLogo{display:flex;align-items:center;gap:10px;margin-right:auto;}
-.nLogoIco{
-  width:40px;height:40px;border-radius:10px;
-  background:linear-gradient(135deg,var(--r),var(--r2));
-  display:flex;align-items:center;justify-content:center;
-  font-size:19px;flex-shrink:0;
-}
+.nLogoIco{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--r),var(--r2));display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
 .nLogoTxt{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--r);}
 .nLogoSub{font-size:9.5px;letter-spacing:2px;font-weight:700;text-transform:uppercase;color:var(--md);display:block;margin-top:-2px;}
 .nLinks{display:flex;align-items:center;gap:2px;}
-.nLinks a{
-  font-size:12.5px;font-weight:600;color:var(--md);
-  padding:7px 12px;border-radius:8px;
-  transition:all .2s;white-space:nowrap;
-}
+.nLinks a{font-size:12.5px;font-weight:600;color:var(--md);padding:7px 12px;border-radius:8px;transition:all .2s;white-space:nowrap;}
 .nLinks a:hover{background:var(--cr3);color:var(--r);}
-.nCart{
-  background:linear-gradient(135deg,var(--r),var(--r2));
-  color:#fff;border:none;border-radius:11px;
-  padding:9px 18px;font-size:13px;font-weight:700;
-  display:flex;align-items:center;gap:8px;cursor:pointer;
-  transition:all .3s;white-space:nowrap;
-}
+.nCart{background:linear-gradient(135deg,var(--r),var(--r2));color:#fff;border:none;border-radius:11px;padding:9px 18px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px;cursor:pointer;transition:all .3s;white-space:nowrap;}
 .nCart:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(139,15,20,.35);}
-.nBadge{
-  background:var(--gold2);color:var(--dk);
-  width:20px;height:20px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:10px;font-weight:900;
-}
-.nAdm{
-  background:#1a0a07;color:#fff;border:none;border-radius:9px;
-  padding:8px 13px;font-size:12px;font-weight:700;cursor:pointer;
-  transition:all .2s;
-}
+.nBadge{background:var(--gold2);color:var(--dk);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;}
+.nAdm{background:#1a0a07;color:#fff;border:none;border-radius:9px;padding:8px 13px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;}
 .nAdm:hover{background:#2d1208;}
-.nHamb{
-  display:none;background:none;border:2px solid var(--ln);
-  border-radius:8px;width:38px;height:38px;
-  align-items:center;justify-content:center;
-  font-size:18px;cursor:pointer;color:var(--r);
-}
-.mobileMenu{
-  display:none;position:fixed;top:64px;left:0;right:0;
-  background:#fff;border-bottom:2px solid var(--ln);
-  z-index:998;padding:16px;
-  flex-direction:column;gap:6px;
-  box-shadow:0 8px 24px rgba(0,0,0,.1);
-}
+.nHamb{display:none;background:none;border:2px solid var(--ln);border-radius:8px;width:38px;height:38px;align-items:center;justify-content:center;font-size:18px;cursor:pointer;color:var(--r);}
+.mobileMenu{display:none;position:fixed;top:64px;left:0;right:0;background:#fff;border-bottom:2px solid var(--ln);z-index:998;padding:16px;flex-direction:column;gap:6px;box-shadow:0 8px 24px rgba(0,0,0,.1);}
 .mobileMenu.open{display:flex;}
-.mobileMenu a{
-  font-size:15px;font-weight:600;color:var(--md);
-  padding:12px 16px;border-radius:10px;
-  transition:background .2s;
-}
+.mobileMenu a{font-size:15px;font-weight:600;color:var(--md);padding:12px 16px;border-radius:10px;transition:background .2s;}
 .mobileMenu a:hover{background:var(--cr3);color:var(--r);}
 
 /* ═══════ HERO GALERIA ═══════ */
-.heroGallery{
-  margin-top:64px;
-  width:100%;
-  overflow:hidden;
-  background:var(--cr);
-  padding:16px 0 8px;
-}
+.heroGallery{margin-top:64px;width:100%;overflow:hidden;background:var(--cr);padding:16px 0 8px;}
 .galleryRow{overflow:hidden;padding:5px 0;}
-.galleryTrack{
-  display:flex;gap:12px;
-  width:max-content;
-  animation:scrollLeft 40s linear infinite;
-}
+.galleryTrack{display:flex;gap:12px;width:max-content;animation:scrollLeft 40s linear infinite;}
 .galleryTrack:hover{animation-play-state:paused;}
-.galleryTrack2{
-  display:flex;gap:12px;
-  width:max-content;
-  animation:scrollRight 46s linear infinite;
-}
+.galleryTrack2{display:flex;gap:12px;width:max-content;animation:scrollRight 46s linear infinite;}
 .galleryTrack2:hover{animation-play-state:paused;}
 @keyframes scrollLeft{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 @keyframes scrollRight{0%{transform:translateX(-50%);}100%{transform:translateX(0);}}
-
-.galleryItem{
-  flex-shrink:0;
-  width:220px;height:180px;
-  border-radius:14px;overflow:hidden;position:relative;
-  box-shadow:0 4px 16px rgba(0,0,0,.12);
-  background:#f0e0c8;
-}
-.galleryItem img{
-  width:100%;height:100%;object-fit:cover;
-  display:block;
-  transition:transform .4s;
-}
+.galleryItem{flex-shrink:0;width:220px;height:180px;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 4px 16px rgba(0,0,0,.12);background:#f0e0c8;}
+.galleryItem img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
 .galleryItem:hover img{transform:scale(1.07);}
-.gBadge{
-  position:absolute;top:10px;left:10px;
-  background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
-  border-radius:50px;padding:4px 10px;
-  font-size:11px;font-weight:800;color:var(--r);
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
-  pointer-events:none;
-}
+.gBadge{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-radius:50px;padding:4px 10px;font-size:11px;font-weight:800;color:var(--r);box-shadow:0 2px 8px rgba(0,0,0,.08);pointer-events:none;}
 
 /* ═══════ BENEFITS ═══════ */
 .benefits{background:#fff;border-bottom:1px solid var(--ln);}
-.bInner{
-  max-width:1300px;margin:0 auto;padding:0 32px;
-  display:grid;grid-template-columns:repeat(4,1fr);
-}
-.bItem{
-  display:flex;align-items:center;gap:13px;
-  padding:22px 24px;border-right:1px solid var(--ln);
-  transition:background .2s;
-}
+.bInner{max-width:1300px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:repeat(4,1fr);}
+.bItem{display:flex;align-items:center;gap:13px;padding:22px 24px;border-right:1px solid var(--ln);transition:background .2s;}
 .bItem:last-child{border-right:none;}
 .bItem:hover{background:var(--cr);}
-.bIco{
-  width:44px;height:44px;border-radius:11px;flex-shrink:0;
-  background:rgba(139,15,20,.07);
-  display:flex;align-items:center;justify-content:center;
-  font-size:21px;
-}
+.bIco{width:44px;height:44px;border-radius:11px;flex-shrink:0;background:rgba(139,15,20,.07);display:flex;align-items:center;justify-content:center;font-size:21px;}
 .bTxt strong{font-size:13.5px;font-weight:700;display:block;}
 .bTxt span{font-size:12px;color:var(--lt);}
 
 /* ═══════ SHARED ═══════ */
 .wrap{max-width:1300px;margin:0 auto;padding:0 32px;}
 .secPad{padding:80px 0;}
-.secEye{
-  display:inline-block;
-  background:rgba(139,15,20,.08);color:var(--r);
-  padding:4px 14px;border-radius:50px;
-  font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
-  margin-bottom:11px;
-}
-.secTitle{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(24px,3vw,40px);font-weight:700;
-  color:var(--dk);margin-bottom:9px;line-height:1.2;
-}
+.secEye{display:inline-block;background:rgba(139,15,20,.08);color:var(--r);padding:4px 14px;border-radius:50px;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:11px;}
+.secTitle{font-family:'Playfair Display',serif;font-size:clamp(24px,3vw,40px);font-weight:700;color:var(--dk);margin-bottom:9px;line-height:1.2;}
 .secSub{font-size:15px;color:var(--md);max-width:480px;line-height:1.65;}
 .secHead{margin-bottom:44px;}
 .secHead.center{text-align:center;}
 .secHead.center .secSub{margin:0 auto;}
 
-/* ═══════ CATEGORY CARDS — altura igual ═══════ */
+/* ═══════ CATEGORY CARDS ═══════ */
 .catSection{background:var(--cr);}
-.catGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:20px;
-  align-items:stretch;
-}
-.catCard{
-  background:#fff;border-radius:var(--rad);
-  border:1px solid var(--ln);overflow:hidden;
-  display:flex;flex-direction:column;
-  box-shadow:var(--sh1);transition:all .35s;
-  height:100%;
-}
+.catGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:stretch;}
+.catCard{background:#fff;border-radius:var(--rad);border:1px solid var(--ln);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--sh1);transition:all .35s;height:100%;}
 .catCard:hover{transform:translateY(-6px);box-shadow:var(--sh3);}
-.catImg{
-  height:185px;position:relative;overflow:hidden;
-  flex-shrink:0;
-}
-.catImg img{
-  width:100%;height:100%;object-fit:cover;
-  display:block;transition:transform .4s;
-  background:#f0e0c8;
-}
+.catImg{height:185px;position:relative;overflow:hidden;flex-shrink:0;}
+.catImg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;background:#f0e0c8;}
 .catCard:hover .catImg img{transform:scale(1.07);}
-.catBadge{
-  position:absolute;top:12px;right:12px;
-  width:42px;height:42px;border-radius:50%;
-  background:#fff;box-shadow:var(--sh2);
-  display:flex;align-items:center;justify-content:center;font-size:19px;
-}
-.catBody{
-  padding:20px;display:flex;flex-direction:column;
-  flex:1;
-}
+.catBadge{position:absolute;top:12px;right:12px;width:42px;height:42px;border-radius:50%;background:#fff;box-shadow:var(--sh2);display:flex;align-items:center;justify-content:center;font-size:19px;}
+.catBody{padding:20px;display:flex;flex-direction:column;flex:1;}
 .catBody h3{font-family:'Playfair Display',serif;font-size:21px;color:var(--r);margin-bottom:7px;}
 .catBody p{font-size:13px;color:var(--md);line-height:1.5;margin-bottom:13px;}
 .catCheck{margin-bottom:16px;flex:1;}
@@ -225,39 +106,18 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 .catCheck div::before{content:'✓';color:var(--g);font-weight:900;font-size:13px;}
 
 /* ═══════ BUTTONS ═══════ */
-.btnRed{
-  background:linear-gradient(135deg,var(--r),var(--r2));
-  color:#fff;border:none;border-radius:var(--rad3);
-  padding:11px 18px;font-size:13px;font-weight:700;
-  display:inline-flex;align-items:center;justify-content:center;gap:6px;
-  cursor:pointer;transition:all .3s;
-}
+.btnRed{background:linear-gradient(135deg,var(--r),var(--r2));color:#fff;border:none;border-radius:var(--rad3);padding:11px 18px;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:all .3s;}
 .btnRed:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(139,15,20,.35);}
 .catCard .btnRed{width:100%;}
-.btnGreen{
-  background:linear-gradient(135deg,var(--g),var(--g2));
-  color:#fff;border:none;border-radius:var(--rad3);
-  padding:11px 20px;font-size:13.5px;font-weight:700;
-  cursor:pointer;transition:all .3s;
-  display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
-}
+.btnGreen{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;border:none;border-radius:var(--rad3);padding:11px 20px;font-size:13.5px;font-weight:700;cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;}
 .btnGreen:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(15,159,77,.35);}
-.btnWhite{
-  background:#fff;color:var(--r);border:none;border-radius:var(--rad3);
-  padding:11px 20px;font-size:13.5px;font-weight:800;
-  cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:7px;
-  margin-top:auto;
-}
+.btnWhite{background:#fff;color:var(--r);border:none;border-radius:var(--rad3);padding:11px 20px;font-size:13.5px;font-weight:800;cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:7px;margin-top:auto;}
 .btnWhite:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.2);}
 
 /* ═══════ SPECIALS ═══════ */
 .specsSection{background:#fff;}
 .specGrid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;}
-.specCard{
-  background:var(--cr);border:1px solid var(--ln);
-  border-radius:var(--rad2);overflow:hidden;
-  cursor:pointer;transition:all .3s;
-}
+.specCard{background:var(--cr);border:1px solid var(--ln);border-radius:var(--rad2);overflow:hidden;cursor:pointer;transition:all .3s;}
 .specCard:hover{transform:translateY(-5px);box-shadow:var(--sh2);border-color:var(--r);}
 .specCard img{width:100%;height:100px;object-fit:cover;background:#f0e0c8;}
 .specCard .scb{padding:11px;}
@@ -267,96 +127,38 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 /* ═══════ INFO GRID ═══════ */
 .infoSection{background:var(--cr);}
 .infoGrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;}
-.panel{
-  background:#fff;border:1px solid var(--ln);
-  border-radius:var(--rad);padding:28px;
-  box-shadow:var(--sh1);display:flex;flex-direction:column;
-}
-.storyPanel .storyImg{
-  width:100%;height:170px;border-radius:var(--rad2);
-  overflow:hidden;margin-bottom:18px;
-  background:#f0e0c8;
-}
+.panel{background:#fff;border:1px solid var(--ln);border-radius:var(--rad);padding:28px;box-shadow:var(--sh1);display:flex;flex-direction:column;}
+.storyPanel .storyImg{width:100%;height:170px;border-radius:var(--rad2);overflow:hidden;margin-bottom:18px;background:#f0e0c8;}
 .storyPanel .storyImg img{width:100%;height:100%;object-fit:cover;}
 .storyPanel h2{font-family:'Playfair Display',serif;font-size:22px;color:var(--r);margin-bottom:9px;}
 .storyPanel p{font-size:13.5px;color:var(--md);line-height:1.6;margin-bottom:18px;}
 .stepsPanel h2{font-family:'Playfair Display',serif;font-size:22px;color:var(--r);margin-bottom:18px;}
 .step{display:flex;gap:13px;padding:13px 0;border-bottom:1px dashed var(--ln);}
 .step:last-child{border-bottom:none;}
-.stepNum{
-  width:28px;height:28px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,var(--r),var(--r2));
-  color:#fff;display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:900;
-}
+.stepNum{width:28px;height:28px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--r),var(--r2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;}
 .step b{font-size:13.5px;display:block;margin-bottom:2px;}
 .step span{font-size:12.5px;color:var(--md);}
 
-/* ═══════ DELIVERY + VAN ═══════ */
-.delivPanel{
-  background:linear-gradient(145deg,var(--r),var(--r2));
-  position:relative;overflow:hidden;
-}
+/* ═══════ VAN ═══════ */
+.delivPanel{background:linear-gradient(145deg,var(--r),var(--r2));position:relative;overflow:hidden;}
 .delivPanel h2{font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin-bottom:10px;}
 .delivPanel p{font-size:13.5px;color:rgba(255,255,255,.78);line-height:1.6;margin-bottom:20px;}
-.vanScene{
-  width:100%;height:105px;
-  position:relative;overflow:hidden;margin-bottom:16px;
-}
-.vanRoad{
-  position:absolute;bottom:0;left:0;right:0;
-  height:16px;background:rgba(0,0,0,.22);border-radius:4px;
-}
-.vanRoad::before{
-  content:'';position:absolute;top:50%;left:0;right:0;
-  height:3px;
-  background:repeating-linear-gradient(90deg,rgba(255,255,255,.5) 0,rgba(255,255,255,.5) 20px,transparent 20px,transparent 40px);
-  transform:translateY(-50%);
-  animation:road .5s linear infinite;
-}
+.vanScene{width:100%;height:105px;position:relative;overflow:hidden;margin-bottom:16px;}
+.vanRoad{position:absolute;bottom:0;left:0;right:0;height:16px;background:rgba(0,0,0,.22);border-radius:4px;}
+.vanRoad::before{content:'';position:absolute;top:50%;left:0;right:0;height:3px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.5) 0,rgba(255,255,255,.5) 20px,transparent 20px,transparent 40px);transform:translateY(-50%);animation:road .5s linear infinite;}
 @keyframes road{from{background-position:0 0;}to{background-position:-40px 0;}}
-.vanSvg{
-  position:absolute;bottom:16px;left:50%;
-  transform:translateX(-50%);width:155px;
-  filter:drop-shadow(0 5px 12px rgba(0,0,0,.3));
-  animation:vanBounce .6s ease-in-out infinite alternate;
-}
-@keyframes vanBounce{
-  from{transform:translateX(-50%) translateY(0);}
-  to{transform:translateX(-50%) translateY(-4px);}
-}
-.vanSpeed{
-  position:absolute;bottom:36px;
-  left:calc(50% - 105px);
-  display:flex;flex-direction:column;gap:5px;
-}
-.vanSpeed span{
-  display:block;height:2.5px;
-  background:rgba(255,255,255,.55);border-radius:2px;
-  animation:speedLine .8s ease-in-out infinite;
-}
+.vanSvg{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);width:155px;filter:drop-shadow(0 5px 12px rgba(0,0,0,.3));animation:vanBounce .6s ease-in-out infinite alternate;}
+@keyframes vanBounce{from{transform:translateX(-50%) translateY(0);}to{transform:translateX(-50%) translateY(-4px);}}
+.vanSpeed{position:absolute;bottom:36px;left:calc(50% - 105px);display:flex;flex-direction:column;gap:5px;}
+.vanSpeed span{display:block;height:2.5px;background:rgba(255,255,255,.55);border-radius:2px;animation:speedLine .8s ease-in-out infinite;}
 .vanSpeed span:nth-child(1){width:26px;animation-delay:0s;}
 .vanSpeed span:nth-child(2){width:18px;animation-delay:.15s;}
 .vanSpeed span:nth-child(3){width:13px;animation-delay:.3s;}
-@keyframes speedLine{
-  0%,100%{opacity:.55;transform:translateX(0);}
-  50%{opacity:1;transform:translateX(-5px);}
-}
+@keyframes speedLine{0%,100%{opacity:.55;transform:translateX(0);}50%{opacity:1;transform:translateX(-5px);}}
 
 /* ═══════ CONTACT ═══════ */
-.contactStrip{
-  background:#fff;border:1px solid var(--ln);
-  border-radius:var(--rad);padding:26px 28px;
-  margin-top:22px;
-  display:grid;grid-template-columns:60px 1fr auto;gap:20px;align-items:center;
-  box-shadow:var(--sh1);
-}
-.contactIco{
-  width:58px;height:58px;border-radius:50%;
-  background:linear-gradient(135deg,var(--g),var(--g2));
-  color:#fff;display:flex;align-items:center;justify-content:center;
-  font-size:26px;flex-shrink:0;
-}
+.contactStrip{background:#fff;border:1px solid var(--ln);border-radius:var(--rad);padding:26px 28px;margin-top:22px;display:grid;grid-template-columns:60px 1fr auto;gap:20px;align-items:center;box-shadow:var(--sh1);}
+.contactIco{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
 .contactTxt h2{font-family:'Playfair Display',serif;font-size:19px;color:var(--r);margin-bottom:3px;}
 .contactTxt p{font-size:13px;color:var(--md);}
 .contactPhone{font-size:21px;font-weight:800;color:var(--g);}
@@ -364,211 +166,157 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 /* ═══════ ORDER SECTION ═══════ */
 .orderSection{background:var(--cr);}
 .shopLayout{display:grid;grid-template-columns:1fr 370px;gap:26px;align-items:start;}
-.orderBox{
-  background:#fff;border:1px solid var(--ln);
-  border-radius:var(--rad);padding:26px;box-shadow:var(--sh2);
-}
+.orderBox{background:#fff;border:1px solid var(--ln);border-radius:var(--rad);padding:26px;box-shadow:var(--sh2);}
 .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:22px;}
-.tabBtn{
-  padding:12px 8px;border:2px solid var(--ln);background:#fff;
-  border-radius:var(--rad2);font-size:12.5px;font-weight:700;
-  color:var(--md);cursor:pointer;transition:all .25s;text-align:center;
-}
+.tabBtn{padding:12px 8px;border:2px solid var(--ln);background:#fff;border-radius:var(--rad2);font-size:12.5px;font-weight:700;color:var(--md);cursor:pointer;transition:all .25s;text-align:center;}
 .tabBtn:hover{border-color:var(--r);color:var(--r);}
 .tabBtn.active{background:linear-gradient(135deg,var(--r),var(--r2));color:#fff;border-color:transparent;}
 .formSec{display:none;}
 .formSec.active{display:block;}
 .fGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;}
 .fGrid .full{grid-column:1/-1;}
-.fg label{
-  display:block;font-size:11.5px;font-weight:800;
-  color:var(--r);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px;
-}
-.fg input,.fg select,.fg textarea{
-  width:100%;padding:10px 13px;
-  border:1.5px solid var(--ln);border-radius:var(--rad3);
-  font-size:13.5px;font-weight:500;background:#fff;
-  outline:none;transition:border .2s;
-  -webkit-appearance:none;appearance:none;
-}
+.fg label{display:block;font-size:11.5px;font-weight:800;color:var(--r);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px;}
+.fg input,.fg select,.fg textarea{width:100%;padding:10px 13px;border:1.5px solid var(--ln);border-radius:var(--rad3);font-size:13.5px;font-weight:500;background:#fff;outline:none;transition:border .2s;-webkit-appearance:none;appearance:none;}
 .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--r);}
-
-/* Kugeln */
 .kugelnGrid{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;}
-.kugelnBtn{
-  flex:1;min-width:70px;padding:13px 6px;
-  border:2px solid var(--ln);background:#fff;
-  border-radius:11px;font-size:12px;font-weight:800;
-  color:var(--md);cursor:pointer;transition:all .22s;
-  text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px;
-}
+.kugelnBtn{flex:1;min-width:70px;padding:13px 6px;border:2px solid var(--ln);background:#fff;border-radius:11px;font-size:12px;font-weight:800;color:var(--md);cursor:pointer;transition:all .22s;text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px;}
 .kugelnBtn .kIco{font-size:18px;}
 .kugelnBtn:hover{border-color:var(--r);color:var(--r);}
-.kugelnBtn.selected{
-  background:linear-gradient(135deg,var(--r),var(--r2));
-  color:#fff;border-color:transparent;
-  box-shadow:0 4px 14px rgba(139,15,20,.28);
-  transform:translateY(-2px);
-}
+.kugelnBtn.selected{background:linear-gradient(135deg,var(--r),var(--r2));color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(139,15,20,.28);transform:translateY(-2px);}
 .flavGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;}
-.sumLine{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:7px 0;border-bottom:1px dashed var(--ln);font-size:13.5px;font-weight:600;
-}
+.sumLine{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px dashed var(--ln);font-size:13.5px;font-weight:600;}
 .sumLine:last-child{border:none;}
-.sumBox{
-  background:var(--cr);border:1px solid var(--ln);
-  border-radius:var(--rad3);padding:13px;margin:14px 0;
-}
+.sumBox{background:var(--cr);border:1px solid var(--ln);border-radius:var(--rad3);padding:13px;margin:14px 0;}
 .totLine{font-size:21px;font-weight:900;color:var(--g);text-align:right;margin:6px 0 14px;}
 
 /* ═══════ CART ═══════ */
-.cartBox{
-  background:#fff;border:1px solid var(--ln);
-  border-radius:var(--rad);padding:22px;
-  box-shadow:var(--sh2);position:sticky;top:80px;
-}
+.cartBox{background:#fff;border:1px solid var(--ln);border-radius:var(--rad);padding:22px;box-shadow:var(--sh2);position:sticky;top:80px;}
 .cartBox h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--r);margin-bottom:14px;}
-.cItem{
-  display:grid;grid-template-columns:44px 1fr auto;gap:9px;
-  align-items:start;padding:11px 0;border-bottom:1px solid var(--ln);
-}
-.cThumb{
-  width:44px;height:44px;border-radius:9px;
-  background:#f5e8d0;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;font-size:20px;
-}
+.cItem{display:grid;grid-template-columns:44px 1fr auto;gap:9px;align-items:start;padding:11px 0;border-bottom:1px solid var(--ln);}
+.cThumb{width:44px;height:44px;border-radius:9px;background:#f5e8d0;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px;}
 .cItem b{font-size:13px;font-weight:700;display:block;}
 .cItem small{font-size:11px;color:var(--lt);display:block;margin-top:2px;line-height:1.4;}
 .cItem strong{font-size:12.5px;font-weight:800;color:var(--r);display:block;margin-top:4px;}
-.cDel{
-  background:#fee2e2;color:#b91c1c;border:none;
-  border-radius:7px;width:26px;height:26px;
-  font-size:14px;font-weight:900;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .2s;flex-shrink:0;
-}
+.cDel{background:#fee2e2;color:#b91c1c;border:none;border-radius:7px;width:26px;height:26px;font-size:14px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
 .cDel:hover{background:#b91c1c;color:#fff;}
-.cTotal{
-  display:flex;justify-content:space-between;align-items:center;
-  font-size:15px;font-weight:800;color:var(--r);
-  margin:14px 0;padding-top:6px;
-}
+.cTotal{display:flex;justify-content:space-between;align-items:center;font-size:15px;font-weight:800;color:var(--r);margin:14px 0;padding-top:6px;}
 .cTotal span:last-child{font-size:21px;font-family:'Playfair Display',serif;}
 .dlChoice{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0;}
-.dlLabel{
-  border:2px solid var(--ln);border-radius:var(--rad3);
-  padding:11px 7px;text-align:center;cursor:pointer;
-  font-size:12.5px;font-weight:700;transition:all .2s;display:block;
-}
+.dlLabel{border:2px solid var(--ln);border-radius:var(--rad3);padding:11px 7px;text-align:center;cursor:pointer;font-size:12.5px;font-weight:700;transition:all .2s;display:block;}
 .dlLabel:has(input:checked){border-color:var(--r);background:rgba(139,15,20,.05);color:var(--r);}
 .dlLabel input{display:none;}
 .miniForm{display:grid;gap:9px;margin-bottom:12px;}
-.miniForm input,.miniForm textarea{
-  width:100%;padding:10px 13px;
-  border:1.5px solid var(--ln);border-radius:var(--rad3);
-  font-size:13px;outline:none;transition:border .2s;
-}
+.miniForm input,.miniForm textarea{width:100%;padding:10px 13px;border:1.5px solid var(--ln);border-radius:var(--rad3);font-size:13px;outline:none;transition:border .2s;}
 .miniForm input:focus,.miniForm textarea:focus{border-color:var(--r);}
 .miniForm textarea{min-height:65px;resize:none;}
-.btnWA{
-  width:100%;padding:13px;
-  background:linear-gradient(135deg,#1DB954,#128C7E);
-  color:#fff;border:none;border-radius:var(--rad2);
-  font-size:14.5px;font-weight:800;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  transition:all .3s;
-}
+.btnWA{width:100%;padding:13px;background:linear-gradient(135deg,#1DB954,#128C7E);color:#fff;border:none;border-radius:var(--rad2);font-size:14.5px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .3s;}
 .btnWA:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(18,140,126,.4);}
-
-/* ═══════ EMPTY CART — COM FOTO ═══════ */
 .emptyCart{text-align:center;padding:10px 0 24px;color:var(--lt);}
-.emptyCartImg{
-  width:100%;height:175px;
-  border-radius:14px;overflow:hidden;
-  margin-bottom:14px;
-  position:relative;
-}
-.emptyCartImg img{
-  width:100%;height:100%;
-  object-fit:cover;display:block;
-}
-.emptyCartImg::after{
-  content:'';
-  position:absolute;inset:0;
-  background:linear-gradient(to bottom,transparent 50%,rgba(26,10,7,.35) 100%);
-  border-radius:14px;
-  pointer-events:none;
-}
+.emptyCartImg{width:100%;height:175px;border-radius:14px;overflow:hidden;margin-bottom:14px;position:relative;}
+.emptyCartImg img{width:100%;height:100%;object-fit:cover;display:block;}
+.emptyCartImg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(26,10,7,.35) 100%);border-radius:14px;pointer-events:none;}
 .emptyCart .ei{font-size:38px;margin-bottom:8px;}
 .emptyCart p{font-size:13.5px;}
 
 /* ═══════ FLOAT ═══════ */
-.floatBtn{
-  position:fixed;right:18px;bottom:18px;z-index:500;
-  background:linear-gradient(135deg,var(--g),var(--g2));
-  color:#fff;border:none;border-radius:50px;
-  padding:13px 20px;font-size:13.5px;font-weight:800;
-  box-shadow:0 10px 32px rgba(0,0,0,.20);cursor:pointer;
-  display:flex;align-items:center;gap:8px;
-  transition:all .3s;
-}
+.floatBtn{position:fixed;right:18px;bottom:18px;z-index:500;background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;border:none;border-radius:50px;padding:13px 20px;font-size:13.5px;font-weight:800;box-shadow:0 10px 32px rgba(0,0,0,.20);cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .3s;}
 .floatBtn:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.26);}
-.floatBadge{
-  background:#fff;color:var(--g);
-  width:21px;height:21px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:10.5px;font-weight:900;
-}
+.floatBadge{background:#fff;color:var(--g);width:21px;height:21px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:900;}
 
-/* ═══════ ADMIN ═══════ */
-.adminOv{
-  position:fixed;inset:0;background:rgba(0,0,0,.6);
-  z-index:9000;display:none;align-items:center;justify-content:center;padding:16px;
-}
+/* ═══════════════════════════════
+   ADMIN PANEL — NOVO DESIGN
+═══════════════════════════════ */
+.adminOv{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9000;display:none;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto;}
 .adminOv.show{display:flex;}
-.adminBox{
-  width:min(1020px,100%);max-height:90vh;overflow:auto;
-  background:var(--cr);border-radius:22px;padding:28px;
-  box-shadow:0 32px 80px rgba(0,0,0,.4);
+.adminBox{width:min(1100px,100%);margin:auto;background:var(--cr);border-radius:22px;box-shadow:0 32px 80px rgba(0,0,0,.5);overflow:hidden;}
+
+/* Admin Header */
+.adminHdr{
+  background:linear-gradient(135deg,var(--r),var(--r2));
+  padding:24px 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
 }
-.adminHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;flex-wrap:wrap;gap:10px;}
-.adminHead h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--r);}
-.adminGrid{display:grid;grid-template-columns:1.3fr .7fr 1.8fr .9fr;gap:9px;margin-bottom:12px;}
-.adminGrid input,.adminGrid select{
-  padding:9px 11px;border:1.5px solid var(--ln);border-radius:var(--rad3);font-size:13px;
-}
-.aList{display:grid;gap:7px;max-height:280px;overflow-y:auto;margin-top:16px;}
-.aRow{
-  background:#fff;border:1px solid var(--ln);border-radius:var(--rad3);
-  padding:9px 13px;display:flex;justify-content:space-between;align-items:center;
-  font-size:13px;gap:8px;flex-wrap:wrap;
-}
-.aRowBtns{display:flex;gap:5px;}
-.aEdit{padding:5px 11px;background:var(--cr3);border:none;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer;}
-.aDelBtn{padding:5px 9px;background:#fee2e2;color:#b91c1c;border:none;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer;}
-.closeBtn{background:var(--dk);color:#fff;border:none;border-radius:50px;padding:8px 16px;font-size:12.5px;font-weight:700;cursor:pointer;}
+.adminHdr h2{font-family:'Playfair Display',serif;font-size:24px;color:#fff;display:flex;align-items:center;gap:10px;}
+.adminHdr .closeBtn{background:rgba(255,255,255,.18);color:#fff;border:2px solid rgba(255,255,255,.35);border-radius:50px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;}
+.adminHdr .closeBtn:hover{background:rgba(255,255,255,.32);}
+
+/* Admin Tabs */
+.adminTabs{display:flex;gap:0;border-bottom:2px solid var(--ln);background:#fff;}
+.adminTab{flex:1;padding:14px 10px;border:none;background:none;font-size:13px;font-weight:700;color:var(--md);cursor:pointer;transition:all .2s;border-bottom:3px solid transparent;margin-bottom:-2px;}
+.adminTab:hover{background:var(--cr);color:var(--r);}
+.adminTab.active{color:var(--r);border-bottom-color:var(--r);background:var(--cr);}
+
+/* Admin Sections */
+.adminSec{display:none;padding:24px 28px;}
+.adminSec.active{display:block;}
+
+/* Add Form */
+.addForm{background:#fff;border:1px solid var(--ln);border-radius:var(--rad2);padding:20px;margin-bottom:20px;}
+.addForm h3{font-family:'Playfair Display',serif;font-size:17px;color:var(--r);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.aFormGrid{display:grid;gap:12px;}
+.aFormGrid2{grid-template-columns:1fr 1fr;}
+.aFormGrid3{grid-template-columns:1fr 1fr 1fr;}
+.aFormGrid1{grid-template-columns:1fr 140px;}
+.aFg label{display:block;font-size:11px;font-weight:800;color:var(--r);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+.aFg input,.aFg select{width:100%;padding:10px 13px;border:1.5px solid var(--ln);border-radius:var(--rad3);font-size:13.5px;background:#fff;outline:none;transition:border .2s;}
+.aFg input:focus,.aFg select:focus{border-color:var(--r);}
+.addFormBtn{width:100%;margin-top:14px;padding:12px;background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;border:none;border-radius:var(--rad3);font-size:14px;font-weight:800;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.addFormBtn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(15,159,77,.35);}
+
+/* Items List */
+.aItemsHdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.aItemsHdr h3{font-family:'Playfair Display',serif;font-size:17px;color:var(--dk);}
+.aItemsHdr span{font-size:12px;color:var(--lt);background:var(--cr3);padding:4px 10px;border-radius:50px;font-weight:700;}
+.aItems{display:grid;gap:8px;max-height:340px;overflow-y:auto;padding-right:4px;}
+.aItems::-webkit-scrollbar{width:4px;}
+.aItems::-webkit-scrollbar-thumb{background:var(--ln);border-radius:2px;}
+
+/* Item Row — normal */
+.aRow{background:#fff;border:1.5px solid var(--ln);border-radius:var(--rad3);padding:0;overflow:hidden;transition:all .2s;}
+.aRow:hover{border-color:var(--r);box-shadow:0 4px 12px rgba(139,15,20,.08);}
+.aRowView{display:flex;align-items:center;gap:12px;padding:11px 14px;}
+.aRowIco{width:36px;height:36px;border-radius:9px;background:var(--cr3);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.aRowInfo{flex:1;min-width:0;}
+.aRowInfo b{font-size:13.5px;font-weight:700;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.aRowInfo span{font-size:12px;color:var(--lt);}
+.aRowPrice{font-size:14px;font-weight:800;color:var(--g);flex-shrink:0;}
+.aRowBtns{display:flex;gap:6px;flex-shrink:0;}
+.aBtnEdit{padding:6px 12px;background:var(--cr3);border:1.5px solid var(--ln);border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;color:var(--md);transition:all .2s;}
+.aBtnEdit:hover{background:var(--gold2);border-color:var(--gold);color:var(--dk);}
+.aBtnDel{padding:6px 10px;background:#fee2e2;border:1.5px solid #fca5a5;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;color:#b91c1c;transition:all .2s;}
+.aBtnDel:hover{background:#b91c1c;color:#fff;border-color:#b91c1c;}
+
+/* Item Row — edit mode */
+.aRowEdit{display:none;padding:12px 14px;background:var(--cr);border-top:1.5px solid var(--ln);}
+.aRowEdit.open{display:block;}
+.aEditGrid{display:grid;gap:9px;margin-bottom:10px;}
+.aEditGrid2{grid-template-columns:1fr 1fr;}
+.aEditGrid1{grid-template-columns:1fr 130px;}
+.aEFg label{display:block;font-size:10.5px;font-weight:800;color:var(--r);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;}
+.aEFg input{width:100%;padding:8px 11px;border:1.5px solid var(--ln);border-radius:8px;font-size:13px;background:#fff;outline:none;transition:border .2s;}
+.aEFg input:focus{border-color:var(--r);}
+.aEditBtns{display:flex;gap:7px;}
+.aBtnSave{flex:1;padding:9px;background:linear-gradient(135deg,var(--r),var(--r2));color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;}
+.aBtnSave:hover{opacity:.9;}
+.aBtnCancel{padding:9px 14px;background:#fff;border:1.5px solid var(--ln);border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;color:var(--md);}
+.aBtnCancel:hover{background:var(--cr3);}
+
+/* Admin Footer */
+.adminFooter{padding:16px 28px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-top:1px solid var(--ln);}
+.adminFooter p{font-size:12px;color:var(--lt);}
+.aBtnReset{padding:9px 18px;background:#fee2e2;border:1.5px solid #fca5a5;border-radius:9px;font-size:12.5px;font-weight:700;cursor:pointer;color:#b91c1c;transition:all .2s;}
+.aBtnReset:hover{background:#b91c1c;color:#fff;}
 
 /* ═══════ FOOTER ═══════ */
-footer{
-  background:linear-gradient(135deg,#3d0709,#6b1015);
-  color:#fff;padding:52px 32px 32px;
-}
-.footInner{
-  max-width:1300px;margin:0 auto;
-  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:32px;
-}
+footer{background:linear-gradient(135deg,#3d0709,#6b1015);color:#fff;padding:52px 32px 32px;}
+.footInner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:32px;}
 .footBrand .fl{font-family:'Playfair Display',serif;font-size:26px;color:#fff;margin-bottom:7px;}
 .footBrand p{font-size:13px;color:rgba(255,255,255,.58);line-height:1.65;}
 footer h4{font-size:11.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold2);margin-bottom:13px;}
 footer p,footer a{font-size:13px;color:rgba(255,255,255,.62);line-height:1.7;}
 footer a:hover{color:var(--gold2);}
-.footBot{
-  max-width:1300px;margin:28px auto 0;padding-top:22px;
-  border-top:1px solid rgba(255,255,255,.1);
-  display:flex;justify-content:space-between;align-items:center;
-  font-size:12px;color:rgba(255,255,255,.32);flex-wrap:wrap;gap:8px;
-}
+.footBot{max-width:1300px;margin:28px auto 0;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(255,255,255,.32);flex-wrap:wrap;gap:8px;}
 
 /* ═══════ RESPONSIVE ≤1100 ═══════ */
 @media(max-width:1100px){
@@ -584,7 +332,7 @@ footer a:hover{color:var(--gold2);}
   .footInner{grid-template-columns:1fr 1fr;gap:24px;}
   .wrap{padding:0 22px;}
   .secPad{padding:60px 0;}
-  .adminGrid{grid-template-columns:1fr 1fr;}
+  .aFormGrid2,.aFormGrid3,.aEditGrid2,.aEditGrid1,.aFormGrid1{grid-template-columns:1fr;}
 }
 
 /* ═══════ RESPONSIVE ≤768 ═══════ */
@@ -622,10 +370,14 @@ footer a:hover{color:var(--gold2);}
   .floatBtn{right:14px;bottom:14px;padding:11px 16px;font-size:13px;}
   .secPad{padding:48px 0;}
   .wrap{padding:0 16px;}
-  .adminGrid{grid-template-columns:1fr;}
-  .adminBox{padding:20px;}
   .panel{padding:20px;}
   .emptyCartImg{height:140px;}
+  .adminSec{padding:16px;}
+  .adminHdr{padding:18px 16px;}
+  .adminTabs{overflow-x:auto;}
+  .adminTab{white-space:nowrap;font-size:12px;padding:12px 8px;}
+  .adminFooter{padding:14px 16px 20px;}
+  .aRowView{flex-wrap:wrap;}
 }
 
 /* ═══════ RESPONSIVE ≤420 ═══════ */
@@ -667,7 +419,7 @@ footer a:hover{color:var(--gold2);}
     🛒 Warenkorb
     <span class="nBadge" id="cartCountTop">0</span>
   </button>
-  <button class="nAdm" onclick="openAdminLogin()">⚙</button>
+  <button class="nAdm" onclick="openAdminLogin()">⚙ Admin</button>
   <button class="nHamb" onclick="toggleMenu()" id="hambBtn">☰</button>
 </nav>
 
@@ -682,12 +434,8 @@ footer a:hover{color:var(--gold2);}
 
 <!-- ══════════════ HERO GALERIA ══════════════ -->
 <section class="heroGallery" id="top">
-  <div class="galleryRow">
-    <div class="galleryTrack" id="track1"></div>
-  </div>
-  <div class="galleryRow">
-    <div class="galleryTrack2" id="track2"></div>
-  </div>
+  <div class="galleryRow"><div class="galleryTrack" id="track1"></div></div>
+  <div class="galleryRow"><div class="galleryTrack2" id="track2"></div></div>
 </section>
 
 <!-- ══════════════ BENEFITS ══════════════ -->
@@ -709,75 +457,42 @@ footer a:hover{color:var(--gold2);}
       <p class="secSub">Frisch zubereitet — wählen Sie Ihre Favoriten und bestellen Sie bequem per WhatsApp</p>
     </div>
     <div class="catGrid">
-
       <article class="catCard" id="eistorten">
-        <div class="catImg">
-          <img src="https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?auto=format&fit=crop&w=600&q=80" alt="Gelato">
-          <div class="catBadge">🍦</div>
-        </div>
+        <div class="catImg"><img src="https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?auto=format&fit=crop&w=600&q=80" alt="Gelato"><div class="catBadge">🍦</div></div>
         <div class="catBody">
           <h3>Gelato</h3>
           <p>Hausgemachtes italienisches Eis — cremig, frisch und intensiv im Geschmack.</p>
-          <div class="catCheck">
-            <div>Über 30 frische Sorten</div>
-            <div>Cremig &amp; intensiv</div>
-            <div>Täglich frisch zubereitet</div>
-          </div>
+          <div class="catCheck"><div>Über 30 frische Sorten</div><div>Cremig &amp; intensiv</div><div>Täglich frisch zubereitet</div></div>
           <button class="btnRed" onclick="switchOrder('gelato')">Gelato wählen →</button>
         </div>
       </article>
-
       <article class="catCard" id="spezialitaeten">
-        <div class="catImg">
-          <img src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=600&q=80" alt="Eistorte">
-          <div class="catBadge">🎂</div>
-        </div>
+        <div class="catImg"><img src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=600&q=80" alt="Eistorte"><div class="catBadge">🎂</div></div>
         <div class="catBody">
           <h3>Eistorten</h3>
           <p>Handgemachte Eistorten für jeden besonderen Anlass.</p>
-          <div class="catCheck">
-            <div>18 cm – 28,00 €</div>
-            <div>24 cm – 42,90 €</div>
-            <div>Bis zu 4 Sorten wählbar</div>
-          </div>
+          <div class="catCheck"><div>18 cm – 28,00 €</div><div>24 cm – 42,90 €</div><div>Bis zu 4 Sorten wählbar</div></div>
           <button class="btnRed" onclick="switchOrder('cake')">Eistorten ansehen →</button>
         </div>
       </article>
-
       <article class="catCard">
-        <div class="catImg">
-          <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80" alt="Spezialitäten">
-          <div class="catBadge">🍨</div>
-        </div>
+        <div class="catImg"><img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80" alt="Spezialitäten"><div class="catBadge">🍨</div></div>
         <div class="catBody">
           <h3>Spezialitäten</h3>
           <p>Unsere beliebten Becher und Eis-Spezialitäten für besondere Momente.</p>
-          <div class="catCheck">
-            <div>Spaghetti Eis</div>
-            <div>Schoko &amp; After Eight</div>
-            <div>Viele Variationen</div>
-          </div>
+          <div class="catCheck"><div>Spaghetti Eis</div><div>Schoko &amp; After Eight</div><div>Viele Variationen</div></div>
           <button class="btnRed" onclick="switchOrder('special')">Spezialitäten ansehen →</button>
         </div>
       </article>
-
       <article class="catCard" id="becher">
-        <div class="catImg">
-          <img src="https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=600&q=80" alt="REWE Becher">
-          <div class="catBadge">🛍️</div>
-        </div>
+        <div class="catImg"><img src="https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=600&q=80" alt="REWE Becher"><div class="catBadge">🛍️</div></div>
         <div class="catBody">
           <h3>REWE Becher</h3>
           <p>170 g und 750 g Becher für Zuhause — perfekte Familienportionen.</p>
-          <div class="catCheck">
-            <div>170 g Becher – 3,60 €</div>
-            <div>750 g Becher – 8,90 €</div>
-            <div>Viele Sorten verfügbar</div>
-          </div>
+          <div class="catCheck"><div>170 g Becher – 3,60 €</div><div>750 g Becher – 8,90 €</div><div>Viele Sorten verfügbar</div></div>
           <button class="btnRed" onclick="switchOrder('cups')">Becher bestellen →</button>
         </div>
       </article>
-
     </div>
   </div>
 </div>
@@ -786,10 +501,7 @@ footer a:hover{color:var(--gold2);}
 <div class="specsSection secPad" id="spezialitaeten">
   <div class="wrap">
     <div class="secHead" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px;">
-      <div>
-        <div class="secEye">Beliebt</div>
-        <h2 class="secTitle" style="margin-bottom:0;">Unsere Spezialitäten</h2>
-      </div>
+      <div><div class="secEye">Beliebt</div><h2 class="secTitle" style="margin-bottom:0;">Unsere Spezialitäten</h2></div>
       <a href="#bestellung" style="font-size:13.5px;font-weight:700;color:var(--r);" onclick="switchOrder('special')">Alle ansehen →</a>
     </div>
     <div class="specGrid" id="specialCards"></div>
@@ -800,16 +512,12 @@ footer a:hover{color:var(--gold2);}
 <div class="infoSection secPad">
   <div class="wrap">
     <div class="infoGrid">
-
       <div class="panel storyPanel">
-        <div class="storyImg">
-          <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=700&q=80" alt="Gelateria">
-        </div>
+        <div class="storyImg"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=700&q=80" alt="Gelateria"></div>
         <h2>Ein Stück Italien in Bad Berleburg</h2>
         <p>Unsere Gelato-Kreationen werden nach original italienischer Art hergestellt — cremig, frisch und voller Geschmack. Seit 2006 mit Liebe gemacht.</p>
         <button class="btnRed" onclick="document.getElementById('bestellung').scrollIntoView({behavior:'smooth'})">Jetzt probieren</button>
       </div>
-
       <div class="panel stepsPanel">
         <h2>So funktioniert's</h2>
         <div class="step"><div class="stepNum">1</div><div><b>Produkte auswählen</b><span>Gelato, Eistorte, Spezialität oder Becher wählen</span></div></div>
@@ -817,7 +525,6 @@ footer a:hover{color:var(--gold2);}
         <div class="step"><div class="stepNum">3</div><div><b>Abholung oder Lieferung</b><span>Lieferung in Bad Berleburg nach Absprache</span></div></div>
         <div class="step"><div class="stepNum">4</div><div><b>Per WhatsApp bestellen</b><span>Wir bestätigen Ihre Bestellung schnell</span></div></div>
       </div>
-
       <div class="panel delivPanel">
         <h2>Lieferung ganz bequem</h2>
         <p>Wir liefern nach Absprache in Bad Berleburg und der gesamten Umgebung — schnell, frisch und direkt zu Ihnen.</p>
@@ -833,12 +540,8 @@ footer a:hover{color:var(--gold2);}
             <text x="152" y="54" font-size="14">🍦</text>
             <rect x="173" y="52" width="12" height="6" rx="2" fill="#d1d5db"/>
             <rect x="8" y="52" width="10" height="6" rx="2" fill="#d1d5db"/>
-            <circle cx="42" cy="66" r="13" fill="#374151"/>
-            <circle cx="42" cy="66" r="8" fill="#6b7280"/>
-            <circle cx="42" cy="66" r="4" fill="#fff" opacity="0.8"/>
-            <circle cx="155" cy="66" r="13" fill="#374151"/>
-            <circle cx="155" cy="66" r="8" fill="#6b7280"/>
-            <circle cx="155" cy="66" r="4" fill="#fff" opacity="0.8"/>
+            <circle cx="42" cy="66" r="13" fill="#374151"/><circle cx="42" cy="66" r="8" fill="#6b7280"/><circle cx="42" cy="66" r="4" fill="#fff" opacity="0.8"/>
+            <circle cx="155" cy="66" r="13" fill="#374151"/><circle cx="155" cy="66" r="8" fill="#6b7280"/><circle cx="155" cy="66" r="4" fill="#fff" opacity="0.8"/>
             <ellipse cx="178" cy="34" rx="5" ry="7" fill="#fde68a" opacity="0.9"/>
             <rect x="10" y="28" width="6" height="10" rx="2" fill="#fca5a5" opacity="0.85"/>
           </svg>
@@ -847,9 +550,7 @@ footer a:hover{color:var(--gold2);}
         </div>
         <button class="btnWhite" onclick="document.getElementById('warenkorb').scrollIntoView({behavior:'smooth'})">🚚 Lieferung wählen</button>
       </div>
-
     </div>
-
     <div class="contactStrip" id="kontakt">
       <div class="contactIco">💬</div>
       <div class="contactTxt">
@@ -871,7 +572,6 @@ footer a:hover{color:var(--gold2);}
       <p class="secSub">Wählen Sie Ihre Produkte, legen Sie alles in den Warenkorb und senden Sie die Bestellung per WhatsApp</p>
     </div>
     <div class="shopLayout">
-
       <div>
         <div class="tabs">
           <button class="tabBtn active" id="tabGelato" onclick="switchOrder('gelato')">🍦 Gelato</button>
@@ -880,7 +580,6 @@ footer a:hover{color:var(--gold2);}
           <button class="tabBtn" id="tabCups" onclick="switchOrder('cups')">🛒 REWE Becher</button>
         </div>
         <div class="orderBox">
-
           <!-- GELATO -->
           <div id="gelatoForm" class="formSec active">
             <div class="fGrid">
@@ -908,7 +607,6 @@ footer a:hover{color:var(--gold2);}
             <div class="totLine" id="gelatoTotal"></div>
             <button class="btnRed" style="width:100%" onclick="addGelatoToCart()">🛒 In den Warenkorb</button>
           </div>
-
           <!-- CAKE -->
           <div id="cakeForm" class="formSec">
             <div class="fGrid">
@@ -922,16 +620,14 @@ footer a:hover{color:var(--gold2);}
                 <select id="cakeDeko" onchange="calcCake()">
                   <option value="0">Fruchtig elegant +0,00 €</option>
                   <option value="0">Schoko Premium +0,00 €</option>
-                  <option value="4">Kinder Mix +0,00 €</option>
+                  <option value="0">Kinder Mix +0,00 €</option>
                   <option value="3">Konfirmation / Kommunion +3,00 €</option>
                 </select>
               </div>
               <div class="fg full"><label>Bis zu 4 Eissorten wählen</label>
                 <div class="flavGrid">
-                  <select id="cakeF1"></select>
-                  <select id="cakeF2"></select>
-                  <select id="cakeF3"></select>
-                  <select id="cakeF4"></select>
+                  <select id="cakeF1"></select><select id="cakeF2"></select>
+                  <select id="cakeF3"></select><select id="cakeF4"></select>
                 </div>
               </div>
               <div class="fg"><label>Wunschtext auf der Torte</label><input id="cakeText" placeholder="z. B. Alles Gute Laura"></div>
@@ -941,7 +637,6 @@ footer a:hover{color:var(--gold2);}
             <div class="totLine" id="cakeTotal"></div>
             <button class="btnRed" style="width:100%" onclick="addCakeToCart()">🛒 In den Warenkorb</button>
           </div>
-
           <!-- SPECIAL -->
           <div id="specialForm" class="formSec">
             <div class="fGrid">
@@ -953,7 +648,6 @@ footer a:hover{color:var(--gold2);}
             <div class="totLine" id="spTotal"></div>
             <button class="btnRed" style="width:100%" onclick="addSpecialToCart()">🛒 In den Warenkorb</button>
           </div>
-
           <!-- CUPS -->
           <div id="cupsForm" class="formSec">
             <div class="fGrid">
@@ -971,7 +665,6 @@ footer a:hover{color:var(--gold2);}
             <div class="totLine" id="cupTotal"></div>
             <button class="btnRed" style="width:100%" onclick="addCupsToCart()">🛒 In den Warenkorb</button>
           </div>
-
         </div>
       </div>
 
@@ -979,10 +672,7 @@ footer a:hover{color:var(--gold2);}
       <aside class="cartBox" id="warenkorb">
         <h3>🛒 Ihre Bestellung</h3>
         <div id="cartItems"></div>
-        <div class="cTotal">
-          <span>Gesamt</span>
-          <span id="cartTotal">0,00 €</span>
-        </div>
+        <div class="cTotal"><span>Gesamt</span><span id="cartTotal">0,00 €</span></div>
         <b style="font-size:13px;display:block;margin-bottom:9px;color:var(--dk);">Abholung oder Lieferung?</b>
         <div class="dlChoice">
           <label class="dlLabel"><input type="radio" name="delivery" value="Abholung" checked>🚗 Abholung</label>
@@ -998,7 +688,6 @@ footer a:hover{color:var(--gold2);}
         <button class="btnWA" onclick="sendCart()">💬 Jetzt per WhatsApp bestellen</button>
         <p style="text-align:center;font-size:11.5px;color:var(--lt);margin-top:9px;">🔒 Sicher &amp; direkt über WhatsApp</p>
       </aside>
-
     </div>
   </div>
 </div>
@@ -1038,33 +727,82 @@ footer a:hover{color:var(--gold2);}
 </footer>
 
 <button class="floatBtn" onclick="document.getElementById('warenkorb').scrollIntoView({behavior:'smooth'})">
-  🛒 Warenkorb
-  <span class="floatBadge" id="cartCountFloat">0</span>
+  🛒 Warenkorb <span class="floatBadge" id="cartCountFloat">0</span>
 </button>
 
-<!-- ADMIN -->
+<!-- ══════════════ ADMIN PANEL — NOVO ══════════════ -->
 <div class="adminOv" id="adminPanel">
   <div class="adminBox">
-    <div class="adminHead">
-      <h2>⚙️ Admin Panel</h2>
-      <button class="closeBtn" onclick="closeAdmin()">Schließen ✕</button>
+
+    <!-- Header -->
+    <div class="adminHdr">
+      <h2>⚙️ Admin Panel — Sanremo</h2>
+      <button class="closeBtn" onclick="closeAdmin()">✕ Schließen</button>
     </div>
-    <p style="font-size:13.5px;color:var(--md);margin-bottom:18px;">Produkte, Spezialitäten und Sorten verwalten</p>
-    <div class="adminGrid">
-      <input id="adminName" placeholder="Name des Produkts">
-      <input id="adminPrice" placeholder="Preis z.B. 5.90">
-      <input id="adminDesc" placeholder="Beschreibung">
-      <select id="adminType">
-        <option value="special">Spezialität</option>
-        <option value="cup">Becher-Sorte</option>
-        <option value="flavour">Gelato/Eistorten-Sorte</option>
-      </select>
+
+    <!-- Tabs -->
+    <div class="adminTabs">
+      <button class="adminTab active" onclick="switchAdminTab('specials')">🍨 Spezialitäten</button>
+      <button class="adminTab" onclick="switchAdminTab('cups')">🛒 Becher-Sorten</button>
+      <button class="adminTab" onclick="switchAdminTab('flavours')">🍦 Gelato-Sorten</button>
     </div>
-    <div style="margin-top:11px;display:flex;gap:9px;flex-wrap:wrap;">
-      <button class="btnGreen" onclick="addAdminItem()">+ Hinzufügen</button>
-      <button class="btnRed" onclick="resetAll()">↺ Zurücksetzen</button>
+
+    <!-- TAB: SPEZIALITÄTEN -->
+    <div class="adminSec active" id="adminSec_specials">
+      <div class="addForm">
+        <h3>➕ Neue Spezialität hinzufügen</h3>
+        <div class="aFormGrid aFormGrid3">
+          <div class="aFg"><label>Name</label><input id="sp_name" placeholder="z. B. Spaghetti Mango"></div>
+          <div class="aFg"><label>Preis (€)</label><input id="sp_price" type="number" step="0.01" placeholder="z. B. 5.90"></div>
+          <div class="aFg"><label>Beschreibung</label><input id="sp_desc" placeholder="z. B. Fruchtig &amp; frisch"></div>
+        </div>
+        <button class="addFormBtn" onclick="addSpecial()">➕ Spezialität hinzufügen</button>
+      </div>
+      <div class="aItemsHdr">
+        <h3>Alle Spezialitäten</h3>
+        <span id="sp_count">0 Einträge</span>
+      </div>
+      <div class="aItems" id="sp_list"></div>
     </div>
-    <div class="aList" id="adminList"></div>
+
+    <!-- TAB: BECHER-SORTEN -->
+    <div class="adminSec" id="adminSec_cups">
+      <div class="addForm">
+        <h3>➕ Neue Becher-Sorte hinzufügen</h3>
+        <div class="aFormGrid aFormGrid1">
+          <div class="aFg"><label>Name der Sorte</label><input id="cup_name" placeholder="z. B. Karamell Salz"></div>
+          <div class="aFg"><label>&nbsp;</label><button class="addFormBtn" style="margin-top:0" onclick="addCup()">➕ Hinzufügen</button></div>
+        </div>
+      </div>
+      <div class="aItemsHdr">
+        <h3>Alle Becher-Sorten</h3>
+        <span id="cup_count">0 Einträge</span>
+      </div>
+      <div class="aItems" id="cup_list"></div>
+    </div>
+
+    <!-- TAB: GELATO-SORTEN -->
+    <div class="adminSec" id="adminSec_flavours">
+      <div class="addForm">
+        <h3>➕ Neue Gelato-Sorte hinzufügen</h3>
+        <div class="aFormGrid aFormGrid1">
+          <div class="aFg"><label>Name der Sorte</label><input id="fl_name" placeholder="z. B. Basilikum-Zitrone"></div>
+          <div class="aFg"><label>&nbsp;</label><button class="addFormBtn" style="margin-top:0" onclick="addFlavour()">➕ Hinzufügen</button></div>
+        </div>
+      </div>
+      <div class="aItemsHdr">
+        <h3>Alle Gelato-Sorten</h3>
+        <span id="fl_count">0 Einträge</span>
+      </div>
+      <div class="aItems" id="fl_list"></div>
+    </div>
+
+    <!-- Footer -->
+    <div class="adminFooter">
+      <p>Änderungen werden sofort gespeichert und im Shop angezeigt.</p>
+      <button class="aBtnReset" onclick="resetAll()">↺ Alles zurücksetzen</button>
+    </div>
+
   </div>
 </div>
 
@@ -1139,7 +877,7 @@ const defaults={
 };
 let cart=JSON.parse(localStorage.getItem('sr_cart_v3')||'[]');
 function money(n){return Number(n||0).toLocaleString('de-DE',{style:'currency',currency:'EUR'});}
-function getData(k){const s=localStorage.getItem('sr_'+k);return s?JSON.parse(s):defaults[k];}
+function getData(k){const s=localStorage.getItem('sr_'+k);return s?JSON.parse(s):JSON.parse(JSON.stringify(defaults[k]));}
 function saveData(k,v){localStorage.setItem('sr_'+k,JSON.stringify(v));}
 function sumLine(a,b){return`<div class="sumLine"><span>${a}</span><b>${b}</b></div>`;}
 
@@ -1219,7 +957,6 @@ function calcCups(){
 
 /* ══ CART ══ */
 const EMOJI_MAP={Gelato:'🍦',Eistorte:'🎂',Spezialität:'🍨',Becher:'🛒'};
-
 function addToCart(item){
   cart.push({...item,id:Date.now()});
   saveCart();renderCart();
@@ -1255,25 +992,14 @@ function addCupsToCart(){
 }
 function removeCart(id){cart=cart.filter(i=>i.id!==id);saveCart();renderCart();}
 function saveCart(){localStorage.setItem('sr_cart_v3',JSON.stringify(cart));}
-
 function renderCart(){
   const el=document.getElementById('cartItems');
   if(!cart.length){
-    el.innerHTML=`
-      <div class="emptyCart">
-        <div class="emptyCartImg">
-          <img
-            src="https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=600&q=80"
-            alt="Gelato Sanremo"
-            loading="lazy"
-            onerror="this.parentElement.style.display='none'">
-        </div>
-        <div class="ei">🍦</div>
-        <p>Noch keine Produkte im Warenkorb</p>
-      </div>`;
+    el.innerHTML=`<div class="emptyCart">
+      <div class="emptyCartImg"><img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=600&q=80" alt="Gelato" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="ei">🍦</div><p>Noch keine Produkte im Warenkorb</p></div>`;
     document.getElementById('cartTotal').textContent='0,00 €';
-    updateBadge(0);
-    return;
+    updateBadge(0);return;
   }
   const total=cart.reduce((s,i)=>s+Number(i.price),0);
   el.innerHTML=cart.map(i=>`
@@ -1285,7 +1011,6 @@ function renderCart(){
   document.getElementById('cartTotal').textContent=money(total);
   updateBadge(cart.length);
 }
-
 function updateBadge(n){
   document.getElementById('cartCountTop').textContent=n;
   document.getElementById('cartCountFloat').textContent=n;
@@ -1321,59 +1046,242 @@ function showToast(msg){
   setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(20px)';},2600);
 }
 
-/* ══ ADMIN ══ */
+/* ════════════════════════════════════════
+   ADMIN PANEL — LÓGICA COMPLETA
+════════════════════════════════════════ */
 let adminUnlocked=false;
+let currentAdminTab='specials';
+
 function openAdminLogin(){
-  if(!adminUnlocked){const p=prompt('Admin-Passwort:');if(p!=='2026'){if(p!==null)alert('Falsches Passwort!');return;}adminUnlocked=true;}
+  if(!adminUnlocked){
+    const p=prompt('Admin-Passwort:');
+    if(p!=='2026'){if(p!==null)alert('Falsches Passwort!');return;}
+    adminUnlocked=true;
+  }
   document.getElementById('adminPanel').classList.add('show');
-  renderAdminList();
+  renderAdminTab('specials');
 }
-function closeAdmin(){document.getElementById('adminPanel').classList.remove('show');}
-function addAdminItem(){
-  const type=document.getElementById('adminType').value;
-  const name=document.getElementById('adminName').value.trim();
-  const price=Number(document.getElementById('adminPrice').value.replace(',','.'))||0;
-  const desc=document.getElementById('adminDesc').value.trim();
-  if(!name){alert('Name fehlt!');return;}
-  const key=type==='special'?'specials':type==='cup'?'cups':'flavours';
-  const arr=getData(key);
-  if(type==='special') arr.push({name,price,desc});
-  else arr.push(name);
-  saveData(key,arr);
-  document.getElementById('adminName').value='';
-  document.getElementById('adminPrice').value='';
-  document.getElementById('adminDesc').value='';
-  fillSelects();renderAdminList();
+function closeAdmin(){
+  document.getElementById('adminPanel').classList.remove('show');
 }
-function renderAdminList(){
-  document.getElementById('adminList').innerHTML=
-    ['specials','cups','flavours'].flatMap(k=>getData(k).map((it,idx)=>{
-      const name=typeof it==='string'?it:it.name;
-      return`<div class="aRow">
-        <span><b style="color:var(--r)">${k}:</b> ${name}${typeof it!=='string'?' – '+money(it.price):''}</span>
+
+/* Fechar clicando fora */
+document.getElementById('adminPanel').addEventListener('click',function(e){
+  if(e.target===this) closeAdmin();
+});
+
+function switchAdminTab(tab){
+  currentAdminTab=tab;
+  document.querySelectorAll('.adminTab').forEach((t,i)=>{
+    t.classList.toggle('active',['specials','cups','flavours'][i]===tab);
+  });
+  document.querySelectorAll('.adminSec').forEach(s=>s.classList.remove('active'));
+  document.getElementById('adminSec_'+tab).classList.add('active');
+  renderAdminTab(tab);
+}
+
+function renderAdminTab(tab){
+  if(tab==='specials') renderSpecialsList();
+  else if(tab==='cups') renderCupsList();
+  else renderFlavoursList();
+}
+
+/* ── SPECIALS ── */
+function addSpecial(){
+  const name=document.getElementById('sp_name').value.trim();
+  const price=parseFloat(document.getElementById('sp_price').value.replace(',','.'))||0;
+  const desc=document.getElementById('sp_desc').value.trim();
+  if(!name){showToast('Bitte einen Namen eingeben!');return;}
+  const arr=getData('specials');
+  arr.push({name,price,desc});
+  saveData('specials',arr);
+  document.getElementById('sp_name').value='';
+  document.getElementById('sp_price').value='';
+  document.getElementById('sp_desc').value='';
+  fillSelects();
+  renderSpecialsList();
+  showToast(name+' hinzugefügt!');
+}
+
+function renderSpecialsList(){
+  const arr=getData('specials');
+  document.getElementById('sp_count').textContent=arr.length+' Einträge';
+  document.getElementById('sp_list').innerHTML=arr.map((s,i)=>`
+    <div class="aRow" id="sp_row_${i}">
+      <div class="aRowView">
+        <div class="aRowIco">🍨</div>
+        <div class="aRowInfo">
+          <b>${s.name}</b>
+          <span>${s.desc||'–'}</span>
+        </div>
+        <div class="aRowPrice">${money(s.price)}</div>
         <div class="aRowBtns">
-          <button class="aEdit" onclick="editItem('${k}',${idx})">✏ Bearbeiten</button>
-          <button class="aDelBtn" onclick="deleteItem('${k}',${idx})">🗑 Löschen</button>
-        </div></div>`;
-    })).join('');
+          <button class="aBtnEdit" onclick="toggleSpEdit(${i})">✏ Bearbeiten</button>
+          <button class="aBtnDel" onclick="deleteSpecial(${i})">🗑</button>
+        </div>
+      </div>
+      <div class="aRowEdit" id="sp_edit_${i}">
+        <div class="aEditGrid aEditGrid2" style="margin-bottom:9px;">
+          <div class="aEFg"><label>Name</label><input id="sp_ename_${i}" value="${s.name}"></div>
+          <div class="aEFg"><label>Preis (€)</label><input id="sp_eprice_${i}" type="number" step="0.01" value="${s.price}"></div>
+        </div>
+        <div class="aEditGrid" style="margin-bottom:10px;">
+          <div class="aEFg"><label>Beschreibung</label><input id="sp_edesc_${i}" value="${s.desc||''}"></div>
+        </div>
+        <div class="aEditBtns">
+          <button class="aBtnSave" onclick="saveSpecial(${i})">✓ Speichern</button>
+          <button class="aBtnCancel" onclick="toggleSpEdit(${i})">Abbrechen</button>
+        </div>
+      </div>
+    </div>`).join('');
 }
-function deleteItem(k,idx){const a=getData(k);a.splice(idx,1);saveData(k,a);fillSelects();renderAdminList();}
-function editItem(k,idx){
-  const a=getData(k),it=a[idx],old=typeof it==='string'?it:it.name;
-  const neu=prompt('Neuer Name:',old);if(!neu)return;
-  if(typeof it==='string') a[idx]=neu;
-  else{
-    a[idx].name=neu;
-    const p=prompt('Preis:',a[idx].price);if(p!==null) a[idx].price=Number(p.replace(',','.'))||a[idx].price;
-    const d=prompt('Beschreibung:',a[idx].desc||'');if(d!==null) a[idx].desc=d;
-  }
-  saveData(k,a);fillSelects();renderAdminList();
+
+function toggleSpEdit(i){
+  const el=document.getElementById('sp_edit_'+i);
+  el.classList.toggle('open');
 }
+function saveSpecial(i){
+  const arr=getData('specials');
+  arr[i].name=document.getElementById('sp_ename_'+i).value.trim()||arr[i].name;
+  arr[i].price=parseFloat(document.getElementById('sp_eprice_'+i).value)||arr[i].price;
+  arr[i].desc=document.getElementById('sp_edesc_'+i).value.trim();
+  saveData('specials',arr);
+  fillSelects();
+  renderSpecialsList();
+  showToast('Gespeichert!');
+}
+function deleteSpecial(i){
+  if(!confirm('Spezialität löschen?')) return;
+  const arr=getData('specials');
+  arr.splice(i,1);
+  saveData('specials',arr);
+  fillSelects();
+  renderSpecialsList();
+  showToast('Gelöscht!');
+}
+
+/* ── CUPS ── */
+function addCup(){
+  const name=document.getElementById('cup_name').value.trim();
+  if(!name){showToast('Bitte einen Namen eingeben!');return;}
+  const arr=getData('cups');
+  arr.push(name);
+  saveData('cups',arr);
+  document.getElementById('cup_name').value='';
+  fillSelects();
+  renderCupsList();
+  showToast(name+' hinzugefügt!');
+}
+
+function renderCupsList(){
+  const arr=getData('cups');
+  document.getElementById('cup_count').textContent=arr.length+' Einträge';
+  document.getElementById('cup_list').innerHTML=arr.map((c,i)=>`
+    <div class="aRow" id="cup_row_${i}">
+      <div class="aRowView">
+        <div class="aRowIco">🛒</div>
+        <div class="aRowInfo"><b>${c}</b><span>Becher-Sorte</span></div>
+        <div class="aRowBtns">
+          <button class="aBtnEdit" onclick="toggleCupEdit(${i})">✏ Bearbeiten</button>
+          <button class="aBtnDel" onclick="deleteCup(${i})">🗑</button>
+        </div>
+      </div>
+      <div class="aRowEdit" id="cup_edit_${i}">
+        <div class="aEditGrid" style="margin-bottom:10px;">
+          <div class="aEFg"><label>Name der Sorte</label><input id="cup_ename_${i}" value="${c}"></div>
+        </div>
+        <div class="aEditBtns">
+          <button class="aBtnSave" onclick="saveCup(${i})">✓ Speichern</button>
+          <button class="aBtnCancel" onclick="toggleCupEdit(${i})">Abbrechen</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function toggleCupEdit(i){document.getElementById('cup_edit_'+i).classList.toggle('open');}
+function saveCup(i){
+  const arr=getData('cups');
+  const v=document.getElementById('cup_ename_'+i).value.trim();
+  if(v) arr[i]=v;
+  saveData('cups',arr);
+  fillSelects();
+  renderCupsList();
+  showToast('Gespeichert!');
+}
+function deleteCup(i){
+  if(!confirm('Sorte löschen?')) return;
+  const arr=getData('cups');
+  arr.splice(i,1);
+  saveData('cups',arr);
+  fillSelects();
+  renderCupsList();
+  showToast('Gelöscht!');
+}
+
+/* ── FLAVOURS ── */
+function addFlavour(){
+  const name=document.getElementById('fl_name').value.trim();
+  if(!name){showToast('Bitte einen Namen eingeben!');return;}
+  const arr=getData('flavours');
+  arr.push(name);
+  saveData('flavours',arr);
+  document.getElementById('fl_name').value='';
+  fillSelects();
+  renderFlavoursList();
+  showToast(name+' hinzugefügt!');
+}
+
+function renderFlavoursList(){
+  const arr=getData('flavours');
+  document.getElementById('fl_count').textContent=arr.length+' Einträge';
+  document.getElementById('fl_list').innerHTML=arr.map((f,i)=>`
+    <div class="aRow" id="fl_row_${i}">
+      <div class="aRowView">
+        <div class="aRowIco">🍦</div>
+        <div class="aRowInfo"><b>${f}</b><span>Gelato / Eistorten-Sorte</span></div>
+        <div class="aRowBtns">
+          <button class="aBtnEdit" onclick="toggleFlEdit(${i})">✏ Bearbeiten</button>
+          <button class="aBtnDel" onclick="deleteFlavour(${i})">🗑</button>
+        </div>
+      </div>
+      <div class="aRowEdit" id="fl_edit_${i}">
+        <div class="aEditGrid" style="margin-bottom:10px;">
+          <div class="aEFg"><label>Name der Sorte</label><input id="fl_ename_${i}" value="${f}"></div>
+        </div>
+        <div class="aEditBtns">
+          <button class="aBtnSave" onclick="saveFlavour(${i})">✓ Speichern</button>
+          <button class="aBtnCancel" onclick="toggleFlEdit(${i})">Abbrechen</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function toggleFlEdit(i){document.getElementById('fl_edit_'+i).classList.toggle('open');}
+function saveFlavour(i){
+  const arr=getData('flavours');
+  const v=document.getElementById('fl_ename_'+i).value.trim();
+  if(v) arr[i]=v;
+  saveData('flavours',arr);
+  fillSelects();
+  renderFlavoursList();
+  showToast('Gespeichert!');
+}
+function deleteFlavour(i){
+  if(!confirm('Sorte löschen?')) return;
+  const arr=getData('flavours');
+  arr.splice(i,1);
+  saveData('flavours',arr);
+  fillSelects();
+  renderFlavoursList();
+  showToast('Gelöscht!');
+}
+
 function resetAll(){
-  if(confirm('Alle Daten zurücksetzen?')){
-    ['specials','cups','flavours'].forEach(k=>localStorage.removeItem('sr_'+k));
-    fillSelects();renderAdminList();
-  }
+  if(!confirm('Alle Daten auf Standard zurücksetzen?\nDiese Aktion kann nicht rückgängig gemacht werden.')) return;
+  ['specials','cups','flavours'].forEach(k=>localStorage.removeItem('sr_'+k));
+  fillSelects();
+  renderAdminTab(currentAdminTab);
+  showToast('Daten zurückgesetzt!');
 }
 
 /* ══ INIT ══ */
