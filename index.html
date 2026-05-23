@@ -165,6 +165,7 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 
 /* ═══════ ORDER SECTION ═══════ */
 .orderSection{background:var(--cr);}
+/* ✅ CORREÇÃO 1: align-items:start garante topo alinhado */
 .shopLayout{display:grid;grid-template-columns:1fr 370px;gap:26px;align-items:start;}
 .orderBox{background:#fff;border:1px solid var(--ln);border-radius:var(--rad);padding:26px;box-shadow:var(--sh2);}
 .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:22px;}
@@ -190,6 +191,7 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 .totLine{font-size:21px;font-weight:900;color:var(--g);text-align:right;margin:6px 0 14px;}
 
 /* ═══════ CART ═══════ */
+/* ✅ CORREÇÃO 1: position:sticky;top:80px alinha o carrinho com o topo do formulário */
 .cartBox{background:#fff;border:1px solid var(--ln);border-radius:var(--rad);padding:22px;box-shadow:var(--sh2);position:sticky;top:80px;}
 .cartBox h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--r);margin-bottom:14px;}
 .cItem{display:grid;grid-template-columns:44px 1fr auto;gap:9px;align-items:start;padding:11px 0;border-bottom:1px solid var(--ln);}
@@ -230,7 +232,6 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 .adminOv.show{display:flex;}
 .adminBox{width:min(1100px,100%);margin:auto;background:var(--cr);border-radius:22px;box-shadow:0 32px 80px rgba(0,0,0,.5);overflow:hidden;}
 
-/* Admin Header */
 .adminHdr{
   background:linear-gradient(135deg,var(--r),var(--r2));
   padding:24px 28px;
@@ -241,17 +242,14 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 .adminHdr .closeBtn{background:rgba(255,255,255,.18);color:#fff;border:2px solid rgba(255,255,255,.35);border-radius:50px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;}
 .adminHdr .closeBtn:hover{background:rgba(255,255,255,.32);}
 
-/* Admin Tabs */
 .adminTabs{display:flex;gap:0;border-bottom:2px solid var(--ln);background:#fff;}
 .adminTab{flex:1;padding:14px 10px;border:none;background:none;font-size:13px;font-weight:700;color:var(--md);cursor:pointer;transition:all .2s;border-bottom:3px solid transparent;margin-bottom:-2px;}
 .adminTab:hover{background:var(--cr);color:var(--r);}
 .adminTab.active{color:var(--r);border-bottom-color:var(--r);background:var(--cr);}
 
-/* Admin Sections */
 .adminSec{display:none;padding:24px 28px;}
 .adminSec.active{display:block;}
 
-/* Add Form */
 .addForm{background:#fff;border:1px solid var(--ln);border-radius:var(--rad2);padding:20px;margin-bottom:20px;}
 .addForm h3{font-family:'Playfair Display',serif;font-size:17px;color:var(--r);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
 .aFormGrid{display:grid;gap:12px;}
@@ -264,7 +262,6 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 .addFormBtn{width:100%;margin-top:14px;padding:12px;background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;border:none;border-radius:var(--rad3);font-size:14px;font-weight:800;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .addFormBtn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(15,159,77,.35);}
 
-/* Items List */
 .aItemsHdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
 .aItemsHdr h3{font-family:'Playfair Display',serif;font-size:17px;color:var(--dk);}
 .aItemsHdr span{font-size:12px;color:var(--lt);background:var(--cr3);padding:4px 10px;border-radius:50px;font-weight:700;}
@@ -272,7 +269,6 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 .aItems::-webkit-scrollbar{width:4px;}
 .aItems::-webkit-scrollbar-thumb{background:var(--ln);border-radius:2px;}
 
-/* Item Row — normal */
 .aRow{background:#fff;border:1.5px solid var(--ln);border-radius:var(--rad3);padding:0;overflow:hidden;transition:all .2s;}
 .aRow:hover{border-color:var(--r);box-shadow:0 4px 12px rgba(139,15,20,.08);}
 .aRowView{display:flex;align-items:center;gap:12px;padding:11px 14px;}
@@ -287,7 +283,6 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 .aBtnDel{padding:6px 10px;background:#fee2e2;border:1.5px solid #fca5a5;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;color:#b91c1c;transition:all .2s;}
 .aBtnDel:hover{background:#b91c1c;color:#fff;border-color:#b91c1c;}
 
-/* Item Row — edit mode */
 .aRowEdit{display:none;padding:12px 14px;background:var(--cr);border-top:1.5px solid var(--ln);}
 .aRowEdit.open{display:block;}
 .aEditGrid{display:grid;gap:9px;margin-bottom:10px;}
@@ -302,7 +297,6 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 .aBtnCancel{padding:9px 14px;background:#fff;border:1.5px solid var(--ln);border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;color:var(--md);}
 .aBtnCancel:hover{background:var(--cr3);}
 
-/* Admin Footer */
 .adminFooter{padding:16px 28px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-top:1px solid var(--ln);}
 .adminFooter p{font-size:12px;color:var(--lt);}
 .aBtnReset{padding:9px 18px;background:#fee2e2;border:1.5px solid #fca5a5;border-radius:9px;font-size:12.5px;font-weight:700;cursor:pointer;color:#b91c1c;transition:all .2s;}
@@ -730,23 +724,18 @@ footer a:hover{color:var(--gold2);}
   🛒 Warenkorb <span class="floatBadge" id="cartCountFloat">0</span>
 </button>
 
-<!-- ══════════════ ADMIN PANEL — NOVO ══════════════ -->
+<!-- ══════════════ ADMIN PANEL ══════════════ -->
 <div class="adminOv" id="adminPanel">
   <div class="adminBox">
-
-    <!-- Header -->
     <div class="adminHdr">
       <h2>⚙️ Admin Panel — Sanremo</h2>
       <button class="closeBtn" onclick="closeAdmin()">✕ Schließen</button>
     </div>
-
-    <!-- Tabs -->
     <div class="adminTabs">
       <button class="adminTab active" onclick="switchAdminTab('specials')">🍨 Spezialitäten</button>
       <button class="adminTab" onclick="switchAdminTab('cups')">🛒 Becher-Sorten</button>
       <button class="adminTab" onclick="switchAdminTab('flavours')">🍦 Gelato-Sorten</button>
     </div>
-
     <!-- TAB: SPEZIALITÄTEN -->
     <div class="adminSec active" id="adminSec_specials">
       <div class="addForm">
@@ -764,7 +753,6 @@ footer a:hover{color:var(--gold2);}
       </div>
       <div class="aItems" id="sp_list"></div>
     </div>
-
     <!-- TAB: BECHER-SORTEN -->
     <div class="adminSec" id="adminSec_cups">
       <div class="addForm">
@@ -780,7 +768,6 @@ footer a:hover{color:var(--gold2);}
       </div>
       <div class="aItems" id="cup_list"></div>
     </div>
-
     <!-- TAB: GELATO-SORTEN -->
     <div class="adminSec" id="adminSec_flavours">
       <div class="addForm">
@@ -796,13 +783,10 @@ footer a:hover{color:var(--gold2);}
       </div>
       <div class="aItems" id="fl_list"></div>
     </div>
-
-    <!-- Footer -->
     <div class="adminFooter">
       <p>Änderungen werden sofort gespeichert und im Shop angezeigt.</p>
       <button class="aBtnReset" onclick="resetAll()">↺ Alles zurücksetzen</button>
     </div>
-
   </div>
 </div>
 
@@ -881,13 +865,14 @@ function getData(k){const s=localStorage.getItem('sr_'+k);return s?JSON.parse(s)
 function saveData(k,v){localStorage.setItem('sr_'+k,JSON.stringify(v));}
 function sumLine(a,b){return`<div class="sumLine"><span>${a}</span><b>${b}</b></div>`;}
 
+/* ✅ CORREÇÃO 2: Todas as imagens dos specials são de gelado/sorvete */
 const SPECIAL_IMGS=[
-  'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=300&q=80',
-  'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=300&q=80',
-  'https://images.unsplash.com/photo-1560008581-09826d1de69e?auto=format&fit=crop&w=300&q=80',
-  'https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=300&q=80',
   'https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?auto=format&fit=crop&w=300&q=80',
+  'https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=300&q=80',
+  'https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=300&q=80',
+  'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=300&q=80',
   'https://images.unsplash.com/photo-1576506295286-5cda18df43e7?auto=format&fit=crop&w=300&q=80',
+  'https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=300&q=80',
 ];
 
 function fillSelects(){
@@ -1047,7 +1032,7 @@ function showToast(msg){
 }
 
 /* ════════════════════════════════════════
-   ADMIN PANEL — LÓGICA COMPLETA
+   ADMIN PANEL
 ════════════════════════════════════════ */
 let adminUnlocked=false;
 let currentAdminTab='specials';
@@ -1064,12 +1049,9 @@ function openAdminLogin(){
 function closeAdmin(){
   document.getElementById('adminPanel').classList.remove('show');
 }
-
-/* Fechar clicando fora */
 document.getElementById('adminPanel').addEventListener('click',function(e){
   if(e.target===this) closeAdmin();
 });
-
 function switchAdminTab(tab){
   currentAdminTab=tab;
   document.querySelectorAll('.adminTab').forEach((t,i)=>{
@@ -1079,7 +1061,6 @@ function switchAdminTab(tab){
   document.getElementById('adminSec_'+tab).classList.add('active');
   renderAdminTab(tab);
 }
-
 function renderAdminTab(tab){
   if(tab==='specials') renderSpecialsList();
   else if(tab==='cups') renderCupsList();
@@ -1098,11 +1079,9 @@ function addSpecial(){
   document.getElementById('sp_name').value='';
   document.getElementById('sp_price').value='';
   document.getElementById('sp_desc').value='';
-  fillSelects();
-  renderSpecialsList();
+  fillSelects();renderSpecialsList();
   showToast(name+' hinzugefügt!');
 }
-
 function renderSpecialsList(){
   const arr=getData('specials');
   document.getElementById('sp_count').textContent=arr.length+' Einträge';
@@ -1110,10 +1089,7 @@ function renderSpecialsList(){
     <div class="aRow" id="sp_row_${i}">
       <div class="aRowView">
         <div class="aRowIco">🍨</div>
-        <div class="aRowInfo">
-          <b>${s.name}</b>
-          <span>${s.desc||'–'}</span>
-        </div>
+        <div class="aRowInfo"><b>${s.name}</b><span>${s.desc||'–'}</span></div>
         <div class="aRowPrice">${money(s.price)}</div>
         <div class="aRowBtns">
           <button class="aBtnEdit" onclick="toggleSpEdit(${i})">✏ Bearbeiten</button>
@@ -1135,44 +1111,28 @@ function renderSpecialsList(){
       </div>
     </div>`).join('');
 }
-
-function toggleSpEdit(i){
-  const el=document.getElementById('sp_edit_'+i);
-  el.classList.toggle('open');
-}
+function toggleSpEdit(i){document.getElementById('sp_edit_'+i).classList.toggle('open');}
 function saveSpecial(i){
   const arr=getData('specials');
   arr[i].name=document.getElementById('sp_ename_'+i).value.trim()||arr[i].name;
   arr[i].price=parseFloat(document.getElementById('sp_eprice_'+i).value)||arr[i].price;
   arr[i].desc=document.getElementById('sp_edesc_'+i).value.trim();
-  saveData('specials',arr);
-  fillSelects();
-  renderSpecialsList();
-  showToast('Gespeichert!');
+  saveData('specials',arr);fillSelects();renderSpecialsList();showToast('Gespeichert!');
 }
 function deleteSpecial(i){
   if(!confirm('Spezialität löschen?')) return;
-  const arr=getData('specials');
-  arr.splice(i,1);
-  saveData('specials',arr);
-  fillSelects();
-  renderSpecialsList();
-  showToast('Gelöscht!');
+  const arr=getData('specials');arr.splice(i,1);saveData('specials',arr);
+  fillSelects();renderSpecialsList();showToast('Gelöscht!');
 }
 
 /* ── CUPS ── */
 function addCup(){
   const name=document.getElementById('cup_name').value.trim();
   if(!name){showToast('Bitte einen Namen eingeben!');return;}
-  const arr=getData('cups');
-  arr.push(name);
-  saveData('cups',arr);
+  const arr=getData('cups');arr.push(name);saveData('cups',arr);
   document.getElementById('cup_name').value='';
-  fillSelects();
-  renderCupsList();
-  showToast(name+' hinzugefügt!');
+  fillSelects();renderCupsList();showToast(name+' hinzugefügt!');
 }
-
 function renderCupsList(){
   const arr=getData('cups');
   document.getElementById('cup_count').textContent=arr.length+' Einträge';
@@ -1188,7 +1148,7 @@ function renderCupsList(){
       </div>
       <div class="aRowEdit" id="cup_edit_${i}">
         <div class="aEditGrid" style="margin-bottom:10px;">
-          <div class="aEFg"><label>Name der Sorte</label><input id="cup_ename_${i}" value="${c}"></div>
+          <div class="aEFg"><label>Nome da Sorte</label><input id="cup_ename_${i}" value="${c}"></div>
         </div>
         <div class="aEditBtns">
           <button class="aBtnSave" onclick="saveCup(${i})">✓ Speichern</button>
@@ -1197,40 +1157,26 @@ function renderCupsList(){
       </div>
     </div>`).join('');
 }
-
 function toggleCupEdit(i){document.getElementById('cup_edit_'+i).classList.toggle('open');}
 function saveCup(i){
   const arr=getData('cups');
   const v=document.getElementById('cup_ename_'+i).value.trim();
-  if(v) arr[i]=v;
-  saveData('cups',arr);
-  fillSelects();
-  renderCupsList();
-  showToast('Gespeichert!');
+  if(v) arr[i]=v;saveData('cups',arr);fillSelects();renderCupsList();showToast('Gespeichert!');
 }
 function deleteCup(i){
   if(!confirm('Sorte löschen?')) return;
-  const arr=getData('cups');
-  arr.splice(i,1);
-  saveData('cups',arr);
-  fillSelects();
-  renderCupsList();
-  showToast('Gelöscht!');
+  const arr=getData('cups');arr.splice(i,1);saveData('cups',arr);
+  fillSelects();renderCupsList();showToast('Gelöscht!');
 }
 
 /* ── FLAVOURS ── */
 function addFlavour(){
   const name=document.getElementById('fl_name').value.trim();
   if(!name){showToast('Bitte einen Namen eingeben!');return;}
-  const arr=getData('flavours');
-  arr.push(name);
-  saveData('flavours',arr);
+  const arr=getData('flavours');arr.push(name);saveData('flavours',arr);
   document.getElementById('fl_name').value='';
-  fillSelects();
-  renderFlavoursList();
-  showToast(name+' hinzugefügt!');
+  fillSelects();renderFlavoursList();showToast(name+' hinzugefügt!');
 }
-
 function renderFlavoursList(){
   const arr=getData('flavours');
   document.getElementById('fl_count').textContent=arr.length+' Einträge';
@@ -1255,33 +1201,22 @@ function renderFlavoursList(){
       </div>
     </div>`).join('');
 }
-
 function toggleFlEdit(i){document.getElementById('fl_edit_'+i).classList.toggle('open');}
 function saveFlavour(i){
   const arr=getData('flavours');
   const v=document.getElementById('fl_ename_'+i).value.trim();
-  if(v) arr[i]=v;
-  saveData('flavours',arr);
-  fillSelects();
-  renderFlavoursList();
-  showToast('Gespeichert!');
+  if(v) arr[i]=v;saveData('flavours',arr);fillSelects();renderFlavoursList();showToast('Gespeichert!');
 }
 function deleteFlavour(i){
   if(!confirm('Sorte löschen?')) return;
-  const arr=getData('flavours');
-  arr.splice(i,1);
-  saveData('flavours',arr);
-  fillSelects();
-  renderFlavoursList();
-  showToast('Gelöscht!');
+  const arr=getData('flavours');arr.splice(i,1);saveData('flavours',arr);
+  fillSelects();renderFlavoursList();showToast('Gelöscht!');
 }
 
 function resetAll(){
   if(!confirm('Alle Daten auf Standard zurücksetzen?\nDiese Aktion kann nicht rückgängig gemacht werden.')) return;
   ['specials','cups','flavours'].forEach(k=>localStorage.removeItem('sr_'+k));
-  fillSelects();
-  renderAdminTab(currentAdminTab);
-  showToast('Daten zurückgesetzt!');
+  fillSelects();renderAdminTab(currentAdminTab);showToast('Daten zurückgesetzt!');
 }
 
 /* ══ INIT ══ */
