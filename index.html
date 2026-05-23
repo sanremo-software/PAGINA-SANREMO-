@@ -188,14 +188,14 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:20px;
-  align-items:stretch;   /* todas as colunas com a mesma altura */
+  align-items:stretch;
 }
 .catCard{
   background:#fff;border-radius:var(--rad);
   border:1px solid var(--ln);overflow:hidden;
   display:flex;flex-direction:column;
   box-shadow:var(--sh1);transition:all .35s;
-  height:100%;           /* ocupa toda a altura da linha */
+  height:100%;
 }
 .catCard:hover{transform:translateY(-6px);box-shadow:var(--sh3);}
 .catImg{
@@ -216,11 +216,11 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 }
 .catBody{
   padding:20px;display:flex;flex-direction:column;
-  flex:1;                /* expande para preencher o espaço restante */
+  flex:1;
 }
 .catBody h3{font-family:'Playfair Display',serif;font-size:21px;color:var(--r);margin-bottom:7px;}
 .catBody p{font-size:13px;color:var(--md);line-height:1.5;margin-bottom:13px;}
-.catCheck{margin-bottom:16px;flex:1;}  /* flex:1 empurra o botão para baixo */
+.catCheck{margin-bottom:16px;flex:1;}
 .catCheck div{font-size:12.5px;font-weight:600;padding:3px 0;display:flex;align-items:center;gap:6px;}
 .catCheck div::before{content:'✓';color:var(--g);font-weight:900;font-size:13px;}
 
@@ -233,7 +233,7 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
   cursor:pointer;transition:all .3s;
 }
 .btnRed:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(139,15,20,.35);}
-.catCard .btnRed{width:100%;}   /* sempre na base do card */
+.catCard .btnRed{width:100%;}
 .btnGreen{
   background:linear-gradient(135deg,var(--g),var(--g2));
   color:#fff;border:none;border-radius:var(--rad3);
@@ -480,8 +480,27 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
   transition:all .3s;
 }
 .btnWA:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(18,140,126,.4);}
-.emptyCart{text-align:center;padding:36px 0;color:var(--lt);}
-.emptyCart .ei{font-size:44px;margin-bottom:10px;}
+
+/* ═══════ EMPTY CART — COM FOTO ═══════ */
+.emptyCart{text-align:center;padding:10px 0 24px;color:var(--lt);}
+.emptyCartImg{
+  width:100%;height:175px;
+  border-radius:14px;overflow:hidden;
+  margin-bottom:14px;
+  position:relative;
+}
+.emptyCartImg img{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+}
+.emptyCartImg::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 50%,rgba(26,10,7,.35) 100%);
+  border-radius:14px;
+  pointer-events:none;
+}
+.emptyCart .ei{font-size:38px;margin-bottom:8px;}
 .emptyCart p{font-size:13.5px;}
 
 /* ═══════ FLOAT ═══════ */
@@ -606,6 +625,7 @@ footer a:hover{color:var(--gold2);}
   .adminGrid{grid-template-columns:1fr;}
   .adminBox{padding:20px;}
   .panel{padding:20px;}
+  .emptyCartImg{height:140px;}
 }
 
 /* ═══════ RESPONSIVE ≤420 ═══════ */
@@ -621,6 +641,7 @@ footer a:hover{color:var(--gold2);}
   .tabs{grid-template-columns:1fr 1fr;}
   .nLogoTxt{font-size:17px;}
   .galleryItem{width:130px;height:115px;}
+  .emptyCartImg{height:120px;}
 }
 </style>
 </head>
@@ -659,19 +680,14 @@ footer a:hover{color:var(--gold2);}
   <a href="#bestellung" onclick="closeMenu()">🛒 Jetzt Bestellen</a>
 </div>
 
-<!-- ══════════════ HERO GALERIA — apenas gelado ══════════════ -->
+<!-- ══════════════ HERO GALERIA ══════════════ -->
 <section class="heroGallery" id="top">
-
-  <!-- FILA 1 — rola para a esquerda -->
   <div class="galleryRow">
     <div class="galleryTrack" id="track1"></div>
   </div>
-
-  <!-- FILA 2 — rola para a direita -->
   <div class="galleryRow">
     <div class="galleryTrack2" id="track2"></div>
   </div>
-
 </section>
 
 <!-- ══════════════ BENEFITS ══════════════ -->
@@ -962,12 +978,7 @@ footer a:hover{color:var(--gold2);}
       <!-- CART -->
       <aside class="cartBox" id="warenkorb">
         <h3>🛒 Ihre Bestellung</h3>
-        <div id="cartItems">
-          <div class="emptyCart">
-            <div class="ei">🍦</div>
-            <p>Noch keine Produkte im Warenkorb</p>
-          </div>
-        </div>
+        <div id="cartItems"></div>
         <div class="cTotal">
           <span>Gesamt</span>
           <span id="cartTotal">0,00 €</span>
@@ -1072,63 +1083,43 @@ document.addEventListener('click',function(e){
   if(!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');b.textContent='☰';}
 });
 
-/* ══ GALERIA — apenas fotos de gelado ══ */
+/* ══ GALERIA ══ */
 const ICE_PHOTOS=[
-  {url:'https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?auto=format&fit=crop&w=480&q=80', badge:'🍦 Gelato'},
-  {url:'https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=480&q=80', badge:'🍨 Frisch'},
-  {url:'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=480&q=80', badge:null},
-  {url:'https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=480&q=80', badge:'⭐ 4,9 Sterne'},
-  {url:'https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=480&q=80', badge:'🎂 Eistorte'},
-  {url:'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=480&q=80', badge:'🍦 Cremig'},
-  {url:'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=480&q=80', badge:null},
-  {url:'https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=480&q=80', badge:'❤ Handgemacht'},
-  {url:'https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=480&q=80', badge:'🇮🇹 Italiano'},
-  {url:'https://images.unsplash.com/photo-1576506295286-5cda18df43e7?auto=format&fit=crop&w=480&q=80', badge:'🌿 Natürlich'},
-  {url:'https://images.unsplash.com/photo-1560008581-09826d1de69e?auto=format&fit=crop&w=480&q=80', badge:null},
-  {url:'https://images.unsplash.com/photo-1582716401301-b2407dc7563d?auto=format&fit=crop&w=480&q=80', badge:null},
+  {url:'https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?auto=format&fit=crop&w=480&q=80',badge:'🍦 Gelato'},
+  {url:'https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=480&q=80',badge:'🍨 Frisch'},
+  {url:'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=480&q=80',badge:null},
+  {url:'https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=480&q=80',badge:'⭐ 4,9 Sterne'},
+  {url:'https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=480&q=80',badge:'🎂 Eistorte'},
+  {url:'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=480&q=80',badge:'🍦 Cremig'},
+  {url:'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=480&q=80',badge:null},
+  {url:'https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=480&q=80',badge:'❤ Handgemacht'},
+  {url:'https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=480&q=80',badge:'🇮🇹 Italiano'},
+  {url:'https://images.unsplash.com/photo-1576506295286-5cda18df43e7?auto=format&fit=crop&w=480&q=80',badge:'🌿 Natürlich'},
+  {url:'https://images.unsplash.com/photo-1560008581-09826d1de69e?auto=format&fit=crop&w=480&q=80',badge:null},
+  {url:'https://images.unsplash.com/photo-1582716401301-b2407dc7563d?auto=format&fit=crop&w=480&q=80',badge:null},
 ];
-
 function buildGalleryItem(p){
-  const d=document.createElement('div');
-  d.className='galleryItem';
-  const img=document.createElement('img');
-  img.src=p.url;
-  img.alt='Eis';
-  img.loading='lazy';
-  /* fallback: se a imagem falhar, esconde o item */
+  const d=document.createElement('div');d.className='galleryItem';
+  const img=document.createElement('img');img.src=p.url;img.alt='Eis';img.loading='lazy';
   img.onerror=function(){d.style.display='none';};
   d.appendChild(img);
-  if(p.badge){
-    const b=document.createElement('div');
-    b.className='gBadge';b.textContent=p.badge;
-    d.appendChild(b);
-  }
+  if(p.badge){const b=document.createElement('div');b.className='gBadge';b.textContent=p.badge;d.appendChild(b);}
   return d;
 }
-
-function buildTrack(trackEl, photos){
-  /* duplica para loop infinito */
+function buildTrack(trackEl,photos){
   const all=[...photos,...photos];
   all.forEach(p=>trackEl.appendChild(buildGalleryItem(p)));
 }
-
-// Fila 1: fotos 0-7 (pares)
-const row1=[ICE_PHOTOS[0],ICE_PHOTOS[1],ICE_PHOTOS[2],ICE_PHOTOS[3],
-             ICE_PHOTOS[4],ICE_PHOTOS[5],ICE_PHOTOS[6],ICE_PHOTOS[7]];
-// Fila 2: fotos 4-11 (ordem diferente)
-const row2=[ICE_PHOTOS[8],ICE_PHOTOS[9],ICE_PHOTOS[10],ICE_PHOTOS[11],
-             ICE_PHOTOS[3],ICE_PHOTOS[1],ICE_PHOTOS[5],ICE_PHOTOS[7]];
-
-buildTrack(document.getElementById('track1'), row1);
-buildTrack(document.getElementById('track2'), row2);
+const row1=[ICE_PHOTOS[0],ICE_PHOTOS[1],ICE_PHOTOS[2],ICE_PHOTOS[3],ICE_PHOTOS[4],ICE_PHOTOS[5],ICE_PHOTOS[6],ICE_PHOTOS[7]];
+const row2=[ICE_PHOTOS[8],ICE_PHOTOS[9],ICE_PHOTOS[10],ICE_PHOTOS[11],ICE_PHOTOS[3],ICE_PHOTOS[1],ICE_PHOTOS[5],ICE_PHOTOS[7]];
+buildTrack(document.getElementById('track1'),row1);
+buildTrack(document.getElementById('track2'),row2);
 
 /* ══ KUGELN ══ */
 let selectedKugeln=1;
 function selectKugeln(n){
   selectedKugeln=n;
-  document.querySelectorAll('.kugelnBtn').forEach(b=>{
-    b.classList.toggle('selected',+b.dataset.k===n);
-  });
+  document.querySelectorAll('.kugelnBtn').forEach(b=>{b.classList.toggle('selected',+b.dataset.k===n);});
   calcGelato();
 }
 
@@ -1194,11 +1185,9 @@ function switchOrder(type){
 function calcGelato(){
   const p=+document.getElementById('gelatoPrice').value;
   const f=document.getElementById('gelatoFlavour').value;
-  const k=selectedKugeln;
-  const t=k*p;
+  const k=selectedKugeln,t=k*p;
   const kText=k===1?'1 Kugel':k+' Kugeln';
-  document.getElementById('gelatoSummary').innerHTML=
-    sumLine('Sorte',f)+sumLine('Kugeln',kText)+sumLine('Preis/Kugel',money(p));
+  document.getElementById('gelatoSummary').innerHTML=sumLine('Sorte',f)+sumLine('Kugeln',kText)+sumLine('Preis/Kugel',money(p));
   document.getElementById('gelatoTotal').textContent='Gesamt: '+money(t);
   return t;
 }
@@ -1230,6 +1219,7 @@ function calcCups(){
 
 /* ══ CART ══ */
 const EMOJI_MAP={Gelato:'🍦',Eistorte:'🎂',Spezialität:'🍨',Becher:'🛒'};
+
 function addToCart(item){
   cart.push({...item,id:Date.now()});
   saveCart();renderCart();
@@ -1265,12 +1255,25 @@ function addCupsToCart(){
 }
 function removeCart(id){cart=cart.filter(i=>i.id!==id);saveCart();renderCart();}
 function saveCart(){localStorage.setItem('sr_cart_v3',JSON.stringify(cart));}
+
 function renderCart(){
   const el=document.getElementById('cartItems');
   if(!cart.length){
-    el.innerHTML='<div class="emptyCart"><div class="ei">🍦</div><p>Noch keine Produkte im Warenkorb</p></div>';
+    el.innerHTML=`
+      <div class="emptyCart">
+        <div class="emptyCartImg">
+          <img
+            src="https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=600&q=80"
+            alt="Gelato Sanremo"
+            loading="lazy"
+            onerror="this.parentElement.style.display='none'">
+        </div>
+        <div class="ei">🍦</div>
+        <p>Noch keine Produkte im Warenkorb</p>
+      </div>`;
     document.getElementById('cartTotal').textContent='0,00 €';
-    updateBadge(0);return;
+    updateBadge(0);
+    return;
   }
   const total=cart.reduce((s,i)=>s+Number(i.price),0);
   el.innerHTML=cart.map(i=>`
@@ -1282,6 +1285,7 @@ function renderCart(){
   document.getElementById('cartTotal').textContent=money(total);
   updateBadge(cart.length);
 }
+
 function updateBadge(n){
   document.getElementById('cartCountTop').textContent=n;
   document.getElementById('cartCountFloat').textContent=n;
